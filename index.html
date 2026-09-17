@@ -73,6 +73,22 @@
   nav.chips a{font-size:.85rem;font-weight:600;text-decoration:none;color:var(--muted);
     padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface)}
   nav.chips a:hover{color:var(--accent);border-color:var(--accent)}
+  /* ---------- Subject switcher ---------- */
+  .subjtabs{display:flex;gap:6px;flex-wrap:wrap}
+  .subjtabs button{border:1px solid var(--border);background:var(--surface);color:var(--muted);
+    font-weight:700;font-size:.9rem;font-family:inherit;padding:7px 13px;border-radius:11px;cursor:pointer;display:flex;gap:6px;align-items:center;transition:all .12s}
+  .subjtabs button:hover{border-color:var(--accent);color:var(--text)}
+  .subjtabs button.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));border-color:transparent;color:#fff}
+  .subject{display:none}
+  .subject.active{display:block}
+  nav.chips[data-for]{display:none}
+  nav.chips[data-for].active{display:flex}
+  .math{font-family:var(--mono);background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-size:.94em;white-space:nowrap}
+  .step{border-left:3px solid var(--accent);padding:3px 0 3px 14px;margin:10px 0}
+  .step b{color:var(--accent)}
+  .ans{color:var(--good);font-weight:800}
+  .dfn{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;margin:12px 0}
+  .dfn b{color:var(--accent-2)}
 
   /* ---------- Layout ---------- */
   main{max-width:var(--maxw);margin:0 auto;padding:16px 16px 80px}
@@ -174,29 +190,54 @@
     <div class="brand">
       <span class="logo">J</span>
       <span>Jean's Study Palace</span>
-      <span class="badge">EE212 · Macroeconomics</span>
+    </div>
+    <div class="subjtabs" id="subjtabs">
+      <button data-subj="macro" class="active">📈 Macro</button>
+      <button data-subj="calc">∫ Calculus</button>
+      <button data-subj="eng">🅰 Econ English</button>
     </div>
     <div class="spacer"></div>
     <div class="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="q" type="search" placeholder="Search topics, formulas, terms…" autocomplete="off" aria-label="Search the study hub">
+      <input id="q" type="search" placeholder="Search this subject…" autocomplete="off" aria-label="Search the study hub">
     </div>
     <button class="ghost" id="theme" aria-label="Toggle light/dark theme" title="Toggle theme">
       <span id="theme-ico">🌙</span><span id="theme-txt">Dark</span>
     </button>
   </div>
-  <nav class="chips">
+  <nav class="chips active" data-for="macro">
     <a href="#top">Overview</a>
     <a href="#ch1">1 · Introduction</a>
     <a href="#ch2">2 · GDP</a>
     <a href="#ch3">3 · Equilibrium Income</a>
     <a href="#ch4">4 · Fiscal Policy</a>
     <a href="#examples">★ Worked Examples</a>
-    <a href="#cheatsheet">Formula Cheat-Sheet</a>
+    <a href="#cheatsheet">Cheat-Sheet</a>
+  </nav>
+  <nav class="chips" data-for="calc">
+    <a href="#top">Overview</a>
+    <a href="#calc-limits">1 · Limits &amp; Continuity</a>
+    <a href="#calc-diff">2 · Differentiation</a>
+    <a href="#calc-lhopital">3 · L'Hôpital</a>
+    <a href="#calc-linear">4 · Linear Approx.</a>
+    <a href="#calc-cheat">Formulas &amp; Midterm</a>
+  </nav>
+  <nav class="chips" data-for="eng">
+    <a href="#top">Exam Overview</a>
+    <a href="#eng-vocab">Vocabulary ★</a>
+    <a href="#eng-grammar">Grammar (Tenses)</a>
+    <a href="#eng-purpose">Author's Purpose</a>
+    <a href="#eng-writing">Formal Writing</a>
+    <a href="#eng-reading">Reading Tips</a>
   </nav>
 </header>
 
 <main id="top">
+
+<!-- ################################################################
+                        SUBJECT: MACROECONOMICS
+################################################################# -->
+<div class="subject active" id="s-macro">
 
   <!-- Intro -->
   <section class="unit" style="margin-top:20px">
@@ -991,15 +1032,431 @@
     </div>
   </section>
 
-  <p class="noresult" id="noresult">No topics match your search. Try a shorter word (e.g. “multiplier”, “Gini”, “deflator”).</p>
+</div><!-- /s-macro -->
+
+<!-- ################################################################
+                        SUBJECT: CALCULUS I
+################################################################# -->
+<div class="subject" id="s-calc">
+
+  <section class="unit" style="margin-top:20px">
+    <div class="card" style="background:linear-gradient(135deg,var(--accent-soft),var(--surface))">
+      <span class="tag">Calculus I · Midterm focus</span>
+      <h3 style="font-size:1.3rem">Calculus I — limits, derivatives &amp; their applications</h3>
+      <p class="lead">Simplified straight from your professor's notes: every rule is stated as a clean formula, and the hard ones are shown <b>worked out step-by-step</b> exactly the way you'd write them on paper.</p>
+      <div class="box exam"><span class="lbl">What the midterm actually tests</span>
+        Limits &amp; asymptotes · continuity (find the constants that make <var>f</var> continuous) · <b>L'Hôpital's rule</b> · <b>implicit</b> &amp; <b>logarithmic</b> differentiation · <b>linear approximation</b>.
+        <br><span class="fill">Note from the slides: inverse-trig derivatives are on the FINAL, not the midterm — don't waste time there now.</span></div>
+    </div>
+  </section>
+
+  <!-- ===== C1 LIMITS ===== -->
+  <section class="unit" id="calc-limits">
+    <div class="unit-head"><span class="num">1</span><h2>Limits &amp; Continuity</h2></div>
+    <p class="unit-sub">What a limit is · one/two-sided · limit laws · 0/0 tricks · trig limits · limits at infinity &amp; asymptotes · continuity.</p>
+
+    <div class="card">
+      <span class="tag">1.1 The idea</span>
+      <h3>A limit is where a function is <em>heading</em> — not where it lands</h3>
+      <div class="dfn"><b>Definition.</b> <span class="math">lim<sub>x→a</sub> f(x) = L</span> means we can make <var>f(x)</var> as close to <var>L</var> as we like by taking <var>x</var> close enough to <var>a</var> (from both sides) — <b>without</b> ever letting <var>x</var> = <var>a</var>.</div>
+      <div class="box key"><span class="lbl">The golden existence rule</span>
+        The two-sided limit exists <b>only if both one-sided limits exist AND are equal</b>:
+        <div class="formula center">lim<sub>x→a</sub> f(x) = L &nbsp;⟺&nbsp; lim<sub>x→a⁻</sub> f(x) = lim<sub>x→a⁺</sub> f(x) = L</div>
+        If the left and right sides disagree, the limit <b>does not exist (DNE)</b>. The value <var>f(a)</var> itself is irrelevant to the limit.</div>
+      <figure class="graph">
+        <svg viewBox="0 0 560 240" role="img" aria-label="A jump: left-hand limit and right-hand limit disagree so the two-sided limit does not exist">
+          <line class="axis" x1="50" y1="200" x2="530" y2="200"/><line class="axis" x1="50" y1="20" x2="50" y2="200"/>
+          <line class="c1" x1="60" y1="180" x2="250" y2="90"/><line class="c1" x1="250" y1="150" x2="500" y2="55"/>
+          <circle cx="250" cy="90" r="5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2.5"/>
+          <circle cx="250" cy="150" r="5" fill="var(--accent)"/>
+          <line class="dash" x1="250" y1="90" x2="250" y2="200"/>
+          <text x="228" y="218" class="lbl-ax">x = a</text>
+          <text x="150" y="80" class="lbl-ax" style="fill:var(--accent)">left → L₁</text>
+          <text x="380" y="45" class="lbl-ax" style="fill:var(--accent)">right → L₂</text>
+          <text x="300" y="120" class="box-t" style="fill:var(--warn)">L₁ ≠ L₂ ⟹ limit DNE</text>
+        </svg>
+        <figcaption>A "jump": the two sides head to different heights, so the two-sided limit doesn't exist.</figcaption>
+      </figure>
+    </div>
+
+    <div class="card">
+      <span class="tag">1.2 Computing limits</span>
+      <h3>Step 1: just plug in. Step 2: if you get 0/0, fix it.</h3>
+      <p><b>Direct substitution works</b> for polynomials, sin, cos, eˣ, and (on their domains) tan, ln, roots, etc. — just compute <var>f(a)</var>.</p>
+      <div class="box warn"><span class="lbl">The three outcomes of a fraction lim f/g</span>
+        ① <var>g(a) ≠ 0</var> → answer is just <span class="math">f(a)/g(a)</span>.<br>
+        ② <var>f(a) ≠ 0, g(a) = 0</var> → limit is <b>infinite → DNE</b> (a vertical asymptote).<br>
+        ③ <var>f(a) = 0, g(a) = 0</var> → <b>indeterminate 0/0</b> — you must rearrange (factor or rationalize) before the limit means anything.</div>
+      <h4>0/0 trick A — factor &amp; cancel</h4>
+      <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→2</sub> (x²−4)/(x−2)</span>. Sub gives 0/0. Factor: <span class="math">(x−2)(x+2)/(x−2) = x+2</span> → limit = <span class="ans">4</span>.</div>
+      <h4>0/0 trick B — rationalize (multiply by the conjugate)</h4>
+      <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→0</sub> (√(x²+4) − 2)/x²</span>. Multiply top &amp; bottom by <span class="math">(√(x²+4)+2)</span>:
+        <div class="formula center">= lim<sub>x→0</sub> <span class="frac"><span class="num">(x²+4) − 4</span><span class="den">x²(√(x²+4)+2)</span></span> = lim<sub>x→0</sub> <span class="frac"><span class="num">1</span><span class="den">√(x²+4)+2</span></span> = <span class="frac"><span class="num">1</span><span class="den">2+2</span></span> = <span class="ans">¼</span></div></div>
+      <div class="box tip"><span class="lbl">Handy algebra</span> <span class="math">p²−q² = (p−q)(p+q)</span> · <span class="math">p³±q³ = (p±q)(p²∓pq+q²)</span>. These are what let you cancel the troublesome factor.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">1.3 Trig limits</span>
+      <h3>Memorise two, derive the rest</h3>
+      <div class="formula center">lim<sub>x→0</sub> <span class="frac"><span class="num">sin(x)</span><span class="den">x</span></span> = 1 &nbsp;&nbsp;&nbsp;&nbsp; lim<sub>x→0</sub> <span class="frac"><span class="num">1 − cos(x)</span><span class="den">x</span></span> = 0</div>
+      <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→0</sub> sin(2x)/(5x)</span>. Force a matching "sin(2x)/(2x)": multiply/divide by 2 →
+        <span class="math">(2/5)·[sin(2x)/(2x)] → (2/5)(1) =</span> <span class="ans">2/5</span>. &nbsp;<span class="muted">General: lim sin(kx)/(mx) = k/m.</span></div>
+      <div class="box tip"><span class="lbl">Squeeze (sandwich) theorem</span>
+        If <span class="math">f(x) ≤ h(x) ≤ g(x)</span> and both outer limits equal <var>L</var>, then <span class="math">lim h(x) = L</span> too. Classic: since <span class="math">−x² ≤ x²sin(1/x) ≤ x²</span> and both ends → 0, we get <span class="math">lim<sub>x→0</sub> x²sin(1/x) =</span> <span class="ans">0</span> (even though sin(1/x) alone has no limit).</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">1.4 Limits at infinity &amp; asymptotes</span>
+      <h3>End behaviour of a function</h3>
+      <div class="box key"><span class="lbl">Rational functions: compare the top &amp; bottom degrees</span>
+        For <span class="math">lim<sub>x→±∞</sub> p(x)/q(x)</span>, keep only the highest-power term on top and bottom:
+        <ul style="margin:.4em 0">
+          <li><b>deg(top) &lt; deg(bottom)</b> → limit = <b>0</b> (horizontal asymptote <span class="math">y = 0</span>).</li>
+          <li><b>deg(top) = deg(bottom)</b> → limit = <b>ratio of leading coefficients</b> (that's the H.A.).</li>
+          <li><b>deg(top) &gt; deg(bottom)</b> → limit = <b>±∞</b> (no horizontal asymptote).</li>
+        </ul></div>
+      <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→∞</sub> (1+2x²−3x³)/(2x³+3x)</span> → keep <span class="math">−3x³/2x³</span> = <span class="ans">−3/2</span> (equal degrees).</div>
+      <div class="box tip"><span class="lbl">"∞ − ∞" → rationalize</span>
+        <span class="math">lim<sub>x→∞</sub> (√(x²+5x) − x)</span> ×conjugate → <span class="math">5x/(√(x²+5x)+x) → 5/2</span> = <span class="ans">5/2</span>. (Use √(x²)=|x|=x since x→∞.)</div>
+      <div class="grid2">
+        <figure class="graph">
+          <svg viewBox="0 0 300 220" role="img" aria-label="Vertical asymptote where denominator is zero">
+            <line class="axis" x1="45" y1="185" x2="285" y2="185"/><line class="axis" x1="45" y1="15" x2="45" y2="185"/>
+            <line class="dash" x1="165" y1="15" x2="165" y2="185"/>
+            <path class="c1" d="M60 180 C 120 150, 150 60, 158 20"/>
+            <path class="c1" d="M172 200 C 180 130, 210 100, 285 85"/>
+            <text x="150" y="205" class="lbl-ax" style="fill:var(--warn)">x = a</text>
+            <text x="180" y="35" class="box-t" style="fill:var(--accent)">V.A.: lim = ±∞</text>
+          </svg>
+          <figcaption><b>Vertical asymptote</b> at <var>x=a</var> when the denominator → 0 (and top ≠ 0).</figcaption>
+        </figure>
+        <figure class="graph">
+          <svg viewBox="0 0 300 220" role="img" aria-label="Horizontal asymptote as x goes to infinity">
+            <line class="axis" x1="45" y1="185" x2="285" y2="185"/><line class="axis" x1="45" y1="15" x2="45" y2="185"/>
+            <line class="dash" x1="45" y1="70" x2="285" y2="70"/>
+            <path class="c1" d="M55 175 C 120 90, 180 74, 285 72"/>
+            <text x="200" y="60" class="box-t" style="fill:var(--accent)">H.A.: y = L</text>
+          </svg>
+          <figcaption><b>Horizontal asymptote</b> <var>y=L</var> when <span class="math">lim<sub>x→±∞</sub> f(x)=L</span>.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag">1.5 Continuity</span>
+      <h3>Continuous = "you can draw it without lifting your pen"</h3>
+      <div class="box key"><span class="lbl">f is continuous at x = a if ALL three hold</span>
+        ① <var>f(a)</var> is defined &nbsp;·&nbsp; ② <span class="math">lim<sub>x→a</sub> f(x)</span> exists &nbsp;·&nbsp; ③ they're equal: <span class="math">lim<sub>x→a</sub> f(x) = f(a)</span>.</div>
+      <h4>Exam-style: find the constants that make <var>f</var> continuous</h4>
+      <div class="dfn">Let <span class="math">f(x) = { (x−2)²/(x²−4) + 2k, x&gt;2 ; &nbsp; h, x=2 ; &nbsp; 2x+k, x&lt;2 }</span>. Find <var>h, k</var> so <var>f</var> is continuous at <var>x=2</var>.</div>
+      <div class="step"><b>Left limit</b> (x→2⁻): <span class="math">2x+k → 4+k</span>.</div>
+      <div class="step"><b>Right limit</b> (x→2⁺): simplify <span class="math">(x−2)²/[(x−2)(x+2)] = (x−2)/(x+2) → 0</span>, so <span class="math">→ 0 + 2k = 2k</span>.</div>
+      <div class="step"><b>Value:</b> <span class="math">f(2) = h</span>.</div>
+      <div class="step"><b>Set all three equal:</b> <span class="math">4+k = 2k = h</span> → from <span class="math">4+k=2k</span> get <span class="ans">k = 4</span>, then <span class="ans">h = 2k = 8</span>. ✔</div>
+      <div class="box tip"><span class="lbl">Discontinuity types &amp; IVT</span>
+        <b>Removable</b> (a hole — limit exists but ≠ f(a)) · <b>Jump</b> (sides differ) · <b>Infinite</b> (vertical asymptote).<br>
+        <b>Intermediate Value Theorem:</b> if <var>f</var> is continuous on <span class="math">[a,b]</span> and takes opposite signs at the ends, it has a <b>root</b> in between — the standard way to "show an equation has a solution."</div>
+    </div>
+  </section>
+
+  <!-- ===== C2 DIFFERENTIATION ===== -->
+  <section class="unit" id="calc-diff">
+    <div class="unit-head"><span class="num">2</span><h2>Differentiation</h2></div>
+    <p class="unit-sub">The derivative · the rule toolbox · implicit differentiation · log &amp; exp · logarithmic differentiation.</p>
+
+    <div class="card">
+      <span class="tag">2.1 Meaning</span>
+      <h3>The derivative = slope of the tangent line = instantaneous rate of change</h3>
+      <div class="formula center">f′(x) = lim<sub>h→0</sub> <span class="frac"><span class="num">f(x+h) − f(x)</span><span class="den">h</span></span></div>
+      <p>Tangent line at <var>x=a</var>: <span class="math">y = f(a) + f′(a)(x−a)</span>. &nbsp; <b>Differentiable ⟹ continuous</b> (but not the reverse — <span class="math">|x|</span> is continuous yet has a corner at 0, so no derivative there).</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">2.2 The rule toolbox</span>
+      <h3>The rules you apply on autopilot</h3>
+      <div class="formula">
+        <b>Power:</b> <span class="math">d/dx xⁿ = n·xⁿ⁻¹</span><br>
+        <b>Constant:</b> <span class="math">d/dx c = 0</span> &nbsp;·&nbsp; <b>Constant×:</b> <span class="math">(c·f)′ = c·f′</span><br>
+        <b>Sum:</b> <span class="math">(f ± g)′ = f′ ± g′</span><br>
+        <b>Product:</b> <span class="math">(fg)′ = f′g + fg′</span><br>
+        <b>Quotient:</b> <span class="math">(f/g)′ = (g·f′ − f·g′)/g²</span><br>
+        <b>Chain:</b> <span class="math">d/dx f(g(x)) = f′(g(x))·g′(x)</span>
+      </div>
+      <div class="box key"><span class="lbl">Trig, exp &amp; log derivatives (know cold)</span>
+        <span class="math">(sin)′=cos</span> · <span class="math">(cos)′=−sin</span> · <span class="math">(tan)′=sec²</span> · <span class="math">(cot)′=−csc²</span> · <span class="math">(sec)′=sec·tan</span> · <span class="math">(csc)′=−csc·cot</span><br>
+        <span class="math">(eˣ)′=eˣ</span> · <span class="math">(bˣ)′=bˣ·ln b</span> · <span class="math">(ln x)′=1/x</span> · <span class="math">(log_b x)′=1/(x·ln b)</span>. With chain rule, multiply by <span class="math">du/dx</span>.</div>
+      <div class="box tip"><span class="lbl">Where a derivative fails to exist</span> at a discontinuity, a <b>corner</b> (like |x| at 0), or a <b>vertical tangent</b> (like ∛x at 0).</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">2.3 Implicit differentiation ★</span>
+      <h3>When you can't (or don't want to) solve for <var>y</var></h3>
+      <div class="box key"><span class="lbl">Two-step recipe</span>
+        ① Differentiate <b>both sides</b> w.r.t. <var>x</var>, treating <var>y</var> as a function of <var>x</var> (so every <var>y</var> gets a <span class="math">·dy/dx</span> by the chain rule).
+        ② Solve algebraically for <span class="math">dy/dx</span>.</div>
+      <div class="step"><b>Ex.</b> <span class="math">x² + y² = 2</span> → differentiate: <span class="math">2x + 2y·(dy/dx) = 0</span> → <span class="ans">dy/dx = −x/y</span>.</div>
+      <div class="step"><b>Tangent line</b> at <span class="math">(1,1)</span>: slope <span class="math">= −1/1 = −1</span> → <span class="math">y − 1 = −1(x−1)</span> → <span class="ans">y = −x + 2</span>.</div>
+      <div class="step"><b>Harder.</b> <span class="math">x⁴ + x²y³ − y⁵ = 2x + 1</span>. Differentiate (product rule on <span class="math">x²y³</span>):
+        <span class="math">4x³ + (2x·y³ + x²·3y²y′) − 5y⁴y′ = 2</span>. Collect <span class="math">y′</span>:
+        <div class="formula center">dy/dx = <span class="frac"><span class="num">2 − 4x³ − 2xy³</span><span class="den">3x²y² − 5y⁴</span></span></div></div>
+    </div>
+
+    <div class="card">
+      <span class="tag">2.4 Logarithmic differentiation ★</span>
+      <h3>The trick for "variable to a variable power", like <var>xˣ</var></h3>
+      <div class="box key"><span class="lbl">Three steps</span>
+        ① Take <span class="math">ln</span> of both sides &amp; use log laws to break it up.
+        ② Differentiate implicitly (left side becomes <span class="math">(1/y)·y′</span>).
+        ③ Solve for <span class="math">y′</span> and replace <var>y</var> with the original <var>f(x)</var>.</div>
+      <div class="step"><b>Ex.</b> <span class="math">y = xˣ</span>. Take ln: <span class="math">ln y = x·ln x</span>.</div>
+      <div class="step">Differentiate: <span class="math">(1/y)y′ = ln x + x·(1/x) = ln x + 1</span>.</div>
+      <div class="step">Solve: <span class="math">y′ = y(1 + ln x)</span> → <span class="ans">y′ = xˣ(1 + ln x)</span>.</div>
+      <div class="box tip"><span class="lbl">Log laws that do the heavy lifting</span> <span class="math">ln(AB)=ln A+ln B</span> · <span class="math">ln(A/B)=ln A−ln B</span> · <span class="math">ln(Aᴮ)=B·ln A</span>. Also great for messy products/quotients like <span class="math">ln( x²√((x−1)³(2x+1)⁷) )</span> — take ln first, then it's just sums.</div>
+    </div>
+  </section>
+
+  <!-- ===== C3 L'HOPITAL ===== -->
+  <section class="unit" id="calc-lhopital">
+    <div class="unit-head"><span class="num">3</span><h2>L'Hôpital's Rule</h2></div>
+    <p class="unit-sub">Using derivatives to crack indeterminate limits.</p>
+    <div class="card">
+      <span class="tag">3.1 The rule</span>
+      <h3>When you hit 0/0 or ∞/∞, differentiate top and bottom separately</h3>
+      <div class="formula center">If <span class="math">lim f/g</span> is <span class="math">0/0</span> or <span class="math">∞/∞</span>, then &nbsp; lim<sub>x→a</sub> <span class="frac"><span class="num">f(x)</span><span class="den">g(x)</span></span> = lim<sub>x→a</sub> <span class="frac"><span class="num">f′(x)</span><span class="den">g′(x)</span></span></div>
+      <div class="box warn"><span class="lbl">Check the form FIRST</span>
+        L'Hôpital is <b>only</b> valid for <span class="math">0/0</span> or <span class="math">∞/∞</span>. Applying it to something like <span class="math">1/0</span> or <span class="math">2/1</span> gives a <em>wrong</em> answer. You may apply it repeatedly if the form stays indeterminate.</div>
+      <div class="grid2">
+        <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→0</sub> sin x / x</span> = <span class="math">cos x / 1 → cos 0</span> = <span class="ans">1</span>.</div>
+        <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→∞</sub> ln x / eˣ</span> (∞/∞) = <span class="math">(1/x)/eˣ → 0</span> = <span class="ans">0</span>.</div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag">3.2 Other indeterminate forms</span>
+      <h3>Convert them to 0/0 or ∞/∞ first</h3>
+      <div class="dfn">The disguised forms: <span class="math">∞−∞</span>, <span class="math">0·∞</span>, <span class="math">0⁰</span>, <span class="math">∞⁰</span>, <span class="math">1<sup>∞</sup></span>. Reshape, then apply L'Hôpital.</div>
+      <h4><span class="math">0·∞</span> → make a fraction</h4>
+      <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→∞</sub> x·sin(1/x)</span> = <span class="math">sin(1/x)/(1/x)</span> (now 0/0) → <span class="ans">1</span>.</div>
+      <h4><span class="math">1<sup>∞</sup>, 0⁰, ∞⁰</span> → take ln, solve, then exponentiate</h4>
+      <div class="box key"><span class="lbl">Recipe</span> Let <span class="math">y = f(x)^{g(x)}</span>. Then <span class="math">ln y = g(x)·ln f(x)</span> (a <span class="math">0·∞</span> form). Find <span class="math">L = lim ln y</span>, and the answer is <span class="math">e<sup>L</sup></span>.</div>
+      <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→∞</sub> (1 − 3/x)<sup>2x</sup></span> (form 1<sup>∞</sup>). <span class="math">ln y = 2x·ln(1−3/x) → −6</span>, so limit = <span class="ans">e⁻⁶</span>.</div>
+      <div class="step"><b>Ex.</b> <span class="math">lim<sub>x→0</sub> x<sup>1/ln x</sup></span> (form 0⁰). <span class="math">ln y = (1/ln x)·ln x = 1</span>, so limit = <span class="ans">e</span>.</div>
+    </div>
+  </section>
+
+  <!-- ===== C4 LINEAR APPROX ===== -->
+  <section class="unit" id="calc-linear">
+    <div class="unit-head"><span class="num">4</span><h2>Linear Approximation &amp; Differentials</h2></div>
+    <p class="unit-sub">Using the tangent line to estimate hard values by hand.</p>
+    <div class="card">
+      <span class="tag">4.1 Linearization</span>
+      <h3>Near <var>x=a</var>, a curve looks like its tangent line</h3>
+      <div class="formula center">L(x) = f(a) + f′(a)(x − a) &nbsp;&nbsp; and &nbsp;&nbsp; f(x) ≈ L(x) &nbsp;(for x near a)</div>
+      <div class="box key"><span class="lbl">How to pick <var>a</var></span> Choose an <var>a</var> <b>close to your target</b> where <var>f(a)</var> and <var>f′(a)</var> are <b>easy</b> (a perfect square/cube, or 1).</div>
+      <h4>Ex. Approximate <span class="math">√4.01</span></h4>
+      <div class="step"><span class="math">f(x)=√x, a=4</span>: <span class="math">f(4)=2</span>, <span class="math">f′(x)=1/(2√x)</span> so <span class="math">f′(4)=¼</span>.</div>
+      <div class="step"><span class="math">L(x)=2+¼(x−4)</span> → <span class="math">√4.01 ≈ 2+¼(0.01)</span> = <span class="ans">2.0025</span>. &nbsp;(and <span class="math">√3.95 ≈ 2−¼(0.05)=</span> <span class="ans">1.9875</span>)</div>
+      <div class="grid2">
+        <div class="step"><b>Ex.</b> <span class="math">ln(1.1)</span>: <span class="math">f=ln x, a=1</span> → <span class="math">L(x)=0+1·(x−1)=x−1</span> → <span class="math">ln(1.1)≈</span> <span class="ans">0.1</span>.</div>
+        <div class="step"><b>Ex.</b> <span class="math">∛0.97</span>: <span class="math">f=x^{1/3}, a=1, f′(1)=⅓</span> → <span class="math">1+⅓(−0.03)=</span> <span class="ans">0.99</span>.</div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="tag">4.2 Differentials</span>
+      <h3>Estimating error</h3>
+      <div class="formula center">dy = f′(x)·dx &nbsp;≈&nbsp; Δy &nbsp;(the small change in f when x changes by dx)</div>
+      <div class="step"><b>Ex.</b> A cube side is 30 cm ± 0.02. <span class="math">V=x³, dV=3x²·dx = 3(30²)(±0.02) =</span> <span class="ans">±54 cm³</span>. Relative error <span class="math">dV/V = 54/27000 = 1/500</span>.</div>
+    </div>
+  </section>
+
+  <!-- ===== CALC CHEAT SHEET ===== -->
+  <section class="unit" id="calc-cheat">
+    <div class="unit-head"><span class="num">Σ</span><h2>Formulas &amp; Midterm Checklist</h2></div>
+    <div class="card">
+      <div class="grid2">
+        <div>
+          <h4>Must-know limits</h4>
+          <div class="formula">lim<sub>x→0</sub> sin(x)/x = 1<br>lim<sub>x→0</sub> (1−cos x)/x = 0<br>Rational at ∞: compare degrees<br>0/0 → factor or rationalize</div>
+          <h4>Derivative rules</h4>
+          <div class="formula">Power · Product · Quotient · Chain<br>Trig: (sin)′=cos, (tan)′=sec²…<br>(eˣ)′=eˣ, (ln x)′=1/x</div>
+        </div>
+        <div>
+          <h4>L'Hôpital</h4>
+          <div class="formula">0/0 or ∞/∞ → f′/g′<br>others → reshape (0·∞, ∞−∞)<br>powers → ln then e<sup>L</sup></div>
+          <h4>Linearization</h4>
+          <div class="formula">L(x)=f(a)+f′(a)(x−a)<br>dy=f′(x)dx</div>
+        </div>
+      </div>
+      <div class="box exam"><span class="lbl">Midterm checklist — can you do each?</span>
+        ☐ Evaluate one/two-sided limits &amp; say if DNE &nbsp; ☐ 0/0 by factoring/rationalizing &nbsp; ☐ trig limits &nbsp; ☐ find vertical &amp; horizontal asymptotes &nbsp; ☐ find constants that make <var>f</var> continuous &nbsp; ☐ product/quotient/chain derivatives &nbsp; ☐ <b>implicit</b> dy/dx + tangent line &nbsp; ☐ <b>logarithmic</b> differentiation (xˣ) &nbsp; ☐ <b>L'Hôpital</b> incl. 1<sup>∞</sup>/0⁰ &nbsp; ☐ <b>linear approximation</b>.</div>
+    </div>
+  </section>
+
+</div><!-- /s-calc -->
+
+<!-- ################################################################
+                     SUBJECT: ECON ENGLISH (EL 241/245)
+################################################################# -->
+<div class="subject" id="s-eng">
+
+  <section class="unit" style="margin-top:20px">
+    <div class="card" style="background:linear-gradient(135deg,var(--accent-soft),var(--surface))">
+      <span class="tag">Academic English for Economists · Midterm</span>
+      <h3 style="font-size:1.3rem">Econ English — everything on the midterm, in one place</h3>
+      <p class="lead">Tailored to your <b>MT Vocabulary Review</b> and exam overview. The vocabulary below is the exact list that's coming up — learn these cold.</p>
+      <div class="box exam"><span class="lbl">Midterm structure — 40 points</span>
+        <b>I · Vocabulary (10)</b> — 10 multiple-choice + 10 fill-in-the-blank in 2 paragraphs (word box).<br>
+        <b>II · Reading (15)</b> — 1 "seen" passage (5 MC) + 1 "unseen" passage (5 MC + 5 fill-in from the text).<br>
+        <b>III · Grammar (5)</b> — Present Continuous (pp.10–12) &amp; Present Perfect (pp.31–32).<br>
+        <b>IV · Academic Writing (5)</b> — rewrite an informal paragraph in formal style (pp.33–38).<br>
+        <b>V · Author's Purpose (5)</b> — label 5 paragraphs: inform / persuade / entertain (p.23).</div>
+    </div>
+  </section>
+
+  <!-- ===== VOCAB ===== -->
+  <section class="unit" id="eng-vocab">
+    <div class="unit-head"><span class="num">★</span><h2>Vocabulary — the exact midterm list</h2></div>
+    <p class="unit-sub">From the official MT Vocabulary Review (Units 1–2). Meaning + how it's used in economics + an example. Watch the word-family forms — the exam tests those too.</p>
+    <div class="card">
+      <div class="box key"><span class="lbl">How it's tested</span>10 multiple-choice + 10 fill-in-the-blank (words given in a box, used inside 2 paragraphs). So you need the <b>meaning</b> and which <b>form</b> (noun/verb/adjective) fits the sentence.</div>
+      <div class="tbl"><table>
+        <thead><tr><th>Word (part of speech)</th><th>Meaning</th><th>Economics example</th></tr></thead>
+        <tbody>
+          <tr><td><b>Aggregate</b> (adj/n)</td><td>total; combined sum of all parts</td><td>"<i>Aggregate</i> demand is total spending in the economy."</td></tr>
+          <tr><td><b>Asset</b> (n)</td><td>something valuable that you own</td><td>"A house and shares are <i>assets</i>."</td></tr>
+          <tr><td><b>Collateral</b> (n)</td><td>property pledged to secure a loan (the lender can seize it if you default)</td><td>"She put up her car as <i>collateral</i>."</td></tr>
+          <tr><td><b>Contraction</b> (n)</td><td>a period when the economy shrinks / output falls (opposite of expansion)</td><td>"During a <i>contraction</i>, GDP declines."</td></tr>
+          <tr><td><b>Deficit</b> (n)</td><td>a shortfall — spending exceeds income</td><td>"The budget <i>deficit</i> widened."</td></tr>
+          <tr><td><b>Deflation</b> (n)</td><td>a general <em>fall</em> in prices (opposite of inflation)</td><td>"<i>Deflation</i> can make people delay purchases."</td></tr>
+          <tr><td><b>Entertain</b> (v)</td><td>to amuse; (also: to consider an idea)</td><td>"A column written to <i>entertain</i> readers." (see Author's Purpose)</td></tr>
+          <tr><td><b>Emotional</b> (adj)</td><td>based on feelings, not facts</td><td>"An <i>emotional</i> appeal rather than data."</td></tr>
+          <tr><td><b>Empirical</b> (adj)</td><td>based on observation/data, not just theory</td><td>"<i>Empirical</i> evidence supports the model."</td></tr>
+          <tr><td><b>Exorbitant</b> (adj)</td><td>unreasonably high (price/cost)</td><td>"<i>Exorbitant</i> interest rates."</td></tr>
+          <tr><td><b>Expansion</b> (n)</td><td>a period when the economy grows</td><td>"An economic <i>expansion</i> creates jobs."</td></tr>
+          <tr><td><b>Forecast</b> (n/v)</td><td>a prediction of future events</td><td>"The <i>forecast</i> is for 3% growth."</td></tr>
+          <tr><td><b>Fragile</b> (adj) → <i>fragility</i> (n)</td><td>weak, easily damaged, unstable</td><td>"A <i>fragile</i> recovery."</td></tr>
+          <tr><td><b>Indebted</b> (adj)</td><td>owing money; in debt</td><td>"Heavily <i>indebted</i> households."</td></tr>
+          <tr><td><b>Indicator</b> (n)</td><td>a measurement showing an economy's state</td><td>"Unemployment is a key <i>indicator</i>."</td></tr>
+          <tr><td><b>Inflation</b> (n)</td><td>a general <em>rise</em> in prices</td><td>"High <i>inflation</i> erodes purchasing power."</td></tr>
+          <tr><td><b>Inform</b> (v) → <i>informative</i></td><td>to give facts/information</td><td>"The report aims to <i>inform</i>." (Author's Purpose)</td></tr>
+          <tr><td><b>Informal</b> (adj)</td><td>casual, relaxed (not formal)</td><td>"<i>Informal</i> writing uses contractions."</td></tr>
+          <tr><td><b>Intervene</b> (v) → <i>intervention</i> (n)</td><td>to step in to change an outcome</td><td>"The central bank <i>intervened</i> to support the currency."</td></tr>
+          <tr><td><b>Mandate</b> (n/v)</td><td>official authority or order to do something</td><td>"Price stability is the bank's <i>mandate</i>."</td></tr>
+          <tr><td><b>Measure</b> (n/v)</td><td>a step/action taken; also to assess a size</td><td>"The government took <i>measures</i> to curb inflation."</td></tr>
+          <tr><td><b>Obligation</b> (n)</td><td>a duty; something you must do</td><td>"A debt <i>obligation</i>."</td></tr>
+          <tr><td><b>Obtain</b> (v)</td><td>to get / acquire</td><td>"<i>Obtain</i> a loan / a licence."</td></tr>
+          <tr><td><b>Prospect</b> (n)</td><td>the likelihood/expectation of a future outcome</td><td>"<i>Prospects</i> for growth improved."</td></tr>
+          <tr><td><b>Prosperity</b> (n) → <i>prosper</i> (v)</td><td>the state of being wealthy/successful</td><td>"A decade of <i>prosperity</i>."</td></tr>
+          <tr><td><b>Prudent</b> (adj) → <i>prudence</i> (n)</td><td>careful, sensible, wise (esp. with money)</td><td>"<i>Prudent</i> fiscal management."</td></tr>
+          <tr><td><b>Recovery</b> (n)</td><td>return to growth after a downturn</td><td>"An economic <i>recovery</i> followed the recession."</td></tr>
+          <tr><td><b>Severe</b> (adj)</td><td>very serious or harsh</td><td>"A <i>severe</i> recession."</td></tr>
+          <tr><td><b>Stagnation</b> (n)</td><td>little or no growth/activity</td><td>"Years of economic <i>stagnation</i>."</td></tr>
+          <tr><td><b>Stellar</b> (adj)</td><td>outstanding, excellent</td><td>"<i>Stellar</i> quarterly results."</td></tr>
+          <tr><td><b>Stimulate</b> (v) → <i>stimulus</i> (n)</td><td>to encourage growth/activity</td><td>"Rate cuts <i>stimulate</i> spending."</td></tr>
+          <tr><td><b>Systematic</b> (adj)</td><td>done to a plan; methodical, organized</td><td>"A <i>systematic</i> approach to reform."</td></tr>
+          <tr><td><b>Temptation</b> (n)</td><td>a strong urge to do something (often unwise)</td><td>"The <i>temptation</i> to overspend."</td></tr>
+          <tr><td><b>Unanimous</b> (adj)</td><td>agreed by everyone</td><td>"A <i>unanimous</i> vote by the committee."</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box tip"><span class="lbl">Fast pairs to not confuse</span>
+        <b>Inflation ↔ Deflation</b> (prices up ↔ down) · <b>Expansion ↔ Contraction</b> (economy grows ↔ shrinks) · <b>Stagnation</b> (flat) vs <b>Recovery</b> (bouncing back) · <b>Prospect</b> (future outlook) vs <b>Prosperity</b> (being wealthy) · <b>Empirical</b> (data-based) vs <b>Emotional</b> (feeling-based).</div>
+    </div>
+  </section>
+
+  <!-- ===== GRAMMAR ===== -->
+  <section class="unit" id="eng-grammar">
+    <div class="unit-head"><span class="num">III</span><h2>Grammar — Verb Tenses (5 pts)</h2></div>
+    <p class="unit-sub">Two sentences to write + 6 multiple-choice. Only two tenses are tested.</p>
+    <div class="grid2">
+      <div class="card">
+        <span class="tag">Present Continuous (pp.10–12)</span>
+        <h3>am / is / are + verb-<i>ing</i></h3>
+        <p><b>Use it for:</b> actions happening <em>now</em> or around now, temporary situations, and <b>current trends</b> (very common in economics).</p>
+        <div class="box key"><span class="lbl">Signal words</span> now, right now, at the moment, currently, these days, today.</div>
+        <ul>
+          <li>"The Prime Minister <b>is sleeping</b> right now."</li>
+          <li>"Prices <b>are rising</b> at the moment."</li>
+          <li>"Unemployment <b>is falling</b> this year."</li>
+        </ul>
+        <div class="box warn"><span class="lbl">Watch out</span> Stative verbs (know, want, believe, own) normally aren't used in the continuous.</div>
+      </div>
+      <div class="card">
+        <span class="tag">Present Perfect (pp.31–32)</span>
+        <h3>have / has + past participle</h3>
+        <p><b>Use it for:</b> a past action with a <em>present result/relevance</em>, or something that <b>started in the past and continues now</b> (with <i>since / for</i>).</p>
+        <div class="box key"><span class="lbl">Signal words</span> since, for, already, yet, ever, never, just, recently, so far.</div>
+        <ul>
+          <li>"The war <b>has caused</b> prices to rise <b>since</b> March."</li>
+          <li>"GDP <b>has grown</b> <b>for</b> three years."</li>
+          <li>"The bank <b>has already</b> cut rates."</li>
+        </ul>
+        <div class="box tip"><span class="lbl">since vs for</span> <b>since</b> + a point in time (since March, since 2020). <b>for</b> + a duration (for 3 years, for a decade).</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="box exam"><span class="lbl">Exam tip — how to choose</span>
+        Ask: is it happening <em>right now / a current trend</em>? → <b>Present Continuous</b>. Did it <em>start in the past and still matter now</em> (esp. with since/for)? → <b>Present Perfect</b>. The prompt words (<i>now</i> vs <i>since</i>) are your biggest clue.</div>
+    </div>
+  </section>
+
+  <!-- ===== AUTHOR'S PURPOSE ===== -->
+  <section class="unit" id="eng-purpose">
+    <div class="unit-head"><span class="num">V</span><h2>Author's Purpose (5 pts, p.23)</h2></div>
+    <p class="unit-sub">Label 5 short paragraphs: is the writer trying to inform, persuade, or entertain?</p>
+    <div class="card">
+      <div class="grid2">
+        <div class="box tip"><span class="lbl">INFORM</span>Gives <b>facts</b> neutrally — explains, teaches, reports. Objective tone, data, definitions. <em>"The CPI rose 2% in June."</em></div>
+        <div class="box key"><span class="lbl">PERSUADE</span>Tries to <b>convince</b> you of an opinion or push an action. Look for opinion words, "should/must", emotive or loaded language, one-sided arguments. <em>"The government must act now."</em></div>
+      </div>
+      <div class="box exam"><span class="lbl">ENTERTAIN</span>Aims to <b>amuse or engage</b> — stories, humour, vivid or playful language, personal anecdotes. <em>"My wallet wept as I opened the electricity bill."</em></div>
+      <div class="box warn"><span class="lbl">Decide by asking</span> Facts only? → <b>inform</b>. Opinion + wants you to agree/act? → <b>persuade</b>. Fun / story / makes you smile? → <b>entertain</b>.</div>
+    </div>
+  </section>
+
+  <!-- ===== FORMAL WRITING ===== -->
+  <section class="unit" id="eng-writing">
+    <div class="unit-head"><span class="num">IV</span><h2>Academic Writing — Formal Style (5 pts, pp.33–38)</h2></div>
+    <p class="unit-sub">You'll rewrite an informal paragraph in formal academic English. Apply these rules.</p>
+    <div class="card">
+      <div class="box key"><span class="lbl">The rewrite rules</span>
+        <ol style="margin:.3em 0">
+          <li><b>No contractions:</b> don't → do not, it's → it is, can't → cannot.</li>
+          <li><b>Replace phrasal verbs</b> with single formal verbs: find out → <i>discover</i>, go up → <i>increase</i>, put off → <i>postpone</i>, cut down → <i>reduce</i>, look into → <i>investigate</i>.</li>
+          <li><b>No slang / vague words:</b> "a lot of" → <i>a significant amount / many</i>, "kids" → <i>children</i>, "stuff" → <i>items</i>, "get" → <i>obtain / receive</i>.</li>
+          <li><b>Impersonal &amp; objective:</b> avoid "I think", "you"; use hedging (<i>may, appears to, suggests</i>) and often the passive.</li>
+          <li><b>No emotional language / exclamation marks / rhetorical questions.</b></li>
+        </ol></div>
+      <div class="grid2">
+        <div class="box warn"><span class="lbl">Informal ✗</span>"Prices have gone up a lot and it's really bad. I think the government should do something about it ASAP!"</div>
+        <div class="box tip"><span class="lbl">Formal ✓</span>"Prices have increased significantly, which appears to have had a negative effect. It may be advisable for the government to intervene promptly."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== READING ===== -->
+  <section class="unit" id="eng-reading">
+    <div class="unit-head"><span class="num">II</span><h2>Reading Strategy (15 pts)</h2></div>
+    <div class="card">
+      <div class="grid2">
+        <div><h4>"Seen" passage (from the textbook)</h4>
+          <p>Re-read the Unit 1–4 passages before the exam so the 5 MC questions are easy recall. Know the main idea and key facts of each.</p></div>
+        <div><h4>"Unseen" (new) passage</h4>
+          <p><b>Skim</b> first for the main idea, then <b>scan</b> for details the questions ask about. For fill-in-the-blank, the answers are <b>exact words or figures from the passage</b> — copy them precisely.</p></div>
+      </div>
+      <div class="box tip"><span class="lbl">Vocabulary in context</span>Don't panic at an unknown word — use the surrounding sentence (and the vocab list above) to infer meaning.</div>
+    </div>
+  </section>
+
+</div><!-- /s-eng -->
+
+  <p class="noresult" id="noresult">No topics match your search in this subject. Try a shorter word.</p>
 
 </main>
 
 <button class="backtop" id="backtop" aria-label="Back to top">↑</button>
 
 <footer>
-  <p><b>Jean's Study Palace</b> · EE212 Principles of Macroeconomics · built from the Case &amp; Fair lecture materials.</p>
-  <p class="muted"><!-- EDIT: update this line whenever you like --> Study notes for personal revision. Filled-in answers (<span class="fill" style="font-size:.8em">green</span>) are worked by hand — double-check against your own lecture before an exam.</p>
+  <p><b>Jean's Study Palace</b> · Macroeconomics · Calculus I · Econ English — pick a subject up top.</p>
+  <p class="muted"><!-- EDIT: update this line whenever you like --> Personal revision notes built from lecture materials. Filled-in answers (<span class="fill" style="font-size:.8em">green</span>) and worked steps are done by hand — double-check against your own lectures before an exam.</p>
 </footer>
 
 <script>
@@ -1028,44 +1485,66 @@
 })();
 
 /* ============================================================
-   LIVE SEARCH — filters the cards as you type
+   SUBJECT SWITCHER + LIVE SEARCH (scoped to the active subject)
    ============================================================ */
 (function(){
   var q=document.getElementById('q');
-  var cards=[].slice.call(document.querySelectorAll('main .card'));
-  var sections=[].slice.call(document.querySelectorAll('section.unit'));
   var noresult=document.getElementById('noresult');
-  // cache lowercase text of each card
-  cards.forEach(function(c){ c._t=(c.innerText||c.textContent||'').toLowerCase(); });
+  var tabs=[].slice.call(document.querySelectorAll('#subjtabs button'));
+  var subjects={
+    macro:document.getElementById('s-macro'),
+    calc:document.getElementById('s-calc'),
+    eng:document.getElementById('s-eng')
+  };
+  var navs={};
+  [].forEach.call(document.querySelectorAll('nav.chips[data-for]'),function(n){ navs[n.getAttribute('data-for')]=n; });
+  // cache lowercase text of every card once
+  document.querySelectorAll('main .card').forEach(function(c){ c._t=(c.innerText||c.textContent||'').toLowerCase(); });
 
-  function run(){
-    var term=q.value.trim().toLowerCase();
-    var any=false;
+  var current='macro';
+
+  function activeCards(){ return [].slice.call(subjects[current].querySelectorAll('.card')); }
+  function activeSections(){ return [].slice.call(subjects[current].querySelectorAll('section.unit')); }
+
+  function runSearch(){
+    var term=q.value.trim().toLowerCase(), any=false;
+    var cards=activeCards(), sections=activeSections();
     if(!term){
       cards.forEach(function(c){ c.style.display=''; });
       sections.forEach(function(s){ s.style.display=''; });
       noresult.style.display='none';
       return;
     }
-    cards.forEach(function(c){
-      var hit=c._t.indexOf(term)>-1;
-      c.style.display = hit ? '' : 'none';
-      if(hit) any=true;
-    });
-    // hide a unit if none of its cards are visible (keep its heading only if it has a hit)
+    cards.forEach(function(c){ var hit=c._t.indexOf(term)>-1; c.style.display=hit?'':'none'; if(hit)any=true; });
     sections.forEach(function(s){
-      var visible=s.querySelectorAll('.card');
       var show=false;
-      [].forEach.call(visible,function(c){ if(c.style.display!=='none') show=true; });
-      s.style.display = show ? '' : 'none';
+      [].forEach.call(s.querySelectorAll('.card'),function(c){ if(c.style.display!=='none') show=true; });
+      s.style.display=show?'':'none';
     });
-    noresult.style.display = any ? 'none' : 'block';
+    noresult.style.display=any?'none':'block';
   }
-  q.addEventListener('input',run);
-  // press "/" to focus search
-  document.addEventListener('keydown',function(e){
-    if(e.key==='/' && document.activeElement!==q){ e.preventDefault(); q.focus(); }
-  });
+
+  function switchTo(subj){
+    if(!subjects[subj]) subj='macro';
+    current=subj;
+    // toggle subject panels
+    for(var k in subjects){ subjects[k].classList.toggle('active', k===subj); }
+    // toggle tabs + nav chip rows
+    tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-subj')===subj); });
+    for(var n in navs){ navs[n].classList.toggle('active', n===subj); }
+    q.value=''; runSearch();
+    try{ localStorage.setItem('subject',subj); }catch(e){}
+    window.scrollTo({top:0});
+  }
+
+  tabs.forEach(function(t){ t.addEventListener('click',function(){ switchTo(t.getAttribute('data-subj')); }); });
+  q.addEventListener('input',runSearch);
+  document.addEventListener('keydown',function(e){ if(e.key==='/' && document.activeElement!==q){ e.preventDefault(); q.focus(); } });
+
+  // restore last subject
+  var saved='macro';
+  try{ saved=localStorage.getItem('subject')||'macro'; }catch(e){}
+  switchTo(saved);
 })();
 
 /* ============================================================
