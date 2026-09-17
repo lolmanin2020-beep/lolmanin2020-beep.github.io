@@ -89,6 +89,18 @@
   .ans{color:var(--good);font-weight:800}
   .dfn{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;margin:12px 0}
   .dfn b{color:var(--accent-2)}
+  /* practice problems + reveal-able solutions */
+  .prob{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:12px;padding:14px 16px;margin:14px 0}
+  .prob .pq{font-weight:600}
+  .qnum{display:inline-block;font-weight:800;color:var(--gold);margin-right:4px}
+  details.sol{margin:10px 0 2px;border:1px solid var(--border);border-radius:9px;background:var(--surface-2);overflow:hidden}
+  details.sol>summary{cursor:pointer;padding:8px 13px;font-weight:700;font-size:.88rem;color:var(--accent);list-style:none;user-select:none}
+  details.sol>summary::-webkit-details-marker{display:none}
+  details.sol>summary::before{content:"▸  Show solution"}
+  details.sol[open]>summary::before{content:"▾  Solution"}
+  details.sol[open]>summary{border-bottom:1px solid var(--border)}
+  details.sol .solbody{padding:11px 15px}
+  details.sol .solbody p{margin:.4em 0}
 
   /* ---------- Layout ---------- */
   main{max-width:var(--maxw);margin:0 auto;padding:16px 16px 80px}
@@ -220,6 +232,7 @@
     <a href="#calc-diff">2 · Differentiation</a>
     <a href="#calc-lhopital">3 · L'Hôpital</a>
     <a href="#calc-linear">4 · Linear Approx.</a>
+    <a href="#calc-practice">★ Practice + Solutions</a>
     <a href="#calc-cheat">Formulas &amp; Midterm</a>
   </nav>
   <nav class="chips" data-for="eng">
@@ -1265,6 +1278,253 @@
       <h3>Estimating error</h3>
       <div class="formula center">dy = f′(x)·dx &nbsp;≈&nbsp; Δy &nbsp;(the small change in f when x changes by dx)</div>
       <div class="step"><b>Ex.</b> A cube side is 30 cm ± 0.02. <span class="math">V=x³, dV=3x²·dx = 3(30²)(±0.02) =</span> <span class="ans">±54 cm³</span>. Relative error <span class="math">dV/V = 54/27000 = 1/500</span>.</div>
+    </div>
+  </section>
+
+  <!-- ===== PRACTICE PROBLEMS ===== -->
+  <section class="unit" id="calc-practice">
+    <div class="unit-head"><span class="num">★</span><h2>Practice Exam Problems — with full solutions</h2></div>
+    <p class="unit-sub">Modeled on your past midterms. <b>Try each one first</b>, then click "Show solution". Grouped by the topics that actually appear on the exam.</p>
+
+    <!-- P1 limits -->
+    <div class="card">
+      <span class="tag">Set 1 · One-sided &amp; piecewise limits</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">1.</span> Let <span class="math">f(x) = { (x²+3x+2)/|x+1|, x&lt;−1 ; &nbsp; 2−x², x≥−1 }</span>. Find <span class="math">lim<sub>x→−1⁻</sub>f</span>, <span class="math">lim<sub>x→−1⁺</sub>f</span>, and <span class="math">lim<sub>x→−1</sub>f</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>Left</b> (x&lt;−1, so <span class="math">x+1&lt;0 ⟹ |x+1| = −(x+1)</span>): factor <span class="math">x²+3x+2=(x+1)(x+2)</span> →
+          <span class="math">(x+1)(x+2)/[−(x+1)] = −(x+2) → −(−1+2) =</span> <span class="ans">−1</span>.</p>
+          <p><b>Right</b> (x≥−1): <span class="math">2−x² → 2−1 =</span> <span class="ans">1</span>.</p>
+          <p>Left <span class="math">(−1)</span> ≠ Right <span class="math">(1)</span>, so <span class="math">lim<sub>x→−1</sub>f</span> <span class="ans">does not exist</span>. The absolute value is the trap — it flips the sign on the left side.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">2.</span> Evaluate (a) <span class="math">lim<sub>x→3</sub> (x−3)/(x²−9)</span> &nbsp; (b) <span class="math">lim<sub>x→0</sub> (√(x+9)−3)/x</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>(a)</b> 0/0. Factor <span class="math">x²−9=(x−3)(x+3)</span> → <span class="math">1/(x+3) → 1/6</span> = <span class="ans">1/6</span>.</p>
+          <p><b>(b)</b> 0/0. Multiply by conjugate <span class="math">(√(x+9)+3)</span>:
+          <span class="math">(x+9−9)/[x(√(x+9)+3)] = 1/(√(x+9)+3) → 1/(3+3)</span> = <span class="ans">1/6</span>.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P2 trig + squeeze -->
+    <div class="card">
+      <span class="tag">Set 2 · Trig limits &amp; squeeze theorem</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">3.</span> Find <span class="math">lim<sub>x→0</sub> tan(3x)/sin(5x)</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Rewrite <span class="math">tan(3x)=sin(3x)/cos(3x)</span> and force the <span class="math">sin(kx)/(kx)→1</span> pattern:</p>
+          <p><span class="math">= [sin(3x)/(3x)]·(3x) / { cos(3x)·[sin(5x)/(5x)]·(5x) } = (1·3x)/(1·1·5x) →</span> <span class="ans">3/5</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">4.</span> Show <span class="math">lim<sub>x→0</sub> x²·sin(1/x) = 0</span>, and use it to decide continuity of <span class="math">g(x)={ x²sin(1/x), x≠0 ; 0, x=0 }</span> at 0.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Since <span class="math">−1 ≤ sin(1/x) ≤ 1</span>, multiply by <span class="math">x²≥0</span>: <span class="math">−x² ≤ x²sin(1/x) ≤ x²</span>.</p>
+          <p>Both <span class="math">lim<sub>x→0</sub>(−x²)=0</span> and <span class="math">lim<sub>x→0</sub>x²=0</span>, so by the <b>squeeze theorem</b> the middle → <span class="ans">0</span>.</p>
+          <p>Now check continuity: ① <span class="math">g(0)=0</span> defined; ② <span class="math">lim<sub>x→0</sub>g=0</span> exists; ③ they're equal → <span class="ans">g is continuous at 0</span>. ✔</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P3 asymptotes / infinity -->
+    <div class="card">
+      <span class="tag">Set 3 · Limits at infinity &amp; asymptotes</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">5.</span> Find all vertical and horizontal asymptotes of <span class="math">f(x) = (3x²+1)/(x²−4)</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>Vertical:</b> denominator zero where numerator isn't: <span class="math">x²−4=0 → x=±2</span> → <span class="ans">x=2 and x=−2</span>.</p>
+          <p><b>Horizontal:</b> equal degrees (2 and 2) → ratio of leading coeffs <span class="math">3/1</span> → <span class="ans">y=3</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">6.</span> Evaluate (a) <span class="math">lim<sub>x→∞</sub> (√(x²+5x) − x)</span> &nbsp; (b) <span class="math">lim<sub>x→−∞</sub> √(x²−8)/(1+2x)</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>(a)</b> ∞−∞. Conjugate: <span class="math">(x²+5x−x²)/(√(x²+5x)+x) = 5x/(x√(1+5/x)+x) → 5/(1+1)</span> = <span class="ans">5/2</span>.</p>
+          <p><b>(b)</b> As <span class="math">x→−∞</span>, <span class="math">√(x²)=|x|=−x</span>. Divide by <var>x</var>:
+          <span class="math">[−x·√(1−8/x²)]/[x(1/x + 2)] → (−1·1)/(0+2)</span> = <span class="ans">−1/2</span>. <span class="muted">(sign flip because x is negative — the classic trap)</span></p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P4 continuity constants -->
+    <div class="card">
+      <span class="tag">Set 4 · Continuity — find the constants ★</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">7.</span> Find <var>m</var> so that <span class="math">f(x) = { x/sin(mx), x≠0 ; 3, x=0 }</span> is continuous at 0.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Need <span class="math">lim<sub>x→0</sub> x/sin(mx) = f(0)=3</span>. Write <span class="math">x/sin(mx) = (1/m)·[mx/sin(mx)] → (1/m)·1 = 1/m</span>.</p>
+          <p>So <span class="math">1/m = 3 →</span> <span class="ans">m = 1/3</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">8.</span> Find <var>a, b</var> so that <span class="math">f(x) = { ax+1, x≤2 ; x²−b, x&gt;2 }</span> is <b>both continuous and differentiable</b> at <span class="math">x=2</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>Differentiable</b> ⟹ slopes match: left slope <span class="math">a</span>, right slope <span class="math">2x|₂=4</span> → <span class="ans">a = 4</span>.</p>
+          <p><b>Continuous</b> ⟹ pieces meet: <span class="math">a(2)+1 = 2²−b → 8+1 = 4−b → b = 4−9 =</span> <span class="ans">−5</span>.</p>
+          <p>Check: left <span class="math">4x+1</span> and right <span class="math">x²+5</span> both give 9 at x=2, slopes both 4. ✔</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P5 derivatives -->
+    <div class="card">
+      <span class="tag">Set 5 · Product / quotient / chain</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">9.</span> Differentiate (a) <span class="math">y=(2+√x+x)(x³−3x+1)</span> &nbsp; (b) <span class="math">F(x)=cos³(sin x)</span> &nbsp; (c) <span class="math">y=sin¹⁰(2x+1)</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>(a) Product rule</b> <span class="math">(fg)′=f′g+fg′</span> with <span class="math">f′ = 1/(2√x)+1</span>:
+          <span class="ans">y′ = (1/(2√x)+1)(x³−3x+1) + (2+√x+x)(3x²−3)</span>.</p>
+          <p><b>(b) Chain, 3 layers</b> (outer cube · cos · inner sin):
+          <span class="ans">F′ = 3cos²(sin x)·(−sin(sin x))·cos x</span>.</p>
+          <p><b>(c)</b> <span class="math">y=[sin(2x+1)]¹⁰</span> → <span class="ans">y′ = 10 sin⁹(2x+1)·cos(2x+1)·2</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">10.</span> Differentiate <span class="math">y = (2 + x√x)/(x³+1)</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>Quotient rule</b> <span class="math">(f/g)′=(g f′ − f g′)/g²</span>, with <span class="math">f = 2 + x^{3/2}, f′ = (3/2)x^{1/2}</span>, <span class="math">g = x³+1, g′=3x²</span>:</p>
+          <p><span class="ans">y′ = [ (x³+1)(3/2)√x − (2+x√x)(3x²) ] / (x³+1)²</span>.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P6 implicit -->
+    <div class="card">
+      <span class="tag">Set 6 · Implicit differentiation ★</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">11.</span> For <span class="math">x³ + y³ = 6xy</span> (the folium), find <span class="math">dy/dx</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Differentiate (product rule on <span class="math">6xy</span>): <span class="math">3x² + 3y²y′ = 6y + 6xy′</span>.</p>
+          <p>Collect <span class="math">y′</span>: <span class="math">y′(3y² − 6x) = 6y − 3x²</span> → <span class="ans">dy/dx = (6y−3x²)/(3y²−6x) = (2y−x²)/(y²−2x)</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">12.</span> For <span class="math">y² = x³ + 3x²</span>: find the slope at <span class="math">(1, 2)</span> and the tangent line.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><span class="math">2y·y′ = 3x² + 6x</span> → <span class="math">y′ = (3x²+6x)/(2y)</span>. At <span class="math">(1,2)</span>: <span class="math">(3+6)/(4)</span> = <span class="ans">9/4</span>.</p>
+          <p>Tangent: <span class="math">y − 2 = (9/4)(x − 1)</span> → <span class="ans">y = (9/4)x − 1/4</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">13.</span> For <span class="math">x² + y² = 2</span>, find the <b>second</b> derivative <span class="math">d²y/dx²</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>First: <span class="math">2x+2yy′=0 → y′=−x/y</span>. Differentiate <span class="math">y′=−x/y</span> with the quotient rule (remember <span class="math">y′=−x/y</span>):</p>
+          <p><span class="math">y″ = −[ y·1 − x·y′ ]/y² = −[ y − x(−x/y) ]/y² = −(y²+x²)/y³</span>. Since <span class="math">x²+y²=2</span>: <span class="ans">y″ = −2/y³</span>.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P7 log diff -->
+    <div class="card">
+      <span class="tag">Set 7 · Logarithmic differentiation ★</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">14.</span> Differentiate <span class="math">y = x^{\,sin x}</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Take ln: <span class="math">ln y = sin x · ln x</span>. Differentiate (product rule on the right):</p>
+          <p><span class="math">(1/y)y′ = cos x·ln x + sin x·(1/x)</span> → <span class="ans">y′ = x^{sin x}( cos x·ln x + sin x / x )</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">15.</span> With <span class="math">a,b,c,d</span> constants, differentiate <span class="math">f(x) = (x−2)ᵃ(x−3)ᵇ / [ (x+4)ᶜ(x+5)ᵈ ]</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Take ln and split with log laws: <span class="math">ln f = a·ln(x−2)+b·ln(x−3)−c·ln(x+4)−d·ln(x+5)</span>.</p>
+          <p>Differentiate: <span class="math">f′/f = a/(x−2)+b/(x−3)−c/(x+4)−d/(x+5)</span>, so</p>
+          <p><span class="ans">f′ = f·[ a/(x−2)+b/(x−3)−c/(x+4)−d/(x+5) ]</span> (a nightmare with the quotient rule, trivial with logs).</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P8 lhopital -->
+    <div class="card">
+      <span class="tag">Set 8 · L'Hôpital — every form</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">16.</span> <span class="math">lim<sub>x→0</sub> (eˣ − 1 − x)/x²</span></p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>0/0 → <span class="math">(eˣ−1)/(2x)</span> still 0/0 → <span class="math">eˣ/2 → 1/2</span> = <span class="ans">1/2</span> (applied twice).</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">17.</span> <span class="math">lim<sub>x→0⁺</sub> x·ln x</span> &nbsp;(form 0·∞)</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Rewrite as a fraction: <span class="math">ln x/(1/x)</span> (form −∞/∞) → L'Hôpital <span class="math">(1/x)/(−1/x²) = −x → 0</span> = <span class="ans">0</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">18.</span> <span class="math">lim<sub>x→∞</sub> (1 + 3/x)ˣ</span> &nbsp;(form 1<sup>∞</sup>)</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Let <span class="math">y=(1+3/x)ˣ</span>, so <span class="math">ln y = x·ln(1+3/x)</span>. Sub <span class="math">t=1/x→0⁺</span>: <span class="math">ln(1+3t)/t</span> (0/0) → <span class="math">3/(1+3t) → 3</span>.</p>
+          <p>So <span class="math">lim ln y = 3</span> ⟹ answer <span class="ans">e³</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">19.</span> <span class="math">lim<sub>x→0</sub> ( 1/x − 1/sin x )</span> &nbsp;(form ∞−∞)</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Common denominator: <span class="math">(sin x − x)/(x sin x)</span> (0/0). L'Hôpital: <span class="math">(cos x − 1)/(sin x + x cos x)</span> (still 0/0).</p>
+          <p>Again: <span class="math">(−sin x)/(2cos x − x sin x) → 0/2</span> = <span class="ans">0</span>.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P9 linearization -->
+    <div class="card">
+      <span class="tag">Set 9 · Linear approximation &amp; error</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">20.</span> Use linearization to approximate (a) <span class="math">√50</span> &nbsp; (b) <span class="math">(8.06)^{1/3}</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>(a)</b> <span class="math">f=√x, a=49</span>: <span class="math">f(49)=7, f′(49)=1/(2·7)=1/14</span>. <span class="math">√50 ≈ 7 + (1/14)(1) ≈</span> <span class="ans">7.0714</span>.</p>
+          <p><b>(b)</b> <span class="math">f=x^{1/3}, a=8</span>: <span class="math">f(8)=2, f′(8)=(1/3)·8^{−2/3}=1/12</span>. <span class="math">(8.06)^{1/3} ≈ 2 + (1/12)(0.06) =</span> <span class="ans">2.005</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">21.</span> A circle's radius is measured as <span class="math">10 cm ± 0.1</span>. Use differentials to estimate the maximum error in its area.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><span class="math">A=πr², dA = 2πr·dr = 2π(10)(0.1) = 2π ≈</span> <span class="ans">6.28 cm²</span>. Relative error <span class="math">dA/A = 2πr dr/(πr²) = 2dr/r = 0.02 = 2%</span>.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P10 abstract chain rule -->
+    <div class="card">
+      <span class="tag">Set 10 · Abstract chain rule (the signature hard one) ★</span>
+      <div class="prob">
+        <p class="pq"><span class="qnum">22.</span> Let <span class="math">h(x) = f(sin(2x) + f(2x))</span> where <span class="math">f(0)=0</span> and <span class="math">f′(0)=2</span>. Find <span class="math">h′(0)</span> and the tangent line to <span class="math">y=h(x)</span> at <span class="math">x=0</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>Chain rule</b> — outer <span class="math">f′</span> at the inside, times the derivative of the inside:</p>
+          <p><span class="math">h′(x) = f′( sin 2x + f(2x) ) · ( 2cos 2x + 2f′(2x) )</span>.</p>
+          <p>At <span class="math">x=0</span>: inside <span class="math">= sin 0 + f(0) = 0</span>, so the outer factor is <span class="math">f′(0)=2</span>. Bracket <span class="math">= 2cos0 + 2f′(0) = 2 + 4 = 6</span>.</p>
+          <p><span class="math">h′(0) = 2·6 =</span> <span class="ans">12</span>. And <span class="math">h(0)=f(sin0+f(0))=f(0)=0</span>, so the tangent line is <span class="ans">y = 12x</span>.</p>
+          <p class="muted">On the real exam they push this further to <span class="math">h″(0)</span> — same idea, differentiate <span class="math">h′</span> again with the product + chain rule and plug in the given <span class="math">f″(0)</span>.</p>
+        </div></details>
+      </div>
+    </div>
+
+    <!-- P11 exp/log -->
+    <div class="card">
+      <span class="tag">Set 11 · Exponential &amp; logarithmic equations + growth</span>
+      <div class="box tip"><span class="lbl">Toolkit</span> Same base ⟹ equate exponents. Hidden quadratic ⟹ let <span class="math">u=eˣ</span> (or <span class="math">5ˣ</span>). Log rules: <span class="math">ln A + ln B = ln(AB)</span>, <span class="math">ln A − ln B = ln(A/B)</span>. Continuous growth: <span class="math">A=A₀e^{kt}</span>; rate <span class="math">A′=kA</span>; doubling time <span class="math">t=ln2/k</span>.</div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">23.</span> Solve <span class="math">2^{x+1} + 2^x + 2^{x−1} = 56</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Factor out <span class="math">2^{x−1}</span>: <span class="math">2^{x−1}(4 + 2 + 1) = 56 → 7·2^{x−1} = 56 → 2^{x−1} = 8 = 2³</span>.</p>
+          <p>So <span class="math">x−1 = 3 →</span> <span class="ans">x = 4</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">24.</span> Solve <span class="math">e^{2x} − 7eˣ + 12 = 0</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p>Let <span class="math">u=eˣ</span>: <span class="math">u²−7u+12=0 → (u−3)(u−4)=0 → u=3, 4</span>.</p>
+          <p>So <span class="math">eˣ=3</span> or <span class="math">eˣ=4</span> → <span class="ans">x = ln 3 or x = ln 4</span>.</p>
+        </div></details>
+      </div>
+      <div class="prob">
+        <p class="pq"><span class="qnum">25.</span> An investment grows as <span class="math">A = 10000·e^{0.05t}</span>. Find the time to <b>double</b>. Also, for <span class="math">N(t)=200e^{0.3t}</span> find the growth rate at <span class="math">t=4</span>.</p>
+        <details class="sol"><summary></summary><div class="solbody">
+          <p><b>Double:</b> <span class="math">e^{0.05t}=2 → 0.05t = ln 2 → t = ln2/0.05 ≈</span> <span class="ans">13.86 years</span>.</p>
+          <p><b>Rate:</b> <span class="math">N′(t)=200·0.3·e^{0.3t}=60e^{0.3t}</span>. At <span class="math">t=4</span>: <span class="math">60e^{1.2} ≈ 60(3.320) ≈</span> <span class="ans">199.3 per unit time</span>.</p>
+        </div></details>
+      </div>
     </div>
   </section>
 
