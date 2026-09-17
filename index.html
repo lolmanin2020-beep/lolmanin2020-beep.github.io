@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Palace</title>
+<meta name="description" content="A personal study hub — subjects, notes, and resources in one place.">
+<style>
+  /* ============================================================
+     THEME TOKENS  — change colors here once, they apply everywhere
+     ============================================================ */
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --text: #1c1d22;
+    --muted: #6b6d76;
+    --border: #e6e6e2;
+    --accent: #3b5bdb;
+    --accent-soft: #eaeeff;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
+    --radius: 14px;
+    --maxw: 1000px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16171b;
+      --surface: #1e2025;
+      --text: #ececf1;
+      --muted: #9a9ca6;
+      --border: #2c2f36;
+      --accent: #8aa2ff;
+      --accent-soft: #23283a;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16171b;
+    --surface: #1e2025;
+    --text: #ececf1;
+    --muted: #9a9ca6;
+    --border: #2c2f36;
+    --accent: #8aa2ff;
+    --accent-soft: #23283a;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---------- Top bar ---------- */
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(150%) blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .bar {
+    max-width: var(--maxw); margin: 0 auto;
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .brand { font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; white-space: nowrap; }
+  .brand span { color: var(--accent); }
+  .search {
+    flex: 1 1 220px; min-width: 160px;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 14px;
+  }
+  .search input {
+    border: 0; background: transparent; outline: none;
+    font: inherit; color: var(--text); width: 100%;
+  }
+  .search svg { flex: none; opacity: .5; }
+  .themeBtn {
+    flex: none;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--muted); border-radius: 999px;
+    width: 38px; height: 38px; cursor: pointer;
+    display: grid; place-items: center; font-size: 1rem;
+  }
+  .themeBtn:hover { color: var(--text); }
+
+  /* ---------- Layout ---------- */
+  main { max-width: var(--maxw); margin: 0 auto; padding: 16px; }
+  .intro { padding: 30px 6px 6px; }
+  .intro h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin: 0 0 .3em; letter-spacing: -.02em; line-height: 1.15;
+  }
+  .intro p { color: var(--muted); max-width: 60ch; margin: 0; font-size: 1.05rem; }
+
+  /* ---------- Collection toggle ---------- */
+  .tabs {
+    display: inline-flex; gap: 4px; margin: 22px 6px 4px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 999px; padding: 4px;
+  }
+  .tabs button {
+    border: 0; background: transparent; color: var(--muted);
+    font: inherit; font-weight: 600; cursor: pointer;
+    padding: 7px 16px; border-radius: 999px; display: flex; align-items: center; gap: 6px;
+  }
+  .tabs button.active { background: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .tabs button.active,
+  .tabs button.active { color: #fff; }
+  .tabs .lock { font-size: .85em; }
+
+  /* ---------- Subject grid ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px; margin-top: 16px;
+  }
+  .collection { display: none; }
+  .collection.active { display: block; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 20px 18px;
+    display: flex; flex-direction: column;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+  .card .tag {
+    align-self: flex-start;
+    font-size: .72rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft);
+    padding: 3px 9px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .card h2 { margin: 0 0 6px; font-size: 1.22rem; letter-spacing: -.01em; }
+  .card .desc { color: var(--muted); font-size: .95rem; margin: 0 0 14px; }
+  .card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .card li { padding: 5px 0; border-top: 1px solid var(--border); font-size: .95rem; }
+  .card li:first-child { border-top: 0; }
+  .card li .note { color: var(--muted); }
+
+  .empty { text-align: center; color: var(--muted); padding: 40px 0; display: none; }
+  .empty.show { display: block; }
+
+  /* ---------- Lock screen ---------- */
+  .lockscreen {
+    max-width: 400px; margin: 34px auto; text-align: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 34px 28px;
+  }
+  .lockscreen .icon { font-size: 1.8rem; }
+  .lockscreen h3 { margin: 10px 0 4px; }
+  .lockscreen p { color: var(--muted); font-size: .92rem; margin: 0 0 18px; }
+  .lockrow { display: flex; gap: 8px; }
+  .lockrow input {
+    flex: 1; font: inherit; padding: 10px 14px;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg); color: var(--text); outline: none;
+  }
+  .lockrow input:focus { border-color: var(--accent); }
+  .lockrow button {
+    border: 0; background: var(--accent); color: #fff; font: inherit; font-weight: 600;
+    padding: 10px 18px; border-radius: 10px; cursor: pointer;
+  }
+  .lockerr { color: #d6455d; font-size: .86rem; margin-top: 12px; min-height: 1.2em; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  .shake { animation: shake .28s; }
+  .lockedOut { display: none; }
+
+  footer {
+    max-width: var(--maxw); margin: 0 auto;
+    padding: 30px 16px 50px; color: var(--muted); font-size: .88rem;
+    border-top: 1px solid var(--border); margin-top: 24px;
+  }
+  footer a { color: var(--muted); text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <!-- EDIT: your name / site title -->
+    <div class="brand">Jean&#39;s <span>Study Palace</span></div>
+    <label class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="q" type="search" placeholder="Search this collection…" autocomplete="off" aria-label="Search">
+    </label>
+    <button class="themeBtn" id="theme" title="Toggle light / dark" aria-label="Toggle theme">◐</button>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <!-- EDIT: headline + one line about the site -->
+    <h1>Everything I&#39;m studying, in one place.</h1>
+    <p>A quiet room for my notes, references, and links — organised by subject. Switch to the private collection for the topics I keep to myself.</p>
+  </section>
+
+  <!-- Collection toggle -->
+  <div class="tabs" role="tablist">
+    <button id="tabPublic" class="active" role="tab">Public</button>
+    <button id="tabPrivate" role="tab"><span class="lock">🔒</span> Private</button>
+  </div>
+
+  <!-- ============================================================
+       PUBLIC COLLECTION
+       To add a subject: copy one <article class="card"> block,
+       change the tag, title, description and the <li> items.
+       ============================================================ -->
+  <section class="collection active" id="colPublic">
+    <div class="grid">
+
+      <article class="card">
+        <span class="tag">Core</span>
+        <h2>Microeconomics</h2>
+        <p class="desc">Consumer &amp; firm behaviour, markets, welfare.</p>
+        <ul>
+          <li><a href="#">Lecture notes — utility &amp; demand</a></li>
+          <li><a href="#">Problem set 3 (elasticity)</a></li>
+          <li><span class="note">Note: revisit deadweight loss before midterm</span></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="tag">Core</span>
+        <h2>Macroeconomics</h2>
+        <p class="desc">Growth, inflation, monetary &amp; fiscal policy.</p>
+        <ul>
+          <li><a href="#">IS-LM summary sheet</a></li>
+          <li><a href="#">Reading: Solow growth model</a></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="tag">Methods</span>
+        <h2>Econometrics</h2>
+        <p class="desc">Regression, inference, causal identification.</p>
+        <ul>
+          <li><a href="#">OLS assumptions cheat sheet</a></li>
+          <li><a href="#">Stata / R commands</a></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="tag">Applied</span>
+        <h2>Case Club</h2>
+        <p class="desc">Frameworks, past cases, competition prep.</p>
+        <ul>
+          <li><a href="#">Profitability &amp; market-entry frameworks</a></li>
+          <li><a href="#">Cracked cases archive</a></li>
+        </ul>
+      </article>
+
+    </div>
+    <div class="empty" id="emptyPublic">No subjects match that search.</div>
+  </section>
+
+  <!-- ============================================================
+       PRIVATE COLLECTION  (behind a passphrase)
+       ⚠️  This is light obfuscation, NOT real security.
+           The content below is still downloaded to every visitor's
+           browser and can be found by a technical person via
+           "View source". Keep only NON-sensitive notes here.
+       Edit the passphrase in the <script> at the bottom (PASSPHRASE).
+       ============================================================ -->
+  <section class="collection" id="colPrivate">
+
+    <!-- Lock screen (shown until the passphrase is entered) -->
+    <div class="lockscreen" id="lockscreen">
+      <div class="icon">🔒</div>
+      <h3>Private collection</h3>
+      <p>Enter the passphrase to view these topics.</p>
+      <div class="lockrow">
+        <input id="pass" type="password" placeholder="Passphrase" autocomplete="off" aria-label="Passphrase">
+        <button id="unlock">Unlock</button>
+      </div>
+      <div class="lockerr" id="lockerr"></div>
+    </div>
+
+    <!-- Private cards (revealed after unlock) -->
+    <div class="lockedOut" id="privateContent">
+      <div class="grid">
+
+        <article class="card">
+          <span class="tag">Trading</span>
+          <h2>Forex Study Log</h2>
+          <p class="desc">Setups, mistakes, and what I&#39;m learning.</p>
+          <ul>
+            <li><a href="#">Trade journal</a></li>
+            <li><span class="note">Note: review losing trades weekly</span></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="tag">Craft</span>
+          <h2>Mentalism &amp; Persuasion</h2>
+          <p class="desc">Techniques, scripts, and reading.</p>
+          <ul>
+            <li><a href="#">Working notes</a></li>
+            <li><a href="#">Practice routines</a></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="tag">Drafts</span>
+          <h2>Ideas &amp; Drafts</h2>
+          <p class="desc">Half-formed thoughts, not ready to share.</p>
+          <ul>
+            <li><span class="note">Anything in progress</span></li>
+          </ul>
+        </article>
+
+      </div>
+      <div class="empty" id="emptyPrivate">No subjects match that search.</div>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  <!-- EDIT: footer line -->
+  Built as a personal study hub · last updated <span id="year"></span>.
+</footer>
+
+<script>
+  /* ========================================================
+     SET YOUR PRIVATE PASSPHRASE HERE
+     (Reminder: this is a light gate, not real security.)
+     ======================================================== */
+  var PASSPHRASE = "changeme";
+
+  var root = document.documentElement;
+
+  // ----- Collection tabs -----
+  var tabPublic = document.getElementById('tabPublic');
+  var tabPrivate = document.getElementById('tabPrivate');
+  var colPublic = document.getElementById('colPublic');
+  var colPrivate = document.getElementById('colPrivate');
+  var q = document.getElementById('q');
+
+  function showCollection(which) {
+    var pub = which === 'public';
+    tabPublic.classList.toggle('active', pub);
+    tabPrivate.classList.toggle('active', !pub);
+    colPublic.classList.toggle('active', pub);
+    colPrivate.classList.toggle('active', !pub);
+    q.value = '';
+    runSearch();
+    if (!pub) setTimeout(function(){ var p = document.getElementById('pass'); if (p && p.offsetParent) p.focus(); }, 30);
+  }
+  tabPublic.addEventListener('click', function(){ showCollection('public'); });
+  tabPrivate.addEventListener('click', function(){ showCollection('private'); });
+
+  // ----- Passphrase gate -----
+  var lockscreen = document.getElementById('lockscreen');
+  var privateContent = document.getElementById('privateContent');
+  var pass = document.getElementById('pass');
+  var unlock = document.getElementById('unlock');
+  var lockerr = document.getElementById('lockerr');
+
+  function reveal() {
+    lockscreen.style.display = 'none';
+    privateContent.style.display = 'block';
+    try { sessionStorage.setItem('unlocked', '1'); } catch (e) {}
+    runSearch();
+  }
+  function tryUnlock() {
+    if (pass.value === PASSPHRASE) {
+      lockerr.textContent = '';
+      reveal();
+    } else {
+      lockerr.textContent = 'Incorrect passphrase.';
+      lockscreen.classList.remove('shake'); void lockscreen.offsetWidth;
+      lockscreen.classList.add('shake');
+      pass.select();
+    }
+  }
+  unlock.addEventListener('click', tryUnlock);
+  pass.addEventListener('keydown', function(e){ if (e.key === 'Enter') tryUnlock(); });
+  // stay unlocked for the rest of the browser session
+  try { if (sessionStorage.getItem('unlocked') === '1') reveal(); } catch (e) {}
+
+  // ----- Live search within the visible collection -----
+  function runSearch() {
+    var term = q.value.trim().toLowerCase();
+    var active = document.querySelector('.collection.active');
+    if (!active) return;
+    // don't filter the private collection while it's still locked
+    var scope = active.querySelector('.lockedOut') && active.querySelector('.lockedOut').style.display !== 'block'
+      ? null : active;
+    var cards = active.querySelectorAll('.card');
+    var empty = active.querySelector('.empty');
+    var visible = 0;
+    cards.forEach(function (c) {
+      var match = c.textContent.toLowerCase().indexOf(term) !== -1;
+      c.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (empty) empty.classList.toggle('show', visible === 0 && (scope !== null));
+  }
+  q.addEventListener('input', runSearch);
+
+  // ----- Theme toggle (remembers choice for this browser only) -----
+  var btn = document.getElementById('theme');
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved) root.setAttribute('data-theme', saved);
+  } catch (e) {}
+  btn.addEventListener('click', function () {
+    var isDark = root.getAttribute('data-theme') === 'dark'
+      || (root.getAttribute('data-theme') !== 'light'
+          && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // ----- Footer year -----
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
