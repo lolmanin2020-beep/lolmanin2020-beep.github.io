@@ -3,435 +3,1079 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Study Palace</title>
-<meta name="description" content="A personal study hub — subjects, notes, and resources in one place.">
+<title>Jean's Study Palace — EE212 Macroeconomics</title>
+<meta name="description" content="A teaching study hub for EE212 Principles of Macroeconomics: GDP, equilibrium income, multipliers, and fiscal policy — with formulas, graphs and worked examples.">
 <style>
   /* ============================================================
-     THEME TOKENS  — change colors here once, they apply everywhere
+     THEME TOKENS — change colors here once, they apply everywhere
      ============================================================ */
-  :root {
-    --bg: #f7f7f5;
-    --surface: #ffffff;
-    --text: #1c1d22;
-    --muted: #6b6d76;
-    --border: #e6e6e2;
-    --accent: #3b5bdb;
-    --accent-soft: #eaeeff;
-    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05);
-    --radius: 14px;
-    --maxw: 1000px;
-    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f0f2f6;
+    --text:#1b1d23; --muted:#636673; --border:#e4e7ec;
+    --accent:#3b5bdb; --accent-soft:#e9edff; --accent-2:#0b7285;
+    --good:#2b8a3e; --good-soft:#e7f7ec; --warn:#c92a2a; --warn-soft:#fdecec;
+    --gold:#b8860b; --gold-soft:#fbf3df;
+    --grid:#d7dbe3; --ink:#2a2d36;
+    --shadow:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(20,30,60,.06);
+    --radius:16px; --maxw:1080px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #16171b;
-      --surface: #1e2025;
-      --text: #ececf1;
-      --muted: #9a9ca6;
-      --border: #2c2f36;
-      --accent: #8aa2ff;
-      --accent-soft: #23283a;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#14151a; --surface:#1c1e25; --surface-2:#23262f;
+      --text:#ecedf2; --muted:#9a9dab; --border:#2c2f39;
+      --accent:#7ea0ff; --accent-soft:#20263c; --accent-2:#4dd0e1;
+      --good:#69db7c; --good-soft:#16281b; --warn:#ff8787; --warn-soft:#2c1a1a;
+      --gold:#f0c65b; --gold-soft:#2a2413;
+      --grid:#3a3e4a; --ink:#c8cbd4;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
     }
   }
-  :root[data-theme="dark"] {
-    --bg: #16171b;
-    --surface: #1e2025;
-    --text: #ececf1;
-    --muted: #9a9ca6;
-    --border: #2c2f36;
-    --accent: #8aa2ff;
-    --accent-soft: #23283a;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  :root[data-theme="dark"]{
+      --bg:#14151a; --surface:#1c1e25; --surface-2:#23262f;
+      --text:#ecedf2; --muted:#9a9dab; --border:#2c2f39;
+      --accent:#7ea0ff; --accent-soft:#20263c; --accent-2:#4dd0e1;
+      --good:#69db7c; --good-soft:#16281b; --warn:#ff8787; --warn-soft:#2c1a1a;
+      --gold:#f0c65b; --gold-soft:#2a2413;
+      --grid:#3a3e4a; --ink:#c8cbd4;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
   }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:120px}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);
+       line-height:1.65;-webkit-font-smoothing:antialiased;font-size:17px}
+  a{color:var(--accent);text-underline-offset:3px}
 
-  /* ---------- Top bar ---------- */
-  header {
-    position: sticky; top: 0; z-index: 20;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: saturate(150%) blur(10px);
-    border-bottom: 1px solid var(--border);
-  }
-  .bar {
-    max-width: var(--maxw); margin: 0 auto;
-    padding: 14px 16px;
-    display: flex; align-items: center; gap: 16px;
-    flex-wrap: wrap;
-  }
-  .brand { font-weight: 700; font-size: 1.05rem; letter-spacing: -.01em; white-space: nowrap; }
-  .brand span { color: var(--accent); }
-  .search {
-    flex: 1 1 220px; min-width: 160px;
-    display: flex; align-items: center; gap: 8px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 8px 14px;
-  }
-  .search input {
-    border: 0; background: transparent; outline: none;
-    font: inherit; color: var(--text); width: 100%;
-  }
-  .search svg { flex: none; opacity: .5; }
-  .themeBtn {
-    flex: none;
-    border: 1px solid var(--border); background: var(--surface);
-    color: var(--muted); border-radius: 999px;
-    width: 38px; height: 38px; cursor: pointer;
-    display: grid; place-items: center; font-size: 1rem;
-  }
-  .themeBtn:hover { color: var(--text); }
+  /* ---------- Sticky header ---------- */
+  header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 88%,transparent);
+    backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--border)}
+  .top-inner{max-width:var(--maxw);margin:0 auto;padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;letter-spacing:.2px}
+  .brand .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;color:#fff;font-weight:800}
+  .badge{font-size:.68rem;font-weight:700;color:var(--accent);background:var(--accent-soft);
+    padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .spacer{flex:1}
+  .search{position:relative;flex:1 1 240px;min-width:180px;max-width:420px}
+  .search input{width:100%;padding:9px 12px 9px 34px;border-radius:11px;border:1px solid var(--border);
+    background:var(--surface-2);color:var(--text);font-size:.95rem;font-family:inherit}
+  .search input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+  button.ghost{border:1px solid var(--border);background:var(--surface-2);color:var(--text);
+    padding:9px 12px;border-radius:11px;cursor:pointer;font-size:.95rem;font-family:inherit;display:flex;gap:6px;align-items:center}
+  button.ghost:hover{border-color:var(--accent)}
+
+  /* ---------- Chapter nav ---------- */
+  nav.chips{max-width:var(--maxw);margin:0 auto;padding:10px 16px 0;display:flex;gap:8px;flex-wrap:wrap}
+  nav.chips a{font-size:.85rem;font-weight:600;text-decoration:none;color:var(--muted);
+    padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface)}
+  nav.chips a:hover{color:var(--accent);border-color:var(--accent)}
 
   /* ---------- Layout ---------- */
-  main { max-width: var(--maxw); margin: 0 auto; padding: 16px; }
-  .intro { padding: 30px 6px 6px; }
-  .intro h1 {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    margin: 0 0 .3em; letter-spacing: -.02em; line-height: 1.15;
-  }
-  .intro p { color: var(--muted); max-width: 60ch; margin: 0; font-size: 1.05rem; }
+  main{max-width:var(--maxw);margin:0 auto;padding:16px 16px 80px}
+  section.unit{margin-top:34px;scroll-margin-top:120px}
+  .unit-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:8px;margin-bottom:6px}
+  .unit-head h2{font-size:1.5rem;margin:0;letter-spacing:-.3px}
+  .unit-head .num{font-family:var(--serif);font-size:1.5rem;color:var(--accent);font-weight:700}
+  .unit-sub{color:var(--muted);font-size:.95rem;margin:2px 0 14px}
 
-  /* ---------- Collection toggle ---------- */
-  .tabs {
-    display: inline-flex; gap: 4px; margin: 22px 6px 4px;
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 999px; padding: 4px;
-  }
-  .tabs button {
-    border: 0; background: transparent; color: var(--muted);
-    font: inherit; font-weight: 600; cursor: pointer;
-    padding: 7px 16px; border-radius: 999px; display: flex; align-items: center; gap: 6px;
-  }
-  .tabs button.active { background: var(--accent); color: #fff; }
-  :root[data-theme="dark"] .tabs button.active,
-  .tabs button.active { color: #fff; }
-  .tabs .lock { font-size: .85em; }
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px 22px;margin:16px 0;box-shadow:var(--shadow)}
+  .card h3{margin:.1em 0 .5em;font-size:1.16rem;letter-spacing:-.2px}
+  .card h4{margin:1.1em 0 .3em;font-size:1rem}
+  .tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+    color:var(--accent-2);background:var(--surface-2);border:1px solid var(--border);padding:3px 9px;border-radius:999px;margin-bottom:8px}
+  p{margin:.55em 0}
+  ul,ol{margin:.5em 0;padding-left:1.25em}
+  li{margin:.28em 0}
+  .lead{font-size:1.02rem}
+  .muted{color:var(--muted)}
+  hr.soft{border:none;border-top:1px dashed var(--border);margin:18px 0}
 
-  /* ---------- Subject grid ---------- */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px; margin-top: 16px;
-  }
-  .collection { display: none; }
-  .collection.active { display: block; }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px 20px 18px;
-    display: flex; flex-direction: column;
-    transition: transform .15s ease, border-color .15s ease;
-  }
-  .card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
-  .card .tag {
-    align-self: flex-start;
-    font-size: .72rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-    color: var(--accent); background: var(--accent-soft);
-    padding: 3px 9px; border-radius: 999px; margin-bottom: 12px;
-  }
-  .card h2 { margin: 0 0 6px; font-size: 1.22rem; letter-spacing: -.01em; }
-  .card .desc { color: var(--muted); font-size: .95rem; margin: 0 0 14px; }
-  .card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-  .card li { padding: 5px 0; border-top: 1px solid var(--border); font-size: .95rem; }
-  .card li:first-child { border-top: 0; }
-  .card li .note { color: var(--muted); }
+  /* ---------- Callouts ---------- */
+  .box{border-radius:12px;padding:12px 15px;margin:14px 0;border:1px solid var(--border);font-size:.97rem}
+  .box .lbl{font-weight:800;font-size:.72rem;letter-spacing:.6px;text-transform:uppercase;display:block;margin-bottom:3px}
+  .key{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+  .key .lbl{color:var(--accent)}
+  .tip{background:var(--good-soft);border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+  .tip .lbl{color:var(--good)}
+  .warn{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 40%,transparent)}
+  .warn .lbl{color:var(--warn)}
+  .exam{background:var(--gold-soft);border-color:color-mix(in srgb,var(--gold) 45%,transparent)}
+  .exam .lbl{color:var(--gold)}
 
-  .empty { text-align: center; color: var(--muted); padding: 40px 0; display: none; }
-  .empty.show { display: block; }
+  .fill{background:var(--good-soft);border:1px solid color-mix(in srgb,var(--good) 45%,transparent);
+    border-radius:7px;padding:1px 7px;font-weight:700;color:var(--good);white-space:nowrap}
+  .fill::before{content:"✎ ";font-size:.85em;opacity:.8}
 
-  /* ---------- Lock screen ---------- */
-  .lockscreen {
-    max-width: 400px; margin: 34px auto; text-align: center;
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); box-shadow: var(--shadow);
-    padding: 34px 28px;
-  }
-  .lockscreen .icon { font-size: 1.8rem; }
-  .lockscreen h3 { margin: 10px 0 4px; }
-  .lockscreen p { color: var(--muted); font-size: .92rem; margin: 0 0 18px; }
-  .lockrow { display: flex; gap: 8px; }
-  .lockrow input {
-    flex: 1; font: inherit; padding: 10px 14px;
-    border: 1px solid var(--border); border-radius: 10px;
-    background: var(--bg); color: var(--text); outline: none;
-  }
-  .lockrow input:focus { border-color: var(--accent); }
-  .lockrow button {
-    border: 0; background: var(--accent); color: #fff; font: inherit; font-weight: 600;
-    padding: 10px 18px; border-radius: 10px; cursor: pointer;
-  }
-  .lockerr { color: #d6455d; font-size: .86rem; margin-top: 12px; min-height: 1.2em; }
-  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-  .shake { animation: shake .28s; }
-  .lockedOut { display: none; }
+  /* ---------- Formulas ---------- */
+  .formula{font-family:var(--serif);font-size:1.12rem;background:var(--surface-2);border:1px solid var(--border);
+    border-left:4px solid var(--accent);border-radius:10px;padding:12px 16px;margin:12px 0;overflow-x:auto;line-height:2.1}
+  .formula.center{text-align:center}
+  var{font-style:italic;font-family:var(--serif)}
+  .frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;margin:0 .18em}
+  .frac>span{padding:0 .45em}
+  .frac .num{border-bottom:1.6px solid currentColor}
+  sub,sup{font-size:.68em}
 
-  footer {
-    max-width: var(--maxw); margin: 0 auto;
-    padding: 30px 16px 50px; color: var(--muted); font-size: .88rem;
-    border-top: 1px solid var(--border); margin-top: 24px;
-  }
-  footer a { color: var(--muted); text-decoration: underline; }
+  /* ---------- Tables ---------- */
+  .tbl{overflow-x:auto;margin:14px 0;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:440px}
+  th,td{border:1px solid var(--border);padding:7px 10px;text-align:center}
+  thead th{background:var(--surface-2);font-weight:700}
+  tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface-2) 55%,transparent)}
+  td.hl{background:var(--good-soft);font-weight:700;color:var(--good)}
+
+  /* ---------- Graphs ---------- */
+  figure.graph{margin:16px 0;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:14px}
+  figure.graph svg{width:100%;height:auto;display:block}
+  figure.graph figcaption{color:var(--muted);font-size:.86rem;margin-top:8px;text-align:center}
+  .graph .axis{stroke:var(--ink);stroke-width:1.6}
+  .graph .grid{stroke:var(--grid);stroke-width:1;stroke-dasharray:3 4}
+  .graph .c1{stroke:var(--accent);stroke-width:2.6;fill:none}
+  .graph .c2{stroke:var(--good);stroke-width:2.6;fill:none}
+  .graph .c3{stroke:var(--warn);stroke-width:2.6;fill:none}
+  .graph .c45{stroke:var(--muted);stroke-width:1.8;stroke-dasharray:5 5;fill:none}
+  .graph .dash{stroke:var(--muted);stroke-width:1.3;stroke-dasharray:4 4;fill:none}
+  .graph .fillA{fill:var(--accent);opacity:.14}
+  .graph .fillW{fill:var(--warn);opacity:.16}
+  .graph .fillG{fill:var(--good);opacity:.16}
+  .graph text{fill:var(--text);font-family:var(--font);font-size:13px}
+  .graph .lbl-ax{fill:var(--muted);font-size:12px}
+  .graph .dot{fill:var(--accent)}
+  .graph .box-n{fill:var(--surface);stroke:var(--accent);stroke-width:1.8}
+  .graph .box-t{fill:var(--text);font-size:12.5px;font-weight:600}
+  .graph .arr{stroke:var(--ink);stroke-width:1.6;fill:none;marker-end:url(#ah)}
+  .graph .arrG{stroke:var(--good);stroke-width:1.6;fill:none;marker-end:url(#ahG)}
+
+  .grid2{display:grid;grid-template-columns:1fr;gap:0}
+  @media(min-width:760px){.grid2{grid-template-columns:1fr 1fr;gap:18px}}
+
+  .keyterms{display:grid;grid-template-columns:1fr;gap:0}
+  .kt{border-top:1px solid var(--border);padding:9px 0}
+  .kt:first-child{border-top:none}
+  .kt b{color:var(--accent)}
+
+  footer{max-width:var(--maxw);margin:0 auto;padding:26px 16px 60px;color:var(--muted);font-size:.9rem;text-align:center}
+  .noresult{display:none;text-align:center;color:var(--muted);padding:40px 0;font-size:1.05rem}
+  mark{background:color-mix(in srgb,var(--gold) 45%,transparent);color:inherit;padding:0 2px;border-radius:3px}
+  .backtop{position:fixed;right:16px;bottom:16px;z-index:40;border:1px solid var(--border);background:var(--surface);
+    color:var(--text);width:44px;height:44px;border-radius:50%;cursor:pointer;box-shadow:var(--shadow);font-size:1.1rem;display:none}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="bar">
-    <!-- EDIT: your name / site title -->
-    <div class="brand">Jean&#39;s <span>Study Palace</span></div>
-    <label class="search">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input id="q" type="search" placeholder="Search this collection…" autocomplete="off" aria-label="Search">
-    </label>
-    <button class="themeBtn" id="theme" title="Toggle light / dark" aria-label="Toggle theme">◐</button>
+<!-- ============================ HEADER ============================ -->
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <span class="logo">J</span>
+      <span>Jean's Study Palace</span>
+      <span class="badge">EE212 · Macroeconomics</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="Search topics, formulas, terms…" autocomplete="off" aria-label="Search the study hub">
+    </div>
+    <button class="ghost" id="theme" aria-label="Toggle light/dark theme" title="Toggle theme">
+      <span id="theme-ico">🌙</span><span id="theme-txt">Dark</span>
+    </button>
   </div>
+  <nav class="chips">
+    <a href="#top">Overview</a>
+    <a href="#ch1">1 · Introduction</a>
+    <a href="#ch2">2 · GDP</a>
+    <a href="#ch3">3 · Equilibrium Income</a>
+    <a href="#ch4">4 · Fiscal Policy</a>
+    <a href="#examples">★ Worked Examples</a>
+    <a href="#cheatsheet">Formula Cheat-Sheet</a>
+  </nav>
 </header>
 
-<main>
-  <section class="intro">
-    <!-- EDIT: headline + one line about the site -->
-    <h1>Everything I&#39;m studying, in one place.</h1>
-    <p>A quiet room for my notes, references, and links — organised by subject. Switch to the private collection for the topics I keep to myself.</p>
-  </section>
+<main id="top">
 
-  <!-- Collection toggle -->
-  <div class="tabs" role="tablist">
-    <button id="tabPublic" class="active" role="tab">Public</button>
-    <button id="tabPrivate" role="tab"><span class="lock">🔒</span> Private</button>
-  </div>
-
-  <!-- ============================================================
-       PUBLIC COLLECTION
-       To add a subject: copy one <article class="card"> block,
-       change the tag, title, description and the <li> items.
-       ============================================================ -->
-  <section class="collection active" id="colPublic">
-    <div class="grid">
-
-      <article class="card">
-        <span class="tag">Core</span>
-        <h2>Microeconomics</h2>
-        <p class="desc">Consumer &amp; firm behaviour, markets, welfare.</p>
-        <ul>
-          <li><a href="#">Lecture notes — utility &amp; demand</a></li>
-          <li><a href="#">Problem set 3 (elasticity)</a></li>
-          <li><span class="note">Note: revisit deadweight loss before midterm</span></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <span class="tag">Core</span>
-        <h2>Macroeconomics</h2>
-        <p class="desc">Growth, inflation, monetary &amp; fiscal policy.</p>
-        <ul>
-          <li><a href="#">IS-LM summary sheet</a></li>
-          <li><a href="#">Reading: Solow growth model</a></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <span class="tag">Methods</span>
-        <h2>Econometrics</h2>
-        <p class="desc">Regression, inference, causal identification.</p>
-        <ul>
-          <li><a href="#">OLS assumptions cheat sheet</a></li>
-          <li><a href="#">Stata / R commands</a></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <span class="tag">Applied</span>
-        <h2>Case Club</h2>
-        <p class="desc">Frameworks, past cases, competition prep.</p>
-        <ul>
-          <li><a href="#">Profitability &amp; market-entry frameworks</a></li>
-          <li><a href="#">Cracked cases archive</a></li>
-        </ul>
-      </article>
-
+  <!-- Intro -->
+  <section class="unit" style="margin-top:20px">
+    <div class="card" style="background:linear-gradient(135deg,var(--accent-soft),var(--surface))">
+      <span class="tag">Study Hub · Rebuilt for teaching</span>
+      <h3 style="font-size:1.35rem">Principles of Macroeconomics — your complete study companion</h3>
+      <p class="lead">This hub rebuilds the EE212 lecture slides into a <b>teaching format</b>: every key idea is explained in plain language (often beyond the slide), every important formula is boxed, the <b>blanks your professor left</b> are filled in and marked with <span class="fill">a green tag</span>, and the hard ideas come with clean graphs. Four units, then fully-worked assignments.</p>
+      <div class="box key"><span class="lbl">How to use this</span>
+        Read a unit top-to-bottom. Watch for <span class="fill">filled-in answers</span>, <b style="color:var(--accent)">blue Key boxes</b> (must-know), <b style="color:var(--warn)">red Careful boxes</b> (common exam traps), and <b style="color:var(--gold)">gold Exam boxes</b> (likely to be tested). Use the search bar to jump to any term.</div>
     </div>
-    <div class="empty" id="emptyPublic">No subjects match that search.</div>
   </section>
 
-  <!-- ============================================================
-       PRIVATE COLLECTION  (behind a passphrase)
-       ⚠️  This is light obfuscation, NOT real security.
-           The content below is still downloaded to every visitor's
-           browser and can be found by a technical person via
-           "View source". Keep only NON-sensitive notes here.
-       Edit the passphrase in the <script> at the bottom (PASSPHRASE).
-       ============================================================ -->
-  <section class="collection" id="colPrivate">
+  <!-- ==================================================================
+                        CHAPTER 1 — INTRODUCTION
+  =================================================================== -->
+  <section class="unit" id="ch1">
+    <div class="unit-head"><span class="num">1</span><h2>Introduction to Macroeconomics</h2></div>
+    <p class="unit-sub">What economics is · micro vs macro · goals & policies · types of variables · key indicators · schools of thought.</p>
 
-    <!-- Lock screen (shown until the passphrase is entered) -->
-    <div class="lockscreen" id="lockscreen">
-      <div class="icon">🔒</div>
-      <h3>Private collection</h3>
-      <p>Enter the passphrase to view these topics.</p>
-      <div class="lockrow">
-        <input id="pass" type="password" placeholder="Passphrase" autocomplete="off" aria-label="Passphrase">
-        <button id="unlock">Unlock</button>
+    <div class="card">
+      <span class="tag">1.1 What economics is</span>
+      <h3>Economics = the science of scarcity and choice</h3>
+      <p><b>Economics</b> studies how individuals and societies choose to use the <b>scarce</b> resources that nature and previous generations provided. Because resources are limited but wants are unlimited, <em>choice is unavoidable</em>.</p>
+      <div class="keyterms">
+        <div class="kt"><b>Scarcity</b> — we "cannot have it all", so we must decide what to have and what to forgo.</div>
+        <div class="kt"><b>Trade-off</b> — to get one thing you give up another.</div>
+        <div class="kt"><b>Opportunity cost</b> — the value of the <em>next best</em> alternative you gave up. This is the single most important idea in the whole course.</div>
       </div>
-      <div class="lockerr" id="lockerr"></div>
-    </div>
-
-    <!-- Private cards (revealed after unlock) -->
-    <div class="lockedOut" id="privateContent">
-      <div class="grid">
-
-        <article class="card">
-          <span class="tag">Trading</span>
-          <h2>Forex Study Log</h2>
-          <p class="desc">Setups, mistakes, and what I&#39;m learning.</p>
-          <ul>
-            <li><a href="#">Trade journal</a></li>
-            <li><span class="note">Note: review losing trades weekly</span></li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <span class="tag">Craft</span>
-          <h2>Mentalism &amp; Persuasion</h2>
-          <p class="desc">Techniques, scripts, and reading.</p>
-          <ul>
-            <li><a href="#">Working notes</a></li>
-            <li><a href="#">Practice routines</a></li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <span class="tag">Drafts</span>
-          <h2>Ideas &amp; Drafts</h2>
-          <p class="desc">Half-formed thoughts, not ready to share.</p>
-          <ul>
-            <li><span class="note">Anything in progress</span></li>
-          </ul>
-        </article>
-
+      <div class="box tip"><span class="lbl">Intuition</span>“There is no such thing as a free lunch.” Even a “free” hour of Netflix costs you the study (or sleep) you could have done instead — that forgone best option <em>is</em> its true cost.</div>
+      <h4>The three basic questions every society answers</h4>
+      <ol><li><b>What</b> to produce?</li><li><b>How</b> to produce it?</li><li><b>For whom</b> — who gets the goods and services?</li></ol>
+      <div class="grid2">
+        <div><h4>Micro vs. Macro</h4>
+          <p><b>Micro</b>economics zooms in — individual industries, firms and households (one market's price & quantity).</p>
+          <p><b>Macro</b>economics zooms out — the whole nation's <em>aggregates</em>: total income, employment, output, the price level.</p></div>
+        <div><h4>Positive vs. Normative</h4>
+          <p><b>Positive</b> = facts & cause-effect, no value judgment (“what <em>is</em>”). <span class="muted">e.g. “A tax cut raised spending 2%.”</span></p>
+          <p><b>Normative</b> = value judgments (“what <em>should</em> be”). <span class="muted">e.g. “The government <em>ought</em> to cut taxes.” Policy debates are normative.</span></p></div>
       </div>
-      <div class="empty" id="emptyPrivate">No subjects match that search.</div>
     </div>
 
+    <div class="card">
+      <span class="tag">1.2 Objectives & policies</span>
+      <h3>The four goals — and the two big policy levers</h3>
+      <p>Economists judge outcomes against four criteria:</p>
+      <div class="keyterms">
+        <div class="kt"><b>Efficiency</b> (allocative) — produce what people want at the <em>least possible cost</em>.</div>
+        <div class="kt"><b>Equity</b> — fairness in how output is shared.</div>
+        <div class="kt"><b>Growth</b> — an increase in the economy's total output over time.</div>
+        <div class="kt"><b>Stability</b> — output grows <em>steadily</em>, with low inflation and full employment.</div>
+      </div>
+      <div class="box key"><span class="lbl">The two policies (memorise the split)</span>
+        <b>Fiscal policy</b> = the <u>Government's</u> taxing &amp; spending (Chapter 4).<br>
+        <b>Monetary policy</b> = the <u>Central Bank's</u> tools to control the quantity of money.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">1.3 Types of variables</span>
+      <h3>Stock vs. Flow, and Nominal vs. Real</h3>
+      <div class="grid2">
+        <div>
+          <h4>Stock vs. Flow</h4>
+          <p><b>Stock</b> = measured at an <em>instant</em> (a photograph). <b>Flow</b> = measured over a <em>period</em> (a video).</p>
+          <div class="box tip"><span class="lbl">Test yourself</span>
+          “FDI <em>during</em> 2016–2020” is a <span class="fill">flow</span>. “Total FDI held <em>on</em> 31 Dec 2020” is a <span class="fill">stock</span>. Wealth = stock; income &amp; saving = flows.</div>
+        </div>
+        <div>
+          <h4>Nominal vs. Real</h4>
+          <p><b>Nominal</b> = <em>not</em> adjusted for price changes. <b>Real</b> = adjusted for prices (divide out inflation).</p>
+          <div class="formula center">Real income = <span class="frac"><span class="num">Y</span><span class="den">P</span></span> &nbsp;·&nbsp; Real interest rate <var>r</var> = <var>i</var> − inflation</div>
+          <div class="box key"><span class="lbl">Why it matters</span>Only <b>real</b> variables tell you about actual purchasing power. A 5% raise with 8% inflation makes you <em>poorer</em> in real terms.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag">1.4 Key indicators</span>
+      <h3>The dashboard of the economy</h3>
+      <p>Macro health is read from three groups of indicators:</p>
+      <ol>
+        <li><b>Level &amp; growth of output</b> — GDP and its growth rate.</li>
+        <li><b>Internal stability</b> — inflation, unemployment, interest rates, income distribution.</li>
+        <li><b>External stability</b> — balance of payments, international reserves, external debt, exchange rate.</li>
+      </ol>
+
+      <h4>① Output &amp; the business cycle</h4>
+      <p><b>Aggregate output</b> = total goods &amp; services produced in a period. The <b>business cycle</b> is its short-run ups and downs around a rising long-run trend.</p>
+      <div class="box key"><span class="lbl">Definitions to nail</span>
+        <b>Recession</b> = output falls for <u>two consecutive quarters</u>. &nbsp; <b>Depression</b> = a <em>prolonged, deep</em> recession.</div>
+      <figure class="graph">
+        <svg viewBox="0 0 620 300" role="img" aria-label="Business cycle around a rising trend line">
+          <line class="axis" x1="55" y1="255" x2="600" y2="255"/><line class="axis" x1="55" y1="30" x2="55" y2="255"/>
+          <line class="c45" x1="55" y1="230" x2="595" y2="70"/>
+          <path class="c1" d="M55 215 C 130 150, 165 120, 210 130 S 300 215, 350 205 S 440 90, 500 105 S 575 160, 595 150"/>
+          <circle class="dot" cx="200" cy="123" r="4"/><text x="188" y="112">Peak</text>
+          <circle class="dot" cx="352" cy="206" r="4" style="fill:var(--warn)"/><text x="330" y="230" style="fill:var(--warn)">Trough</text>
+          <text x="470" y="55" class="lbl-ax">Long-run trend</text>
+          <text x="300" y="150" class="lbl-ax" transform="rotate(0)">expansion → contraction → recovery</text>
+          <text x="300" y="285" class="lbl-ax">Time →</text>
+          <text x="18" y="140" class="lbl-ax" transform="rotate(-90 18 140)">Real output</text>
+        </svg>
+        <figcaption>The cycle oscillates around a rising trend: peak → recession (down) → trough → recovery (up).</figcaption>
+      </figure>
+
+      <h4>② Prices &amp; inflation</h4>
+      <div class="keyterms">
+        <div class="kt"><b>Inflation</b> — a rise in the overall price level. <b>Deflation</b> — a fall. <b>Hyperinflation</b> — very rapid inflation.</div>
+        <div class="kt"><b>CPI</b> (Consumer Price Index) &amp; <b>PPI</b> (Producer Price Index) measure the price level.</div>
+        <div class="kt"><b>Core inflation</b> strips out volatile items (energy, fresh food) to reveal the underlying trend.</div>
+      </div>
+      <div class="formula center">Inflation rate<sub>year t</sub> = <span class="frac"><span class="num">CPI<sub>t</sub> − CPI<sub>t−1</sub></span><span class="den">CPI<sub>t−1</sub></span></span> × 100</div>
+
+      <h4>③ Unemployment</h4>
+      <div class="formula">
+        Population = Labour force + Non-labour force<br>
+        Labour-force participation rate = <span class="frac"><span class="num">Labour force</span><span class="den">Working-age population</span></span> × 100<br>
+        Unemployment rate = <span class="frac"><span class="num">Unemployed</span><span class="den">Labour force</span></span> × 100 &nbsp;<span class="fill">← the blank: divide by the labour force, not population</span>
+      </div>
+      <div class="box key"><span class="lbl">Three types of unemployment</span>
+        <b>Frictional</b> — normal short-run job search / people between jobs (always exists).<br>
+        <b>Structural</b> — skills/industries no longer match the economy (e.g. automation).<br>
+        <b>Cyclical</b> — caused by recessions (demand falls).</div>
+      <div class="box tip"><span class="lbl">Natural rate of unemployment</span>
+        = Frictional + Structural. It's the unemployment that remains even at "full employment" — cyclical unemployment is <em>zero</em> at the natural rate.</div>
+
+      <h4>④ Interest rates</h4>
+      <div class="formula center">Real interest rate = Nominal interest rate − Inflation rate</div>
+      <p><b>Creditors</b> (lenders/savers) want the real rate <em>high</em>; <b>debtors</b> (borrowers) want it <em>low</em>. Loan rate &gt; deposit rate — the spread is the bank's margin.</p>
+
+      <h4>⑤ Income distribution — Lorenz curve &amp; Gini</h4>
+      <figure class="graph">
+        <svg viewBox="0 0 340 320" role="img" aria-label="Lorenz curve with perfect equality line and Gini areas A and B">
+          <line class="axis" x1="45" y1="285" x2="315" y2="285"/><line class="axis" x1="45" y1="25" x2="45" y2="285"/>
+          <line class="c2" x1="45" y1="285" x2="315" y2="25"/>
+          <path class="c1" d="M45 285 C 150 280, 235 235, 315 25"/>
+          <path class="fillA" d="M45 285 L 315 25 C 235 235, 150 280, 45 285 Z"/>
+          <path class="fillG" d="M45 285 L 315 285 L 315 25 C 235 235, 150 280, 45 285 Z" style="opacity:.10"/>
+          <text x="150" y="150" transform="rotate(-33 150 150)" class="lbl-ax" style="fill:var(--good)">Perfect-equality line (45°)</text>
+          <text x="235" y="230" class="box-t" style="fill:var(--accent)">Lorenz curve</text>
+          <text x="120" y="215" style="font-weight:700">A</text><text x="235" y="278" style="font-weight:700">B</text>
+          <text x="150" y="312" class="lbl-ax">% of households →</text>
+          <text x="16" y="180" class="lbl-ax" transform="rotate(-90 16 180)">% of income →</text>
+        </svg>
+        <figcaption>The further the Lorenz curve bows away from the 45° line, the more unequal the distribution.</figcaption>
+      </figure>
+      <div class="formula center">Gini coefficient = <span class="frac"><span class="num">Area A</span><span class="den">Area A + Area B</span></span></div>
+      <div class="box key"><span class="lbl">Read the number</span>
+        Gini ranges 0 → 1. <b>0 = perfect equality</b> (everyone the same), <b>1 = perfect inequality</b> (one person has everything). Higher Gini = <span class="fill">more unequal</span> income distribution.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">1.5 History of macroeconomic thought</span>
+      <h3>From Classical to Keynesian — the big argument that runs through this course</h3>
+      <div class="keyterms">
+        <div class="kt"><b>Classical (Adam Smith, 1776)</b> — the market's <em>“invisible hand”</em> coordinates self-interest into social good; division of labour raises output. Reaction against mercantilism.</div>
+        <div class="kt"><b>Marx</b> — focused on the <em>unfair</em> distribution of industrial gains; history as “class struggle” between owners of capital and labour.</div>
+        <div class="kt"><b>Neo-classical (Marshall)</b> — “father of modern economics”; markets are efficient &amp; self-regulating; introduced <em>homo economicus</em> (rational self-interested agent).</div>
+        <div class="kt"><b>Keynes (1936, Great Depression)</b> — markets do <em>not</em> always self-correct; in slumps the government should <b>boost aggregate demand</b> (spend, cut interest rates, invest).</div>
+        <div class="kt"><b>Monetarists (Friedman)</b> — crises come from <em>bad monetary policy</em>; government should control the money supply and leave goods markets alone. Led to neo-liberalism (privatise, free trade).</div>
+      </div>
+      <div class="box key"><span class="lbl">The distinction you must remember all term</span>
+        <b>Classical</b> = the <u>long run</u>: prices &amp; wages are <em>flexible</em>, economy sits at <em>full employment</em>.<br>
+        <b>Keynesian</b> = the <u>short run</u>: prices &amp; wages are <em>sticky</em>, economy can sit <em>below</em> full employment — so policy has room to work.<br>
+        Keynes: <em>“In the long run we are all dead.”</em></div>
+    </div>
   </section>
+
+  <!-- ==================================================================
+                     CHAPTER 2 — GDP / NATIONAL ACCOUNTS
+  =================================================================== -->
+  <section class="unit" id="ch2">
+    <div class="unit-head"><span class="num">2</span><h2>National Income &amp; Product Accounts (GDP)</h2></div>
+    <p class="unit-sub">Circular flow · what GDP is · GDP vs GNP · the three ways to measure it · nominal vs real &amp; the deflator · limitations.</p>
+
+    <div class="card">
+      <span class="tag">2.1–2.2 The players &amp; the circular flow</span>
+      <h3>Five sectors, one loop of money</h3>
+      <p>Macro tracks five groups: <b>(1) Households + (2) Firms = the private sector</b>, <b>(3) Government</b>, <b>(4) Rest of the world</b>, and <b>(5) Financial institutions</b>.</p>
+      <p>The <b>circular flow</b> shows income and payments moving between them. Two forces act on the loop:</p>
+      <div class="grid2">
+        <div class="box tip"><span class="lbl">Injections (money in)</span> Investment <var>I</var>, Government spending <var>G</var>, Exports <var>X</var>.</div>
+        <div class="box warn"><span class="lbl">Withdrawals / Leakages (money out)</span> Saving <var>S</var>, Taxes <var>T</var>, Imports <var>M</var>.</div>
+      </div>
+      <figure class="graph">
+        <svg viewBox="0 0 620 300" role="img" aria-label="Circular flow between households and firms with injections and leakages">
+          <defs>
+            <marker id="ah" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="var(--ink)"/></marker>
+            <marker id="ahG" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="var(--good)"/></marker>
+          </defs>
+          <rect class="box-n" x="60" y="120" width="150" height="60" rx="10"/><text class="box-t" x="135" y="155" text-anchor="middle">HOUSEHOLDS</text>
+          <rect class="box-n" x="410" y="120" width="150" height="60" rx="10"/><text class="box-t" x="485" y="155" text-anchor="middle">FIRMS</text>
+          <path class="arr" d="M210 138 C 300 100, 320 100, 410 138"/><text x="310" y="95" text-anchor="middle" class="lbl-ax">Spending on goods &amp; services</text>
+          <path class="arr" d="M410 165 C 320 205, 300 205, 210 165"/><text x="310" y="228" text-anchor="middle" class="lbl-ax">Wages, rent, interest, profit (income)</text>
+          <text x="310" y="30" text-anchor="middle" class="box-t" style="fill:var(--good)">Injections ↑ : I, G, X</text>
+          <path class="arrG" d="M310 40 L310 95"/>
+          <text x="310" y="285" text-anchor="middle" class="box-t" style="fill:var(--warn)">Leakages ↓ : S, T, M</text>
+        </svg>
+        <figcaption>Households supply factors &amp; earn income; they spend it on firms' output. Injections add to the loop; leakages drain it.</figcaption>
+      </figure>
+    </div>
+
+    <div class="card">
+      <span class="tag">2.3 What GDP is</span>
+      <h3>Gross Domestic Product — read the definition word-by-word</h3>
+      <div class="formula center" style="font-size:1.05rem">GDP = total <b>market value</b> of all <b>final</b> goods &amp; services <b>produced</b> within a <b>period</b> by factors of production <b>located within a country</b>.</div>
+      <div class="keyterms">
+        <div class="kt"><b>Final</b> goods = for final use. <b>Intermediate</b> goods = used up in producing something else — <em>not</em> counted directly (avoids double counting).</div>
+        <div class="kt"><b>Value added</b> = value of output leaving a stage − cost of inputs entering it. Summing value added = summing final value.</div>
+        <div class="kt"><b>Located within the country</b> — GDP is about <em>where</em> production happens, not who owns the factors.</div>
+      </div>
+      <div class="box warn"><span class="lbl">What GDP excludes</span>
+        Used goods &amp; pure paper transactions (a house built 3 years ago is <em>not</em> in this year's GDP). But the <b>agent's commission</b> on selling it <em>is</em> — that's a new service produced this year. <span class="fill">Only new, current production counts.</span></div>
+    </div>
+
+    <div class="card">
+      <span class="tag">2.4 GDP vs GNP</span>
+      <h3>Where vs. Whose</h3>
+      <div class="grid2">
+        <div><p><b>GDP</b> — output produced <em>inside the country</em> (any owner).</p></div>
+        <div><p><b>GNP</b> — output produced by a country's <em>citizens/factors</em> (anywhere in the world).</p></div>
+      </div>
+      <div class="formula">
+        GNP = GDP + income of <b>Thai</b> factors used <b>abroad</b> − income of <b>foreign</b> factors used <b>in Thailand</b><br>
+        <span class="muted">The correction term is called Net Factor Income from Abroad (NFIEA).</span>
+      </div>
+      <div class="box tip"><span class="lbl">Example</span>Profit of a Thai-owned factory in Laos → adds to Thai <b>GNP</b> (not Thai GDP). A Japanese-owned factory in Bangkok → adds to Thai <b>GDP</b> (not Thai GNP).</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">2.5 Three ways to measure GDP</span>
+      <h3>Same number, three doors — they must all agree</h3>
+
+      <h4>(a) Production (value-added) approach</h4>
+      <p>Sum the value added at every stage. Worked from the slide (orange-juice example):</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Stage</th><th>Sales value</th><th>Value added</th></tr></thead>
+        <tbody>
+          <tr><td>Oranges (farm)</td><td>500</td><td class="hl">500</td></tr>
+          <tr><td>Orange juice</td><td>650</td><td class="hl">150</td></tr>
+          <tr><td>Juice bottled (factory)</td><td>900</td><td class="hl">250</td></tr>
+          <tr><td>Retail sale (supermarket)</td><td>1,200</td><td class="hl">300</td></tr>
+          <tr><td><b>Total value added</b></td><td>—</td><td class="hl">1,200</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box key"><span class="lbl">The point</span>Total value added (<span class="fill">1,200</span>) = the final retail value (1,200). That's why we don't add up all the sales (500+650+900+1200) — that would double-count the oranges four times.</div>
+
+      <h4>(b) Expenditure approach — the one you'll use most</h4>
+      <div class="formula center" style="font-size:1.25rem">GDP = C + I + G + (X − M)</div>
+      <div class="keyterms">
+        <div class="kt"><b>C — Consumption</b>: household spending. Durable goods, non-durables, and services.</div>
+        <div class="kt"><b>I — Gross private investment</b>: new capital by firms/households = non-residential (machines/plant) + residential (new housing) + <b>change in inventories</b>.</div>
+        <div class="kt"><b>G — Government</b> consumption &amp; investment (<em>excludes</em> transfer payments like welfare — no new output).</div>
+        <div class="kt"><b>X − M — Net exports</b>: exports minus imports (can be negative).</div>
+      </div>
+      <div class="box tip"><span class="lbl">Inventories — filled-in example</span>
+        Begin: 2 units. Produce: 7. Sell: 6. End: 3 units (×10฿).<br>
+        Change in inventories = end − beginning = 3 − 2 = <span class="fill">1 unit = 10 ฿</span>. This counts as <b>investment</b> even though it wasn't sold — it was produced this year.<br>
+        GDP = final sales + change in inventories + other components.</div>
+      <div class="box key"><span class="lbl">Gross vs Net</span>
+        Net investment = Gross investment − Depreciation.<br>
+        NDP = GDP − Depreciation. &nbsp; So NDP = C + (I − Depreciation) + G + (X − M).</div>
+
+      <h4>(c) Income approach</h4>
+      <div class="formula">
+        National income = Factor incomes + (indirect taxes − subsidies) + net business transfers + surplus of gov. enterprises<br>
+        <span class="muted">Factor incomes = compensation of employees + proprietors' income + corporate profits + net interest + rental income.</span>
+      </div>
+      <div class="box key"><span class="lbl">The full ladder (very exam-friendly)</span>
+        GDP → <b>+ NFIEA</b> → GNP → <b>− Depreciation</b> → NNP → <b>− Statistical discrepancy</b> → NI → <b>− (retained earnings + other non-household parts)</b> → PI → <b>− personal income tax</b> → DI.<br>
+        And disposable income splits: <b>DI = C + S</b> (if no personal interest/transfer payments).</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">2.6 Nominal vs Real GDP &amp; the deflator</span>
+      <h3>Separating "more stuff" from "higher prices"</h3>
+      <div class="formula">
+        Nominal GDP = Σ (P<sub>current</sub> × Q<sub>current</sub>) &nbsp; <span class="muted">— uses this year's prices</span><br>
+        Real GDP &nbsp;&nbsp;&nbsp;= Σ (P<sub>base year</sub> × Q<sub>current</sub>) &nbsp; <span class="muted">— holds prices fixed at the base year</span>
+      </div>
+      <div class="formula center">GDP deflator = <span class="frac"><span class="num">Nominal GDP</span><span class="den">Real GDP</span></span> × 100</div>
+      <div class="box key"><span class="lbl">Why we bother</span>
+        Nominal GDP can rise just because prices rose. <b>Real GDP</b> strips prices out, so it measures genuine growth in output. The <b>deflator</b> is the economy-wide price level implied by that comparison. In the base year, Real = Nominal, so the deflator = <span class="fill">100</span>.</div>
+      <p class="muted">→ Full numeric solution (base year = Year 3) is in <a href="#ex-gdp">Worked Example A2</a>.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">2.7 Limitations of GDP</span>
+      <h3>GDP is not the same as well-being</h3>
+      <div class="grid2">
+        <div class="box warn"><span class="lbl">GDP &amp; welfare</span>Ignores crime, leisure, pollution and how income is <em>distributed</em> (use GDP per capita + Gini for that).</div>
+        <div class="box warn"><span class="lbl">GDP &amp; measurement</span>Misses the <b>underground economy</b> and non-market work (housework, volunteering) — real production that never shows up.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+                CHAPTER 3 — EQUILIBRIUM NATIONAL INCOME
+  =================================================================== -->
+  <section class="unit" id="ch3">
+    <div class="unit-head"><span class="num">3</span><h2>National Income &amp; Equilibrium Determination</h2></div>
+    <p class="unit-sub">The Keynesian core: consumption &amp; saving · investment · the DAE line · equilibrium (two methods) · the multiplier · paradox of thrift · GDP gaps.</p>
+
+    <div class="card">
+      <span class="tag">3.1 The key idea</span>
+      <h3>Desired vs. Actual — the engine of Keynesian economics</h3>
+      <p>Keynes built the model on <b>desired (planned)</b> spending, not actual spending. The gap between them is <em>unplanned inventory</em>, and it's what pushes the economy toward equilibrium.</p>
+      <div class="formula">
+        Actual Aggregate Expenditure = Actual C + Actual I &nbsp;<span class="muted">(always = output, by accounting)</span><br>
+        <b>DAE</b> (Desired Aggregate Expenditure) = Desired C + Desired I + G + (X − M)
+      </div>
+      <div class="box key"><span class="lbl">The crucial split — investment</span>
+        Actual I = Planned I + <b>Unplanned inventory investment</b>. When firms can't sell what they made, goods pile up as <em>unplanned</em> inventory (actual &gt; planned). When they sell more than expected, inventories fall below plan (actual &lt; planned). This mismatch is the signal to change production.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">3.2.1 Consumption &amp; saving</span>
+      <h3>The consumption function C = C<sub>a</sub> + bY<sub>d</sub></h3>
+      <p>Keynes: the main driver of consumption is <b>disposable income</b> Y<sub>d</sub> = Y − T. Using the slide's numbers, C = 100 + 0.6Y<sub>d</sub>.</p>
+      <div class="formula">
+        <var>C<sub>a</sub></var> = <b>autonomous consumption</b> (spending even at zero income = 100)<br>
+        <var>b</var> = <b>MPC</b> = <span class="frac"><span class="num">ΔC</span><span class="den">ΔY<sub>d</sub></span></span> = slope = 0.6 &nbsp; → of each extra ฿, 60 satang is spent<br>
+        <b>APC</b> = <span class="frac"><span class="num">C</span><span class="den">Y<sub>d</sub></span></span> (average) &nbsp;&nbsp; <b>MPC</b> = marginal (the slope)
+      </div>
+      <div class="box key"><span class="lbl">Golden rule</span> <b>MPC + MPS = 1</b>. Every extra baht is either spent or saved. Here MPC = 0.6, so MPS = <span class="fill">0.4</span>.</div>
+
+      <h4>Saving is just the mirror image</h4>
+      <div class="formula">
+        S = Y<sub>d</sub> − C = Y<sub>d</sub> − (C<sub>a</sub> + bY<sub>d</sub>) = −C<sub>a</sub> + (1 − b)Y<sub>d</sub><br>
+        S = −100 + 0.4Y<sub>d</sub> &nbsp; → intercept −C<sub>a</sub>, slope = MPS = <span class="fill">0.4</span>
+      </div>
+      <div class="box tip"><span class="lbl">Break-even income (where C = Y<sub>d</sub>, S = 0)</span>
+        100 + 0.6Y<sub>d</sub> = Y<sub>d</sub> → 0.4Y<sub>d</sub> = 100 → <b>Y<sub>d</sub>* = 250</b>. Below it households <em>dissave</em> (borrow / sell assets); above it they save.</div>
+
+      <figure class="graph">
+        <svg viewBox="0 0 620 340" role="img" aria-label="Consumption function crossing the 45-degree line at the break-even income, with the saving function below">
+          <line class="axis" x1="60" y1="250" x2="600" y2="250"/><line class="axis" x1="60" y1="20" x2="60" y2="300"/>
+          <line class="c45" x1="60" y1="250" x2="470" y2="40"/><text x="430" y="55" class="lbl-ax">45° (C = Y<tspan dy="3">d</tspan>)</text>
+          <line class="c1" x1="60" y1="150" x2="600" y2="42"/><text x="500" y="60" style="fill:var(--accent);font-weight:700">C = 100 + 0.6Y<tspan dy="3">d</tspan></text>
+          <line class="dash" x1="280" y1="123" x2="280" y2="290"/>
+          <circle class="dot" cx="280" cy="123" r="4.5"/>
+          <text x="255" y="308" class="lbl-ax">Y<tspan dy="3">d</tspan>* = 250 (break-even)</text>
+          <text x="70" y="160" class="lbl-ax">C<tspan dy="3">a</tspan>=100</text>
+          <line class="c2" x1="60" y1="330" x2="600" y2="250" transform="translate(0,-60)"/>
+          <text x="470" y="235" style="fill:var(--good);font-weight:700">S = −100 + 0.4Y<tspan dy="3">d</tspan></text>
+          <text x="300" y="18" class="lbl-ax">C, S</text><text x="580" y="270" class="lbl-ax">Y<tspan dy="3">d</tspan></text>
+        </svg>
+        <figcaption>Where the C-line meets the 45° line, C = Y<sub>d</sub> and saving = 0. Left of it C &gt; Y<sub>d</sub> (dissaving); right of it households save.</figcaption>
+      </figure>
+      <div class="box key"><span class="lbl">Move ALONG vs. SHIFT (classic exam question)</span>
+        A change in <b>Y<sub>d</sub></b> → <em>move along</em> the C (or S) curve. A change in <b>any other factor</b> (interest rate, expectations, wealth, population) → the whole curve <em>shifts</em>.</div>
+      <div class="box tip"><span class="lbl">Two rival theories (know the one-liners)</span>
+        <b>Permanent Income (Friedman)</b>: consumption depends on <em>permanent</em> (expected long-run) income, not this year's. A one-off bonus is mostly saved.<br>
+        <b>Life-Cycle (Ando &amp; Modigliani)</b>: people smooth consumption over a lifetime — borrow when young, save in middle age, dissave in retirement.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">3.2.2–3.2.4 The other components</span>
+      <h3>Investment, Government &amp; Net exports</h3>
+      <div class="grid2">
+        <div>
+          <h4>Investment I</h4>
+          <p>Driven by the <b>real interest rate</b> (↑r → ↓I) and <b>income</b> (↑Y → ↑I), plus technology, existing capital, taxes, expectations.</p>
+          <div class="formula">Autonomous: I = I<sub>a</sub><br>Induced: I = I<sub>a</sub> + dY</div>
+          <div class="box tip"><span class="lbl">Invest when…</span> <b>NPV &gt; 0</b>, or equivalently <b>MEC (IRR) &gt; i</b> — the project's return beats the market interest rate.</div>
+          <p class="muted"><b>Accelerator principle:</b> investment demand is <em>derived</em> from the change in output — a rising ΔY <em>accelerates</em> net investment.</p>
+        </div>
+        <div>
+          <h4>Government G &amp; Net exports (X−M)</h4>
+          <p><b>G</b> is set by policy, planned in advance → treated as <em>autonomous</em> (G = G<sub>a</sub>, flat line vs. Y). Expansionary policy shifts it up; contractionary shifts it down.</p>
+          <p><b>Exports X</b> depend on foreign demand → autonomous (X = X<sub>a</sub>).</p>
+          <div class="formula">Imports rise with income: M = M<sub>a</sub> + mY<br><var>m</var> = MPM = <span class="frac"><span class="num">ΔM</span><span class="den">ΔY</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="tag">3.2 The DAE line</span>
+      <h3>Add it all up</h3>
+      <div class="formula">
+        DAE = C + I + G + (X − M)<br>
+        = (C<sub>a</sub> − bT<sub>a</sub> + I<sub>a</sub> + G<sub>a</sub> + X<sub>a</sub> − M<sub>a</sub>) + (b + d − m)Y<br>
+        <span class="muted">↑ autonomous part (the intercept)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑ slope of the DAE line</span>
+      </div>
+      <div class="box key"><span class="lbl">Slope of DAE</span> = MPC + MPI − MPM = (b + d − m). Every extra ฿ of income induces this much extra spending. It's always &lt; 1, which is what makes equilibrium stable and the multiplier finite.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">3.3 Equilibrium — Method 1</span>
+      <h3>Y = DAE (the "Keynesian cross")</h3>
+      <p><b>Equilibrium</b> = no tendency to change. In the goods market that means output equals desired spending:</p>
+      <div class="formula center" style="font-size:1.2rem">Y = DAE</div>
+      <figure class="graph">
+        <svg viewBox="0 0 620 330" role="img" aria-label="Keynesian cross: DAE line crossing the 45-degree line at equilibrium output">
+          <line class="axis" x1="60" y1="270" x2="600" y2="270"/><line class="axis" x1="60" y1="20" x2="60" y2="270"/>
+          <line class="c45" x1="60" y1="270" x2="470" y2="20"/><text x="430" y="35" class="lbl-ax">45° : Y = DAE</text>
+          <line class="c1" x1="60" y1="175" x2="600" y2="55"/><text x="500" y="70" style="fill:var(--accent);font-weight:700">DAE = A + (slope)Y</text>
+          <circle class="dot" cx="322" cy="147" r="5"/>
+          <line class="dash" x1="322" y1="147" x2="322" y2="270"/><text x="300" y="288" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+          <text x="70" y="185" class="lbl-ax">A</text>
+          <text x="140" y="255" class="box-t" style="fill:var(--good)">Y &lt; Y<tspan dy="3">E</tspan>: DAE&gt;Y → stock ↓ → produce more →Y↑</text>
+          <text x="360" y="110" class="box-t" style="fill:var(--warn)">Y &gt; Y<tspan dy="3">E</tspan>: DAE&lt;Y → stock ↑ → cut output →Y↓</text>
+          <text x="300" y="16" class="lbl-ax">DAE</text><text x="585" y="290" class="lbl-ax">Y</text>
+        </svg>
+        <figcaption>Left of Y<sub>E</sub>, desired spending exceeds output → inventories fall unexpectedly → firms raise output. Right of it, the reverse. Only at Y<sub>E</sub> is there no pressure.</figcaption>
+      </figure>
+      <div class="box key"><span class="lbl">Equilibrium formulas (memorise the pattern)</span>
+        Closed, no gov: &nbsp; Y<sub>E</sub> = <span class="frac"><span class="num">1</span><span class="den">1 − b</span></span>(C<sub>a</sub> + I<sub>a</sub>)<br>
+        Closed, with gov: Y<sub>E</sub> = <span class="frac"><span class="num">1</span><span class="den">1 − b</span></span>(C<sub>a</sub> − bT<sub>a</sub> + I<sub>a</sub> + G<sub>a</sub>)<br>
+        Open, with gov: &nbsp;&nbsp; Y<sub>E</sub> = <span class="frac"><span class="num">1</span><span class="den">1 − b + m</span></span>(C<sub>a</sub> − bT<sub>a</sub> + I<sub>a</sub> + G<sub>a</sub> + X<sub>a</sub> − M<sub>a</sub>)</div>
+      <div class="box exam"><span class="lbl">Worked (closed, with gov)</span>
+        C=100+0.6Y<sub>d</sub>, I=40, T=10, G=60 → Y<sub>E</sub> = 2.5 [100 − 0.6(10) + 40 + 60] = 2.5(194) = <span class="fill">485</span>.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">3.3 Equilibrium — Method 2</span>
+      <h3>Injection = Leakage (must give the same Y<sub>E</sub>)</h3>
+      <p>At equilibrium the money added to the loop equals the money drained from it:</p>
+      <div class="formula">
+        Closed, no gov: &nbsp; <b>I = S</b><br>
+        Closed, with gov: <b>I + G = S + T</b><br>
+        Open, with gov: &nbsp; <b>I + G + X = S + T + M</b>
+      </div>
+      <figure class="graph">
+        <svg viewBox="0 0 620 300" role="img" aria-label="Injection line crossing leakage line at equilibrium income">
+          <line class="axis" x1="60" y1="250" x2="600" y2="250"/><line class="axis" x1="60" y1="20" x2="60" y2="250"/>
+          <line class="c2" x1="60" y1="100" x2="600" y2="220"/><text x="500" y="205" style="fill:var(--good);font-weight:700">S+T+M (leakage)</text>
+          <line class="c1" x1="60" y1="160" x2="600" y2="90"/><text x="480" y="80" style="fill:var(--accent);font-weight:700">I+G+X (injection)</text>
+          <circle class="dot" cx="352" cy="129" r="5"/>
+          <line class="dash" x1="352" y1="129" x2="352" y2="250"/><text x="330" y="268" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+          <text x="300" y="16" class="lbl-ax">Injection, Leakage</text><text x="585" y="270" class="lbl-ax">Y</text>
+        </svg>
+        <figcaption>When injection &gt; leakage the economy expands; when leakage &gt; injection it contracts. Equal at Y<sub>E</sub>.</figcaption>
+      </figure>
+      <p class="muted">→ Both methods solved on the same numbers in <a href="#ex-dae">A3</a> &amp; <a href="#ex-il">A4</a> — and they agree (Y<sub>E</sub> = 880).</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">3.3 The multiplier</span>
+      <h3>Why a small push moves income a lot</h3>
+      <p>Spend 1,000฿ building a factory. The builders earn 1,000฿; they spend MPC of it (600฿); those receivers spend 600×0.6 = 360฿; and so on — an infinite but shrinking chain:</p>
+      <div class="formula center">ΔY = 1000(1 + 0.6 + 0.6² + …) = 1000 × <span class="frac"><span class="num">1</span><span class="den">1 − 0.6</span></span> = 1000 × 2.5 = 2,500</div>
+      <div class="box key"><span class="lbl">Multiplier formulas</span>
+        Simple spending multiplier k = <span class="frac"><span class="num">1</span><span class="den">1 − MPC</span></span> = <span class="frac"><span class="num">1</span><span class="den">MPS</span></span>.<br>
+        <b>More leakages → smaller multiplier.</b> Adding an income tax and imports changes the denominator to (1 − slope of DAE). Higher MPC (or lower MPS) → <em>bigger</em> multiplier.</div>
+      <div class="box tip"><span class="lbl">Tax &amp; balanced-budget multipliers (closed economy)</span>
+        Government-spending multiplier = <span class="frac"><span class="num">1</span><span class="den">1−b</span></span>. &nbsp; Tax multiplier = <span class="frac"><span class="num">−b</span><span class="den">1−b</span></span> (smaller &amp; negative — a tax cut is weaker than equal spending, because part is saved).<br>
+        <b>Balanced-budget multiplier = 1</b>: raise G <em>and</em> T by the same amount and Y rises by exactly that amount.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">3.4 Paradox of thrift</span>
+      <h3>If everyone saves more, everyone earns less</h3>
+      <p>An individual saving more is prudent. But if <em>everyone</em> tries to save more at once, aggregate demand falls → firms cut output → income falls → and society may end up saving the same (or less). This is a <b>fallacy of composition</b>: what's true for one isn't true for all.</p>
+      <figure class="graph">
+        <svg viewBox="0 0 620 300" role="img" aria-label="Saving line shifting up reduces equilibrium income while investment stays fixed">
+          <line class="axis" x1="60" y1="250" x2="600" y2="250"/><line class="axis" x1="60" y1="20" x2="60" y2="250"/>
+          <line class="c1" x1="60" y1="150" x2="600" y2="150"/><text x="520" y="140" style="fill:var(--accent);font-weight:700">I = I<tspan dy="3">a</tspan></text>
+          <line class="c2" x1="60" y1="230" x2="520" y2="60"/><text x="470" y="60" style="fill:var(--good)">S</text>
+          <line class="c2" x1="60" y1="195" x2="430" y2="60" style="opacity:.6"/><text x="380" y="60" style="fill:var(--good);opacity:.8">S′ (save more)</text>
+          <circle class="dot" cx="379" cy="150" r="5"/><circle class="dot" cx="290" cy="150" r="5" style="fill:var(--warn)"/>
+          <line class="dash" x1="379" y1="150" x2="379" y2="250"/><line class="dash" x1="290" y1="150" x2="290" y2="250"/>
+          <text x="360" y="268" class="lbl-ax">Y<tspan dy="3">1</tspan></text><text x="255" y="268" class="lbl-ax" style="fill:var(--warn)">Y<tspan dy="3">2</tspan> ↓</text>
+          <text x="300" y="16" class="lbl-ax">S, I</text><text x="585" y="270" class="lbl-ax">Y</text>
+        </svg>
+        <figcaption>The S curve shifts up (more thrift). With I fixed, the new intersection sits at a <b>lower</b> Y — and saving is unchanged. If investment is <em>induced</em> (I=I<sub>a</sub>+dY), income falls even further.</figcaption>
+      </figure>
+      <div class="box tip"><span class="lbl">Policy takeaway</span>Short run (fight a slump): encourage <b>spending</b> (↓S, ↑C). Long run (fund growth): encourage <b>saving</b> (↑S) so there are funds for investment.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">3.5 GDP gaps</span>
+      <h3>Inflationary vs. Deflationary gap</h3>
+      <p>Compare equilibrium output Y<sub>E</sub> with full-employment (potential) output Y<sub>F</sub>.</p>
+      <div class="grid2">
+        <figure class="graph">
+          <svg viewBox="0 0 300 260" role="img" aria-label="Inflationary gap: desired spending above full-employment output">
+            <line class="axis" x1="45" y1="215" x2="285" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+            <line class="c45" x1="45" y1="215" x2="235" y2="25"/>
+            <line class="c1" x1="45" y1="120" x2="285" y2="35"/>
+            <line class="dash" x1="175" y1="70" x2="175" y2="215"/>
+            <line class="dash" x1="45" y1="82" x2="175" y2="82"/><line class="dash" x1="45" y1="52" x2="175" y2="52"/>
+            <path class="fillW" d="M175 82 L175 52 L45 52 L45 82 Z"/>
+            <text x="150" y="235" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
+            <text x="55" y="46" class="box-t" style="fill:var(--warn);font-size:11px">gap</text>
+            <text x="150" y="14" class="lbl-ax" style="fill:var(--warn)">Inflationary</text>
+          </svg>
+          <figcaption>DAE &gt; output at Y<sub>F</sub>: too much demand → inflation. <b>Fix: reduce DAE</b> (↑T or ↓G).</figcaption>
+        </figure>
+        <figure class="graph">
+          <svg viewBox="0 0 300 260" role="img" aria-label="Deflationary gap: desired spending below full-employment output">
+            <line class="axis" x1="45" y1="215" x2="285" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+            <line class="c45" x1="45" y1="215" x2="235" y2="25"/>
+            <line class="c1" x1="45" y1="150" x2="285" y2="80"/>
+            <line class="dash" x1="215" y1="35" x2="215" y2="215"/>
+            <line class="dash" x1="45" y1="52" x2="215" y2="52"/><line class="dash" x1="45" y1="86" x2="215" y2="86"/>
+            <path class="fillA" d="M215 86 L215 52 L45 52 L45 86 Z" style="fill:var(--good);opacity:.18"/>
+            <text x="190" y="235" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
+            <text x="55" y="46" class="box-t" style="fill:var(--good);font-size:11px">gap</text>
+            <text x="150" y="14" class="lbl-ax" style="fill:var(--good)">Deflationary</text>
+          </svg>
+          <figcaption>DAE &lt; output at Y<sub>F</sub>: too little demand → unemployment. <b>Fix: raise DAE</b> (↓T or ↑G).</figcaption>
+        </figure>
+      </div>
+      <div class="box key"><span class="lbl">3.6 Keynes vs Classical vs in-between (the multiplier's size depends on prices)</span>
+        <b>Keynesian</b>: below full employment, prices sticky → when DAE rises, only Y rises → <em>biggest</em> multiplier.<br>
+        <b>Classical</b>: at full employment, prices flexible → DAE↑ mostly raises P, not Y → <em>smallest</em> multiplier.<br>
+        <b>Non-Keynes non-classic</b>: below full employment but prices <em>do</em> move → in between.<br>
+        So ΔY: <b>Keynes &gt; in-between &gt; Classical</b>.</div>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+                       CHAPTER 4 — FISCAL POLICY
+  =================================================================== -->
+  <section class="unit" id="ch4">
+    <div class="unit-head"><span class="num">4</span><h2>Fiscal Policy</h2></div>
+    <p class="unit-sub">Government spending &amp; taxing · tools · tax structures · public debt · budget types · automatic vs discretionary · policy problems.</p>
+
+    <div class="card">
+      <span class="tag">4.1–4.3 Meaning &amp; tools</span>
+      <h3>Fiscal policy = the government's spending &amp; taxing choices</h3>
+      <p>Its objectives mirror the four macro goals: efficient allocation, fair distribution, growth, and stability. Four tools:</p>
+      <div class="keyterms">
+        <div class="kt"><b>Government expenditure (G)</b> — consumption, investment, and loan/interest payments.</div>
+        <div class="kt"><b>Transfer payments (R)</b> — welfare, unemployment benefits, pensions, veterans' benefits. <em>Not counted in G/GDP</em> — no new output, just redistribution.</div>
+        <div class="kt"><b>Revenue (T)</b> — mostly taxes (below), plus non-tax revenue (state enterprises, fees, fines).</div>
+        <div class="kt"><b>Public debt</b> — borrowing to finance a deficit.</div>
+      </div>
+      <div class="box key"><span class="lbl">Direct vs Indirect tax</span>
+        <b>Direct</b> — the payer <em>cannot</em> shift the burden (personal &amp; corporate income tax, inheritance, property tax).<br>
+        <b>Indirect</b> — the payer <em>can</em> shift it onto others (VAT/sales tax, excise, customs duties).</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">4.3.3 Tax structures — with the blanks filled &amp; checked</span>
+      <h3>Progressive · Proportional · Regressive</h3>
+      <p>Compare the <b>average tax rate (T/Y)</b> and <b>marginal tax rate (ΔT/ΔY)</b> as income rises. Same three income bands (each 1,000 wide) in every table.</p>
+
+      <h4>① Progressive — rate rises with income</h4>
+      <div class="tbl"><table>
+        <thead><tr><th>Income band</th><th>Rate</th><th>Cumulative Y</th><th>Tax paid T</th><th>Avg rate T/Y</th><th>Marginal ΔT/ΔY</th></tr></thead>
+        <tbody>
+          <tr><td>0–1,000</td><td>10%</td><td>1,000</td><td class="hl">100</td><td class="hl">0.100</td><td class="hl">0.10</td></tr>
+          <tr><td>1,001–2,000</td><td>12%</td><td>2,000</td><td class="hl">220</td><td class="hl">0.110</td><td class="hl">0.12</td></tr>
+          <tr><td>2,001–3,000</td><td>15%</td><td>3,000</td><td class="hl">370</td><td class="hl">0.123</td><td class="hl">0.15</td></tr>
+        </tbody>
+      </table></div>
+      <p class="muted">T at 2,000 = 100 + (1,000×0.12) = 220; T at 3,000 = 220 + (1,000×0.15) = 370.</p>
+      <div class="box key"><span class="lbl">Summary</span>Income ↑ → tax rate <span class="fill">rises</span>. And <b>marginal &gt; average</b> at every step. This is Thailand's personal-income-tax design.</div>
+
+      <div class="grid2">
+        <div>
+          <h4>② Proportional (constant)</h4>
+          <div class="tbl"><table>
+            <thead><tr><th>Y</th><th>T (10%)</th><th>T/Y</th><th>ΔT/ΔY</th></tr></thead>
+            <tbody>
+              <tr><td>1,000</td><td>100</td><td>0.10</td><td>0.10</td></tr>
+              <tr><td>2,000</td><td>200</td><td>0.10</td><td>0.10</td></tr>
+              <tr><td>3,000</td><td>300</td><td>0.10</td><td>0.10</td></tr>
+            </tbody>
+          </table></div>
+          <div class="box tip"><span class="lbl">Summary</span>Rate is <span class="fill">constant</span>; marginal <b>=</b> average.</div>
+        </div>
+        <div>
+          <h4>③ Regressive — rate falls with income</h4>
+          <div class="tbl"><table>
+            <thead><tr><th>Y</th><th>T</th><th>T/Y</th><th>ΔT/ΔY</th></tr></thead>
+            <tbody>
+              <tr><td>1,000</td><td>150 (15%)</td><td>0.150</td><td>0.15</td></tr>
+              <tr><td>2,000</td><td>270 (12%)</td><td>0.135</td><td>0.12</td></tr>
+              <tr><td>3,000</td><td>370 (10%)</td><td>0.123</td><td>0.10</td></tr>
+            </tbody>
+          </table></div>
+          <div class="box tip"><span class="lbl">Summary</span>Rate <span class="fill">falls</span>; marginal <b>&lt;</b> average.</div>
+        </div>
+      </div>
+      <div class="box exam"><span class="lbl">Exam shortcut</span>Compare <b>marginal vs average</b>: MTR &gt; ATR → progressive · MTR = ATR → proportional · MTR &lt; ATR → regressive.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">4.3.4 Public debt &amp; budgets</span>
+      <h3>Borrowing and the budget balance</h3>
+      <p>Public debt is classified by <b>term</b> (short &lt; 1 yr, long &gt; 5 yr) and <b>source</b> (domestic vs. international). It affects price stability, resource allocation, income distribution, and the state's ability to run projects.</p>
+      <div class="box key"><span class="lbl">Three budget types (G + R vs T)</span>
+        <b>Deficit</b>: G + R &gt; T (spend more than you take) · <b>Surplus</b>: G + R &lt; T · <b>Balanced</b>: G + R = T.<br>
+        In accounting terms total spending is financed by revenue + public debt + treasury reserves.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">4.4 Types of fiscal policy</span>
+      <h3>Automatic vs. discretionary — and expansion vs. contraction</h3>
+      <div class="grid2">
+        <div class="box tip"><span class="lbl">Non-discretionary = Automatic stabilisers</span>
+          Work <em>by themselves</em>, no new law needed. Boom → tax take rises &amp; welfare falls automatically → cools the economy. Slump → taxes fall &amp; welfare rises automatically → cushions the fall.
+          <br><b>Tools:</b> income tax (T = T<sub>a</sub> + tY) and transfer payments (R = R<sub>a</sub> − gY).</div>
+        <div class="box key"><span class="lbl">Discretionary</span>
+          <em>Deliberate</em> changes to tax types, tax rates, or G when automatic stabilisers aren't enough. Slump → ↑G / ↓T (expansionary). Overheating → ↓G / ↑T (contractionary).</div>
+      </div>
+      <div class="box key"><span class="lbl">Match the disease to the cure</span>
+        <b>Recession / deflationary gap</b> → <b>Expansionary</b>: ↑G, ↓T → DAE↑ → Y↑.<br>
+        <b>Inflation / inflationary gap</b> → <b>Contractionary</b>: ↓G, ↑T → DAE↓ → Y↓.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag">4.4 Why fiscal policy is hard</span>
+      <h3>Six real-world problems</h3>
+      <ol>
+        <li><b>Lags</b> — recognition → decision → execution → response. By the time it acts, the problem may have changed.</li>
+        <li><b>Irreversibility</b> — programmes are hard to switch off once the crisis passes.</li>
+        <li><b>Expectations</b> — if people think a stimulus is temporary, they don't change behaviour.</li>
+        <li><b>Political goals</b> can conflict with economic stability (spending before elections).</li>
+        <li><b>Extra saving</b> — an expansion fails to stimulate if households just save the extra income (paradox of thrift again).</li>
+        <li><b>Crowding-out</b> — government borrowing pushes up interest rates and <em>displaces</em> private investment.</li>
+      </ol>
+      <div class="box tip"><span class="lbl">Thailand's Sustainable Fiscal Framework (targets)</span>
+        Public debt / GDP &lt; 60% ✓ · Debt / budget &lt; 15% ✓ · Balanced budget ✗ (government chose to stimulate) · Investment share of spending &gt; 25% ✗.</div>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+                        WORKED EXAMPLES
+  =================================================================== -->
+  <section class="unit" id="examples">
+    <div class="unit-head"><span class="num">★</span><h2>Worked Examples (Assignments, fully solved)</h2></div>
+    <p class="unit-sub">Every step shown, so you can reproduce these under exam conditions. Numbers taken from your assignment sheets.</p>
+
+    <!-- A2: GDP -->
+    <div class="card" id="ex-gdp">
+      <span class="tag">Assignment 2 · GDP calculation</span>
+      <h3>Nominal &amp; Real GDP, deflator, inflation — base year = Year 3</h3>
+      <p>Three goods: Books (B), Rulers (R), Erasers (E).</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Year</th><th>P<sub>B</sub></th><th>Q<sub>B</sub></th><th>P<sub>R</sub></th><th>Q<sub>R</sub></th><th>P<sub>E</sub></th><th>Q<sub>E</sub></th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>100</td><td>80</td><td>20</td><td>300</td><td>5</td><td>250</td></tr>
+          <tr><td>2</td><td>120</td><td>60</td><td>30</td><td>250</td><td>6</td><td>150</td></tr>
+          <tr><td>3 (base)</td><td>130</td><td>90</td><td>35</td><td>400</td><td>7</td><td>450</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4>Nominal GDP = Σ (current P × current Q)</h4>
+      <ul>
+        <li>Year 1 = 100·80 + 20·300 + 5·250 = 8,000 + 6,000 + 1,250 = <span class="fill">15,250</span></li>
+        <li>Year 2 = 120·60 + 30·250 + 6·150 = 7,200 + 7,500 + 900 = <span class="fill">15,600</span></li>
+        <li>Year 3 = 130·90 + 35·400 + 7·450 = 11,700 + 14,000 + 3,150 = <span class="fill">28,850</span></li>
+      </ul>
+      <h4>Real GDP = Σ (Year-3 P × current Q)  — prices fixed at 130 / 35 / 7</h4>
+      <ul>
+        <li>Year 1 = 130·80 + 35·300 + 7·250 = 10,400 + 10,500 + 1,750 = <span class="fill">22,650</span></li>
+        <li>Year 2 = 130·60 + 35·250 + 7·150 = 7,800 + 8,750 + 1,050 = <span class="fill">17,600</span></li>
+        <li>Year 3 = 130·90 + 35·400 + 7·450 = <span class="fill">28,850</span> &nbsp;<span class="muted">(= nominal, because Year 3 is the base year ✓)</span></li>
+      </ul>
+      <h4>GDP deflator = (Nominal ÷ Real) × 100</h4>
+      <ul>
+        <li>Year 1 = 15,250 / 22,650 × 100 = <span class="fill">67.33</span></li>
+        <li>Year 2 = 15,600 / 17,600 × 100 = <span class="fill">88.64</span></li>
+        <li>Year 3 = 28,850 / 28,850 × 100 = <span class="fill">100.00</span></li>
+      </ul>
+      <div class="grid2">
+        <div><h4>Growth rates</h4>
+          <ul>
+            <li>Nominal growth Y2 = (15,600−15,250)/15,250 = <span class="fill">+2.30%</span></li>
+            <li>Nominal growth Y3 = (28,850−15,600)/15,600 = <span class="fill">+84.94%</span></li>
+            <li>Real growth Y2 = (17,600−22,650)/22,650 = <span class="fill">−22.30%</span></li>
+            <li>Real growth Y3 = (28,850−17,600)/17,600 = <span class="fill">+63.92%</span></li>
+          </ul></div>
+        <div><h4>Inflation (from the deflator)</h4>
+          <ul>
+            <li>Year 2 = (88.64−67.33)/67.33 = <span class="fill">+31.65%</span></li>
+            <li>Year 3 = (100−88.64)/88.64 = <span class="fill">+12.82%</span></li>
+          </ul>
+          <div class="box tip"><span class="lbl">Read the story</span>In Year 2, <b>nominal</b> GDP barely moved (+2.3%) but <b>real</b> GDP fell sharply (−22.3%) — output actually shrank; prices masked it. That's exactly why we compute real GDP.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- A3: Y=DAE -->
+    <div class="card" id="ex-dae">
+      <span class="tag">Assignment 3 · Equilibrium (Y = DAE)</span>
+      <h3>Open economy with government — every step</h3>
+      <p><b>Given:</b> C = 80 + 0.4Y<sub>d</sub>, I = 50 + 0.6Y, G = 30, T = 10 + 0.1Y, X = 40, M = 20 + 0.16Y, with Y<sub>d</sub> = Y − T.</p>
+
+      <h4>Step 1 — substitute to get C in terms of Y</h4>
+      <div class="formula">
+        Y<sub>d</sub> = Y − T = Y − (10 + 0.1Y) = −10 + 0.9Y<br>
+        C = 80 + 0.4(−10 + 0.9Y) = 80 − 4 + 0.36Y = <b>76 + 0.36Y</b>
+      </div>
+      <h4>Step 2 — build DAE</h4>
+      <div class="formula">
+        DAE = C + I + G + X − M<br>
+        = (76 + 0.36Y) + (50 + 0.6Y) + 30 + 40 − (20 + 0.16Y)<br>
+        = (76+50+30+40−20) + (0.36+0.6−0.16)Y = <b>176 + 0.80Y</b>
+      </div>
+      <h4>Step 3 — set Y = DAE (Question 1)</h4>
+      <div class="formula">Y = 176 + 0.8Y → 0.2Y = 176 → <b>Y<sub>E</sub> = <span class="fill">880</span></b></div>
+
+      <h4>Question 3 — multipliers (the important, subtle part)</h4>
+      <p>The DAE slope is k = b(1−t) + d − m = 0.4(0.9) + 0.6 − 0.16 = <b>0.80</b>, so the common multiplier is:</p>
+      <div class="formula center"><span class="frac"><span class="num">1</span><span class="den">1 − k</span></span> = <span class="frac"><span class="num">1</span><span class="den">1 − 0.8</span></span> = <b>5</b></div>
+      <div class="tbl"><table>
+        <thead><tr><th>Autonomous variable</th><th>Multiplier (∂Y/∂·)</th></tr></thead>
+        <tbody>
+          <tr><td>C<sub>a</sub>, I<sub>a</sub>, G<sub>a</sub>, X<sub>a</sub> (spending)</td><td class="hl">+5</td></tr>
+          <tr><td>M<sub>a</sub> (imports — a leakage)</td><td class="hl">−5</td></tr>
+          <tr><td>T<sub>a</sub> (autonomous tax) = −b/(1−k)</td><td class="hl">−0.4/0.2 = −2</td></tr>
+        </tbody>
+      </table></div>
+      <p class="muted">Meaning: +1 unit of autonomous G raises equilibrium income by 5 units; +1 unit of autonomous tax lowers it by 2 units.</p>
+      <div class="box warn"><span class="lbl">Careful — a genuine inconsistency in the lecture slides</span>
+        Some slides compute these multipliers with the shortcut <b>1/(1−b+m) = 1/0.76 ≈ 1.32</b>. That shortcut is <u>only valid when investment and taxes are purely autonomous</u>. Here investment has an induced part (+0.6Y) and tax is induced (+0.1Y), which is exactly why Y<sub>E</sub> came out as 880 (using slope 0.8). To stay consistent with that same Y<sub>E</sub>, the correct multiplier is <b>1/(1−0.8) = 5</b>, and the tax multiplier is <b>−2</b>. Use the reduced-form (slope) method and you can't go wrong.</div>
+
+      <h4>Question 4 — ΔG<sub>a</sub> = +4 and ΔT<sub>a</sub> = +20</h4>
+      <div class="formula">
+        ΔY = (G-multiplier)ΔG<sub>a</sub> + (T-multiplier)ΔT<sub>a</sub> = (+5)(4) + (−2)(20) = 20 − 40 = <b>−20</b><br>
+        New Y<sub>E</sub> = 880 − 20 = <span class="fill">860</span>
+      </div>
+      <p class="muted">Check by re-deriving: new G=34, T=30+0.1Y → C=68+0.36Y → DAE=172+0.8Y → Y<sub>E</sub>=172/0.2=860 ✓</p>
+
+      <h4>Question 5 — if current income is 700 (below Y<sub>E</sub>)</h4>
+      <p>At Y = 700, DAE = 176 + 0.8(700) = 736 &gt; 700. Desired spending exceeds output → inventories fall unexpectedly → firms <b>raise production</b> → income rises. The process continues until <span class="fill">Y = 880</span>, the equilibrium.</p>
+    </div>
+
+    <!-- A4: Injection=Leakage -->
+    <div class="card" id="ex-il">
+      <span class="tag">Assignment 4 · Equilibrium (Injection = Leakage)</span>
+      <h3>Same economy, second method — should give Y<sub>E</sub> = 880 again</h3>
+      <h4>Step 1 — saving function</h4>
+      <div class="formula">
+        S = Y<sub>d</sub> − C = Y<sub>d</sub> − (80 + 0.4Y<sub>d</sub>) = −80 + 0.6Y<sub>d</sub><br>
+        with Y<sub>d</sub> = −10 + 0.9Y → S = −80 + 0.6(−10 + 0.9Y) = <b>−86 + 0.54Y</b>
+      </div>
+      <h4>Step 2 — set Injection = Leakage (Question 1)</h4>
+      <div class="formula">
+        Injection: I + G + X = (50 + 0.6Y) + 30 + 40 = 120 + 0.6Y<br>
+        Leakage: S + T + M = (−86 + 0.54Y) + (10 + 0.1Y) + (20 + 0.16Y) = −56 + 0.8Y<br>
+        120 + 0.6Y = −56 + 0.8Y → 176 = 0.2Y → <b>Y<sub>E</sub> = <span class="fill">880</span></b> ✓ (matches Method 1)
+      </div>
+      <h4>Question 4 — autonomous saving rises 7 units (Paradox of Thrift)</h4>
+      <p>More autonomous saving = less autonomous consumption (C<sub>a</sub> effectively ↓7). Saving is a leakage, so with multiplier 5:</p>
+      <div class="formula">ΔY = −5 × 7 = −35 → New Y<sub>E</sub> = 880 − 35 = <span class="fill">845</span></div>
+      <div class="box tip"><span class="lbl">Lesson</span>Trying to save <em>more</em> made national income <em>fall</em> — the paradox of thrift in one calculation.</div>
+      <h4>Question 5 — if current income is 950 (above Y<sub>E</sub>)</h4>
+      <p>At Y = 950, leakage (−56 + 0.8·950 = 704) &gt; injection (120 + 0.6·950 = 690). Output exceeds desired spending → goods pile up as <b>unplanned inventory</b> → firms <b>cut production</b> → income falls until <span class="fill">Y = 880</span>.</p>
+    </div>
+  </section>
+
+  <!-- ==================================================================
+                        CHEAT SHEET
+  =================================================================== -->
+  <section class="unit" id="cheatsheet">
+    <div class="unit-head"><span class="num">Σ</span><h2>Formula Cheat-Sheet</h2></div>
+    <div class="card">
+      <span class="tag">One-page revision</span>
+      <div class="grid2">
+        <div>
+          <h4>National accounts</h4>
+          <div class="formula">
+            GDP = C + I + G + (X − M)<br>
+            Deflator = (Nominal ÷ Real) × 100<br>
+            GNP = GDP + NFIEA<br>
+            NNP = GNP − Depreciation<br>
+            DI = C + S
+          </div>
+          <h4>Consumption &amp; saving</h4>
+          <div class="formula">
+            C = C<sub>a</sub> + bY<sub>d</sub> ; &nbsp; S = −C<sub>a</sub> + (1−b)Y<sub>d</sub><br>
+            MPC + MPS = 1<br>
+            Break-even: C = Y<sub>d</sub> (S = 0)
+          </div>
+        </div>
+        <div>
+          <h4>Equilibrium (open, with gov)</h4>
+          <div class="formula">
+            Y<sub>E</sub> = <span class="frac"><span class="num">C<sub>a</sub> − bT<sub>a</sub> + I<sub>a</sub> + G<sub>a</sub> + X<sub>a</sub> − M<sub>a</sub></span><span class="den">1 − b + m</span></span><br>
+            or solve Y = DAE directly (safest)
+          </div>
+          <h4>Multipliers</h4>
+          <div class="formula">
+            Spending k = <span class="frac"><span class="num">1</span><span class="den">1 − slope of DAE</span></span> = <span class="frac"><span class="num">1</span><span class="den">MPS</span></span> (simplest case)<br>
+            Tax = <span class="frac"><span class="num">−b</span><span class="den">1 − b</span></span> ; &nbsp; Balanced-budget = 1
+          </div>
+          <h4>Rates</h4>
+          <div class="formula">
+            Real r = i − inflation<br>
+            Unemployment = (Unemployed ÷ Labour force) × 100<br>
+            Gini = A ÷ (A + B)
+          </div>
+        </div>
+      </div>
+      <div class="box exam"><span class="lbl">Exam survival kit</span>
+        ① Always write Y<sub>d</sub> = Y − T first. ② Collect the autonomous intercept and the Y-slope separately. ③ Solve Y = DAE. ④ Multiplier = 1/(1 − slope). ⑤ Sign-check: spending &amp; exports +, imports &amp; taxes −. ⑥ Below Y<sub>E</sub> → produce more; above Y<sub>E</sub> → produce less.</div>
+    </div>
+  </section>
+
+  <p class="noresult" id="noresult">No topics match your search. Try a shorter word (e.g. “multiplier”, “Gini”, “deflator”).</p>
+
 </main>
 
+<button class="backtop" id="backtop" aria-label="Back to top">↑</button>
+
 <footer>
-  <!-- EDIT: footer line -->
-  Built as a personal study hub · last updated <span id="year"></span>.
+  <p><b>Jean's Study Palace</b> · EE212 Principles of Macroeconomics · built from the Case &amp; Fair lecture materials.</p>
+  <p class="muted"><!-- EDIT: update this line whenever you like --> Study notes for personal revision. Filled-in answers (<span class="fill" style="font-size:.8em">green</span>) are worked by hand — double-check against your own lecture before an exam.</p>
 </footer>
 
 <script>
-  /* ========================================================
-     SET YOUR PRIVATE PASSPHRASE HERE
-     (Reminder: this is a light gate, not real security.)
-     ======================================================== */
-  var PASSPHRASE = "mindspace";
-
-  var root = document.documentElement;
-
-  // ----- Collection tabs -----
-  var tabPublic = document.getElementById('tabPublic');
-  var tabPrivate = document.getElementById('tabPrivate');
-  var colPublic = document.getElementById('colPublic');
-  var colPrivate = document.getElementById('colPrivate');
-  var q = document.getElementById('q');
-
-  function showCollection(which) {
-    var pub = which === 'public';
-    tabPublic.classList.toggle('active', pub);
-    tabPrivate.classList.toggle('active', !pub);
-    colPublic.classList.toggle('active', pub);
-    colPrivate.classList.toggle('active', !pub);
-    q.value = '';
-    runSearch();
-    if (!pub) setTimeout(function(){ var p = document.getElementById('pass'); if (p && p.offsetParent) p.focus(); }, 30);
+/* ============================================================
+   THEME TOGGLE — remembers your choice (localStorage)
+   ============================================================ */
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme');
+  var ico=document.getElementById('theme-ico'), txt=document.getElementById('theme-txt');
+  function paint(){
+    var dark = root.getAttribute('data-theme')==='dark'
+      || (root.getAttribute('data-theme')!=='light' && window.matchMedia('(prefers-color-scheme:dark)').matches);
+    ico.textContent = dark ? '☀️' : '🌙';
+    txt.textContent = dark ? 'Light' : 'Dark';
   }
-  tabPublic.addEventListener('click', function(){ showCollection('public'); });
-  tabPrivate.addEventListener('click', function(){ showCollection('private'); });
-
-  // ----- Passphrase gate -----
-  var lockscreen = document.getElementById('lockscreen');
-  var privateContent = document.getElementById('privateContent');
-  var pass = document.getElementById('pass');
-  var unlock = document.getElementById('unlock');
-  var lockerr = document.getElementById('lockerr');
-
-  function reveal() {
-    lockscreen.style.display = 'none';
-    privateContent.style.display = 'block';
-    try { sessionStorage.setItem('unlocked', '1'); } catch (e) {}
-    runSearch();
-  }
-  function tryUnlock() {
-    if (pass.value === PASSPHRASE) {
-      lockerr.textContent = '';
-      reveal();
-    } else {
-      lockerr.textContent = 'Incorrect passphrase.';
-      lockscreen.classList.remove('shake'); void lockscreen.offsetWidth;
-      lockscreen.classList.add('shake');
-      pass.select();
-    }
-  }
-  unlock.addEventListener('click', tryUnlock);
-  pass.addEventListener('keydown', function(e){ if (e.key === 'Enter') tryUnlock(); });
-  // stay unlocked for the rest of the browser session
-  try { if (sessionStorage.getItem('unlocked') === '1') reveal(); } catch (e) {}
-
-  // ----- Live search within the visible collection -----
-  function runSearch() {
-    var term = q.value.trim().toLowerCase();
-    var active = document.querySelector('.collection.active');
-    if (!active) return;
-    // don't filter the private collection while it's still locked
-    var scope = active.querySelector('.lockedOut') && active.querySelector('.lockedOut').style.display !== 'block'
-      ? null : active;
-    var cards = active.querySelectorAll('.card');
-    var empty = active.querySelector('.empty');
-    var visible = 0;
-    cards.forEach(function (c) {
-      var match = c.textContent.toLowerCase().indexOf(term) !== -1;
-      c.style.display = match ? '' : 'none';
-      if (match) visible++;
-    });
-    if (empty) empty.classList.toggle('show', visible === 0 && (scope !== null));
-  }
-  q.addEventListener('input', runSearch);
-
-  // ----- Theme toggle (remembers choice for this browser only) -----
-  var btn = document.getElementById('theme');
-  try {
-    var saved = localStorage.getItem('theme');
-    if (saved) root.setAttribute('data-theme', saved);
-  } catch (e) {}
-  btn.addEventListener('click', function () {
-    var isDark = root.getAttribute('data-theme') === 'dark'
-      || (root.getAttribute('data-theme') !== 'light'
-          && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    var next = isDark ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch (e) {}
+  try{ var saved=localStorage.getItem('theme'); if(saved) root.setAttribute('data-theme',saved); }catch(e){}
+  paint();
+  btn.addEventListener('click',function(){
+    var dark = root.getAttribute('data-theme')==='dark'
+      || (root.getAttribute('data-theme')!=='light' && window.matchMedia('(prefers-color-scheme:dark)').matches);
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme',next);
+    try{ localStorage.setItem('theme',next); }catch(e){}
+    paint();
   });
+})();
 
-  // ----- Footer year -----
-  document.getElementById('year').textContent = new Date().getFullYear();
+/* ============================================================
+   LIVE SEARCH — filters the cards as you type
+   ============================================================ */
+(function(){
+  var q=document.getElementById('q');
+  var cards=[].slice.call(document.querySelectorAll('main .card'));
+  var sections=[].slice.call(document.querySelectorAll('section.unit'));
+  var noresult=document.getElementById('noresult');
+  // cache lowercase text of each card
+  cards.forEach(function(c){ c._t=(c.innerText||c.textContent||'').toLowerCase(); });
+
+  function run(){
+    var term=q.value.trim().toLowerCase();
+    var any=false;
+    if(!term){
+      cards.forEach(function(c){ c.style.display=''; });
+      sections.forEach(function(s){ s.style.display=''; });
+      noresult.style.display='none';
+      return;
+    }
+    cards.forEach(function(c){
+      var hit=c._t.indexOf(term)>-1;
+      c.style.display = hit ? '' : 'none';
+      if(hit) any=true;
+    });
+    // hide a unit if none of its cards are visible (keep its heading only if it has a hit)
+    sections.forEach(function(s){
+      var visible=s.querySelectorAll('.card');
+      var show=false;
+      [].forEach.call(visible,function(c){ if(c.style.display!=='none') show=true; });
+      s.style.display = show ? '' : 'none';
+    });
+    noresult.style.display = any ? 'none' : 'block';
+  }
+  q.addEventListener('input',run);
+  // press "/" to focus search
+  document.addEventListener('keydown',function(e){
+    if(e.key==='/' && document.activeElement!==q){ e.preventDefault(); q.focus(); }
+  });
+})();
+
+/* ============================================================
+   BACK-TO-TOP button
+   ============================================================ */
+(function(){
+  var b=document.getElementById('backtop');
+  window.addEventListener('scroll',function(){ b.style.display = window.scrollY>600 ? 'block' : 'none'; });
+  b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+})();
 </script>
 </body>
 </html>
