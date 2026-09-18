@@ -704,12 +704,16 @@
         Open, with gov: &nbsp; <b>I + G + X = S + T + M</b>
       </div>
       <figure class="graph">
-        <svg viewBox="0 0 620 300" role="img" aria-label="Injection line crossing leakage line at equilibrium income">
+        <svg viewBox="0 0 620 300" role="img" aria-label="Upward-sloping injection and steeper leakage lines crossing at equilibrium income">
           <line class="axis" x1="60" y1="250" x2="600" y2="250"/><line class="axis" x1="60" y1="20" x2="60" y2="250"/>
-          <line class="c2" x1="60" y1="100" x2="600" y2="220"/><text x="500" y="205" style="fill:var(--good);font-weight:700">S+T+M (leakage)</text>
-          <line class="c1" x1="60" y1="160" x2="600" y2="90"/><text x="480" y="80" style="fill:var(--accent);font-weight:700">I+G+X (injection)</text>
-          <circle class="dot" cx="352" cy="129" r="5"/>
-          <line class="dash" x1="352" y1="129" x2="352" y2="250"/><text x="330" y="268" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+          <!-- both slope UP with income; leakage is steeper, so they cross once at (360,117) -->
+          <line class="c1" x1="60" y1="150" x2="600" y2="90"/>
+          <line class="c2" x1="60" y1="192" x2="600" y2="57"/>
+          <circle class="dot" cx="360" cy="117" r="5"/>
+          <line class="dash" x1="360" y1="117" x2="360" y2="250"/>
+          <text x="440" y="62" style="fill:var(--good);font-weight:700">S+T+M (leakage)</text>
+          <text x="440" y="122" style="fill:var(--accent);font-weight:700">I+G+X (injection)</text>
+          <text x="345" y="268" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
           <text x="300" y="16" class="lbl-ax">Injection, Leakage</text><text x="585" y="270" class="lbl-ax">Y</text>
         </svg>
         <figcaption>When injection &gt; leakage the economy expands; when leakage &gt; injection it contracts. Equal at Y<sub>E</sub>.</figcaption>
