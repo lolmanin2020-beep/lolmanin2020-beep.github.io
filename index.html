@@ -677,8 +677,9 @@
           <line class="axis" x1="60" y1="270" x2="600" y2="270"/><line class="axis" x1="60" y1="20" x2="60" y2="270"/>
           <line class="c45" x1="60" y1="270" x2="470" y2="20"/><text x="430" y="35" class="lbl-ax">45° : Y = DAE</text>
           <line class="c1" x1="60" y1="175" x2="600" y2="55"/><text x="500" y="70" style="fill:var(--accent);font-weight:700">DAE = A + (slope)Y</text>
-          <circle class="dot" cx="322" cy="147" r="5"/>
-          <line class="dash" x1="322" y1="147" x2="322" y2="270"/><text x="300" y="288" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+          <!-- 45° and DAE lines intersect exactly at (305,120) -->
+          <circle class="dot" cx="305" cy="120" r="5"/>
+          <line class="dash" x1="305" y1="120" x2="305" y2="270"/><text x="289" y="288" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
           <text x="70" y="185" class="lbl-ax">A</text>
           <text x="140" y="255" class="box-t" style="fill:var(--good)">Y &lt; Y<tspan dy="3">E</tspan>: DAE&gt;Y → stock ↓ → produce more →Y↑</text>
           <text x="360" y="110" class="box-t" style="fill:var(--warn)">Y &gt; Y<tspan dy="3">E</tspan>: DAE&lt;Y → stock ↑ → cut output →Y↓</text>
@@ -741,12 +742,18 @@
       <figure class="graph">
         <svg viewBox="0 0 620 300" role="img" aria-label="Saving line shifting up reduces equilibrium income while investment stays fixed">
           <line class="axis" x1="60" y1="250" x2="600" y2="250"/><line class="axis" x1="60" y1="20" x2="60" y2="250"/>
-          <line class="c1" x1="60" y1="150" x2="600" y2="150"/><text x="520" y="140" style="fill:var(--accent);font-weight:700">I = I<tspan dy="3">a</tspan></text>
-          <line class="c2" x1="60" y1="230" x2="520" y2="60"/><text x="470" y="60" style="fill:var(--good)">S</text>
-          <line class="c2" x1="60" y1="195" x2="430" y2="60" style="opacity:.6"/><text x="380" y="60" style="fill:var(--good);opacity:.8">S′ (save more)</text>
-          <circle class="dot" cx="379" cy="150" r="5"/><circle class="dot" cx="290" cy="150" r="5" style="fill:var(--warn)"/>
-          <line class="dash" x1="379" y1="150" x2="379" y2="250"/><line class="dash" x1="290" y1="150" x2="290" y2="250"/>
-          <text x="360" y="268" class="lbl-ax">Y<tspan dy="3">1</tspan></text><text x="255" y="268" class="lbl-ax" style="fill:var(--warn)">Y<tspan dy="3">2</tspan> ↓</text>
+          <!-- I is a horizontal line at y=150. S crosses it at Y1=x360; the shifted S' crosses at Y2=x250 (lower) -->
+          <line class="c1" x1="60" y1="150" x2="600" y2="150"/>
+          <line class="c2" x1="60" y1="270" x2="520" y2="86"/>
+          <line class="c2" x1="60" y1="226" x2="430" y2="78" style="opacity:.6"/>
+          <line class="dash" x1="360" y1="150" x2="360" y2="250"/>
+          <line class="dash" x1="250" y1="150" x2="250" y2="250"/>
+          <circle class="dot" cx="360" cy="150" r="5"/>
+          <circle class="dot" cx="250" cy="150" r="5" style="fill:var(--warn)"/>
+          <text x="522" y="140" style="fill:var(--accent);font-weight:700">I = I<tspan dy="3">a</tspan></text>
+          <text x="527" y="92" style="fill:var(--good);font-weight:700">S</text>
+          <text x="284" y="64" style="fill:var(--good);font-weight:700;opacity:.75">S′ (save more)</text>
+          <text x="344" y="268" class="lbl-ax">Y<tspan dy="3">1</tspan></text><text x="226" y="268" class="lbl-ax" style="fill:var(--warn)">Y<tspan dy="3">2</tspan> ↓</text>
           <text x="300" y="16" class="lbl-ax">S, I</text><text x="585" y="270" class="lbl-ax">Y</text>
         </svg>
         <figcaption>The S curve shifts up (more thrift). With I fixed, the new intersection sits at a <b>lower</b> Y — and saving is unchanged. If investment is <em>induced</em> (I=I<sub>a</sub>+dY), income falls even further.</figcaption>
