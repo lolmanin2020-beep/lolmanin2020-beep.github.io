@@ -765,34 +765,51 @@
       <span class="tag">3.5 GDP gaps</span>
       <h3>Inflationary vs. Deflationary gap</h3>
       <p>Compare equilibrium output Y<sub>E</sub> with full-employment (potential) output Y<sub>F</sub>.</p>
+      <p class="muted" style="margin-top:-6px">The <b>gap</b> is the <em>vertical distance</em> between the DAE line and the 45° line, measured right at Y<sub>F</sub>.</p>
       <div class="grid2">
         <figure class="graph">
-          <svg viewBox="0 0 300 260" role="img" aria-label="Inflationary gap: desired spending above full-employment output">
-            <line class="axis" x1="45" y1="215" x2="285" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+          <svg viewBox="0 0 320 275" role="img" aria-label="Inflationary gap: at full-employment output the DAE line lies above the 45-degree line, and equilibrium is beyond full employment">
+            <line class="axis" x1="45" y1="215" x2="305" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+            <!-- 45° line (slope 1) and DAE line cross at Y_E=(195,65); Y_F=130 is to the LEFT -->
             <line class="c45" x1="45" y1="215" x2="235" y2="25"/>
-            <line class="c1" x1="45" y1="120" x2="285" y2="35"/>
-            <line class="dash" x1="175" y1="70" x2="175" y2="215"/>
-            <line class="dash" x1="45" y1="82" x2="175" y2="82"/><line class="dash" x1="45" y1="52" x2="175" y2="52"/>
-            <path class="fillW" d="M175 82 L175 52 L45 52 L45 82 Z"/>
-            <text x="150" y="235" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
-            <text x="55" y="46" class="box-t" style="fill:var(--warn);font-size:11px">gap</text>
-            <text x="150" y="14" class="lbl-ax" style="fill:var(--warn)">Inflationary</text>
+            <line class="c1" x1="45" y1="140" x2="305" y2="10"/>
+            <line class="dash" x1="130" y1="215" x2="130" y2="93"/>
+            <line class="dash" x1="195" y1="215" x2="195" y2="65"/>
+            <circle class="dot" cx="195" cy="65" r="4"/>
+            <!-- gap at Y_F: between 45°(130,130) and DAE(130,97.5) -->
+            <line x1="130" y1="97.5" x2="130" y2="130" style="stroke:var(--warn);stroke-width:3"/>
+            <line x1="125" y1="97.5" x2="135" y2="97.5" style="stroke:var(--warn);stroke-width:2"/>
+            <line x1="125" y1="130" x2="135" y2="130" style="stroke:var(--warn);stroke-width:2"/>
+            <text x="83" y="118" style="fill:var(--warn);font-weight:700;font-size:12px">gap</text>
+            <text x="70" y="172" class="lbl-ax">45°</text>
+            <text x="256" y="26" style="fill:var(--accent);font-weight:700;font-size:12px">DAE</text>
+            <text x="118" y="232" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
+            <text x="184" y="232" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+            <text x="150" y="13" style="fill:var(--warn);font-weight:700;font-size:13px">Inflationary (Y<tspan dy="3">E</tspan> &gt; Y<tspan dy="3">F</tspan>)</text>
           </svg>
-          <figcaption>DAE &gt; output at Y<sub>F</sub>: too much demand → inflation. <b>Fix: reduce DAE</b> (↑T or ↓G).</figcaption>
+          <figcaption>At Y<sub>F</sub>, desired spending <b>exceeds</b> output (DAE above the 45° line). Equilibrium Y<sub>E</sub> sits <em>beyond</em> full employment → demand-pull inflation. <b>Fix: reduce DAE</b> (↑T or ↓G).</figcaption>
         </figure>
         <figure class="graph">
-          <svg viewBox="0 0 300 260" role="img" aria-label="Deflationary gap: desired spending below full-employment output">
-            <line class="axis" x1="45" y1="215" x2="285" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+          <svg viewBox="0 0 320 275" role="img" aria-label="Deflationary gap: at full-employment output the DAE line lies below the 45-degree line, and equilibrium is below full employment">
+            <line class="axis" x1="45" y1="215" x2="305" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+            <!-- crosses at Y_E=(130,130); Y_F=195 is to the RIGHT -->
             <line class="c45" x1="45" y1="215" x2="235" y2="25"/>
-            <line class="c1" x1="45" y1="150" x2="285" y2="80"/>
-            <line class="dash" x1="215" y1="35" x2="215" y2="215"/>
-            <line class="dash" x1="45" y1="52" x2="215" y2="52"/><line class="dash" x1="45" y1="86" x2="215" y2="86"/>
-            <path class="fillA" d="M215 86 L215 52 L45 52 L45 86 Z" style="fill:var(--good);opacity:.18"/>
-            <text x="190" y="235" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
-            <text x="55" y="46" class="box-t" style="fill:var(--good);font-size:11px">gap</text>
-            <text x="150" y="14" class="lbl-ax" style="fill:var(--good)">Deflationary</text>
+            <line class="c1" x1="45" y1="172.5" x2="305" y2="42.5"/>
+            <line class="dash" x1="195" y1="215" x2="195" y2="62"/>
+            <line class="dash" x1="130" y1="215" x2="130" y2="130"/>
+            <circle class="dot" cx="130" cy="130" r="4"/>
+            <!-- gap at Y_F: between 45°(195,65) and DAE(195,97.5) -->
+            <line x1="195" y1="65" x2="195" y2="97.5" style="stroke:var(--good);stroke-width:3"/>
+            <line x1="190" y1="65" x2="200" y2="65" style="stroke:var(--good);stroke-width:2"/>
+            <line x1="190" y1="97.5" x2="200" y2="97.5" style="stroke:var(--good);stroke-width:2"/>
+            <text x="205" y="86" style="fill:var(--good);font-weight:700;font-size:12px">gap</text>
+            <text x="70" y="178" class="lbl-ax">45°</text>
+            <text x="256" y="58" style="fill:var(--accent);font-weight:700;font-size:12px">DAE</text>
+            <text x="118" y="232" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+            <text x="184" y="232" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
+            <text x="150" y="13" style="fill:var(--good);font-weight:700;font-size:13px">Deflationary (Y<tspan dy="3">E</tspan> &lt; Y<tspan dy="3">F</tspan>)</text>
           </svg>
-          <figcaption>DAE &lt; output at Y<sub>F</sub>: too little demand → unemployment. <b>Fix: raise DAE</b> (↓T or ↑G).</figcaption>
+          <figcaption>At Y<sub>F</sub>, desired spending <b>falls short</b> of output (DAE below the 45° line). Equilibrium Y<sub>E</sub> sits <em>below</em> full employment → unemployment. <b>Fix: raise DAE</b> (↓T or ↑G).</figcaption>
         </figure>
       </div>
       <div class="box key"><span class="lbl">3.6 Keynes vs Classical vs in-between (the multiplier's size depends on prices)</span>
