@@ -585,17 +585,20 @@
         100 + 0.6Y<sub>d</sub> = Y<sub>d</sub> → 0.4Y<sub>d</sub> = 100 → <b>Y<sub>d</sub>* = 250</b>. Below it households <em>dissave</em> (borrow / sell assets); above it they save.</div>
 
       <figure class="graph">
-        <svg viewBox="0 0 620 340" role="img" aria-label="Consumption function crossing the 45-degree line at the break-even income, with the saving function below">
+        <svg viewBox="0 0 620 340" role="img" aria-label="Consumption function crossing the 45-degree line at the break-even income, with the saving function crossing zero directly below">
           <line class="axis" x1="60" y1="250" x2="600" y2="250"/><line class="axis" x1="60" y1="20" x2="60" y2="300"/>
-          <line class="c45" x1="60" y1="250" x2="470" y2="40"/><text x="430" y="55" class="lbl-ax">45° (C = Y<tspan dy="3">d</tspan>)</text>
-          <line class="c1" x1="60" y1="150" x2="600" y2="42"/><text x="500" y="60" style="fill:var(--accent);font-weight:700">C = 100 + 0.6Y<tspan dy="3">d</tspan></text>
-          <line class="dash" x1="280" y1="123" x2="280" y2="290"/>
-          <circle class="dot" cx="280" cy="123" r="4.5"/>
-          <text x="255" y="308" class="lbl-ax">Y<tspan dy="3">d</tspan>* = 250 (break-even)</text>
-          <text x="70" y="160" class="lbl-ax">C<tspan dy="3">a</tspan>=100</text>
-          <line class="c2" x1="60" y1="330" x2="600" y2="250" transform="translate(0,-60)"/>
-          <text x="470" y="235" style="fill:var(--good);font-weight:700">S = −100 + 0.4Y<tspan dy="3">d</tspan></text>
-          <text x="300" y="18" class="lbl-ax">C, S</text><text x="580" y="270" class="lbl-ax">Y<tspan dy="3">d</tspan></text>
+          <!-- 45° line and C-line are built to intersect exactly at (360,90); S-line crosses the axis at x=360 -->
+          <line class="c45" x1="60" y1="250" x2="480" y2="26"/>
+          <line class="c1" x1="60" y1="150" x2="600" y2="42"/>
+          <line class="c2" x1="60" y1="298" x2="600" y2="211.6"/>
+          <line class="dash" x1="360" y1="90" x2="360" y2="258"/>
+          <circle class="dot" cx="360" cy="90" r="5"/>
+          <text x="344" y="50" class="lbl-ax">45° (C = Y<tspan dy="3">d</tspan>)</text>
+          <text x="450" y="86" style="fill:var(--accent);font-weight:700">C = 100 + 0.6Y<tspan dy="3">d</tspan></text>
+          <text x="450" y="205" style="fill:var(--good);font-weight:700">S = −100 + 0.4Y<tspan dy="3">d</tspan></text>
+          <text x="66" y="168" class="lbl-ax">C<tspan dy="3">a</tspan>=100</text>
+          <text x="284" y="278" class="lbl-ax">Y<tspan dy="3">d</tspan>* = 250 (break-even)</text>
+          <text x="300" y="18" class="lbl-ax">C, S</text><text x="582" y="270" class="lbl-ax">Y<tspan dy="3">d</tspan></text>
         </svg>
         <figcaption>Where the C-line meets the 45° line, C = Y<sub>d</sub> and saving = 0. Left of it C &gt; Y<sub>d</sub> (dissaving); right of it households save.</figcaption>
       </figure>
