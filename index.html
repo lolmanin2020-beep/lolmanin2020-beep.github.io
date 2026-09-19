@@ -84,9 +84,14 @@
     color:#fff;font-size:1.6rem}
   .lockwall h2{margin:0 0 5px;font-size:1.45rem;letter-spacing:.3px}
   .lockwall p{margin:0 0 18px;color:var(--muted);font-size:.92rem}
-  .lockwall input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--border);
+  .lockwall .pwrap{position:relative}
+  .lockwall input{width:100%;padding:12px 40px;border-radius:12px;border:1px solid var(--border);
     background:var(--surface-2);color:var(--text);font-size:1rem;font-family:inherit;text-align:center;letter-spacing:.6px}
   .lockwall input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .lockwall .peek{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;
+    cursor:pointer;font-size:1.05rem;line-height:1;padding:6px;opacity:.55;border-radius:8px}
+  .lockwall .peek:hover{opacity:1}
+  .lockwall .peek.on{opacity:1;filter:none}
   .lockwall button.unlock{margin-top:12px;width:100%;padding:12px;border:none;border-radius:12px;cursor:pointer;
     font-size:1rem;font-weight:700;font-family:inherit;color:#fff;
     background:linear-gradient(135deg,var(--accent),var(--accent-2))}
@@ -248,7 +253,7 @@
     color:var(--text);width:44px;height:44px;border-radius:50%;cursor:pointer;box-shadow:var(--shadow);font-size:1.1rem;display:none}
 </style>
 </head>
-<body>
+<body class="locked">
 
 <!-- ============================ HEADER ============================ -->
 <header class="top">
@@ -2119,14 +2124,17 @@
 </footer>
 
 <!-- ============ SECURITY WALL — client-side passcode gate ============ -->
-<div class="lockwall" id="lockwall" role="dialog" aria-modal="true" aria-label="MindSpace passcode">
+<div class="lockwall show" id="lockwall" role="dialog" aria-modal="true" aria-label="MindSpace passcode">
   <div class="panel" id="lockpanel">
     <div class="lock-logo">🔒</div>
     <h2>MindSpace</h2>
     <p>Enter the passcode to continue.</p>
     <form id="lockform" autocomplete="off">
-      <input id="lockinput" type="password" placeholder="Passcode"
-             aria-label="Passcode" autocomplete="off" spellcheck="false">
+      <div class="pwrap">
+        <input id="lockinput" type="password" placeholder="Passcode"
+               aria-label="Passcode" autocomplete="off" spellcheck="false">
+        <button type="button" class="peek" id="lockpeek" aria-label="Show passcode" title="Show passcode">👁</button>
+      </div>
       <button type="submit" class="unlock">Unlock</button>
       <div class="err" id="lockerr">Incorrect passcode</div>
     </form>
@@ -2288,6 +2296,7 @@
   var form=document.getElementById('lockform');
   var input=document.getElementById('lockinput');
   var err=document.getElementById('lockerr');
+  var peek=document.getElementById('lockpeek');
   var btn=document.getElementById('loginbtn');
   var ico=document.getElementById('login-ico'), txt=document.getElementById('login-txt');
 
@@ -2305,13 +2314,23 @@
   }
   function hideWall(){ wall.classList.remove('show'); document.body.classList.remove('locked'); }
 
-  // Gate on load: locked until the passcode is entered this session.
-  if(!authed()) showWall();
+  // The wall renders locked by default (fail-closed, no content flash).
+  // Only unlock on load if this session already authenticated.
+  if(authed()) hideWall(); else setTimeout(function(){ input.focus(); },30);
   paintBtn();
+
+  // Show / hide the passcode as it's typed.
+  peek.addEventListener('click',function(){
+    var show=input.type==='password';
+    input.type=show?'text':'password';
+    peek.classList.toggle('on',show);
+    peek.setAttribute('aria-label',show?'Hide passcode':'Show passcode');
+    input.focus();
+  });
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    if(input.value===PASSCODE){
+    if(input.value.trim()===PASSCODE){
       try{ sessionStorage.setItem(KEY,'1'); }catch(e){}
       input.value=''; err.classList.remove('show');
       hideWall(); paintBtn();
