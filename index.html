@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jean's Study Palace — EE212 Macroeconomics</title>
+<title>Jean's Palace</title>
 <meta name="description" content="A teaching study hub for EE212 Principles of Macroeconomics: GDP, equilibrium income, multipliers, and fiscal policy — with formulas, graphs and worked examples.">
 <style>
   /* ============================================================
@@ -74,16 +74,28 @@
     display:flex;gap:6px;align-items:center;white-space:nowrap}
   button.loginbtn:hover{border-color:var(--accent)}
   button.loginbtn.authed{background:var(--good-soft);border-color:var(--good);color:var(--good)}
-  .lockwall{position:fixed;inset:0;z-index:200;display:none;place-items:center;padding:20px;
-    background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px) saturate(1.2)}
+  /* Home landing = the passcode front door */
+  .lockwall{position:fixed;inset:0;z-index:200;display:none;place-items:center;padding:28px 20px;overflow:auto;
+    background:
+      radial-gradient(1100px 560px at 50% -12%, var(--accent-soft), transparent 62%),
+      radial-gradient(820px 460px at 112% 118%, color-mix(in srgb,var(--accent-2) 20%,transparent), transparent 55%),
+      var(--bg)}
   .lockwall.show{display:grid}
-  .lockwall .panel{width:min(400px,100%);background:var(--surface);border:1px solid var(--border);
-    border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;text-align:center}
-  .lockwall .lock-logo{width:56px;height:56px;border-radius:16px;margin:0 auto 16px;
+  .home{width:min(560px,100%);margin:auto;text-align:center;animation:homeIn .5s ease}
+  @keyframes homeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .home .crest{width:84px;height:84px;border-radius:22px;margin:0 auto 18px;
     background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;
-    color:#fff;font-size:1.6rem}
-  .lockwall h2{margin:0 0 5px;font-size:1.45rem;letter-spacing:.3px}
-  .lockwall p{margin:0 0 18px;color:var(--muted);font-size:.92rem}
+    color:#fff;font-family:var(--serif);font-weight:700;font-size:2.5rem;box-shadow:var(--shadow)}
+  .home .eyebrow{font-size:.72rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
+  .home h1{margin:8px 0 10px;font-family:var(--serif);font-size:clamp(2.1rem,6vw,2.9rem);line-height:1.03;letter-spacing:-.5px}
+  .home .sub{color:var(--muted);font-size:1.02rem;margin:0 auto 20px;max-width:452px}
+  .home .teasers{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 0 24px}
+  .home .teasers span{font-size:.8rem;font-weight:700;color:var(--muted);background:var(--surface);
+    border:1px solid var(--border);border-radius:999px;padding:6px 12px}
+  .home .gate{width:min(384px,100%);margin:0 auto;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+  .home .gate .glbl{font-size:.72rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+    color:var(--muted);margin-bottom:12px}
   .lockwall .pwrap{position:relative}
   .lockwall input{width:100%;padding:12px 40px;border-radius:12px;border:1px solid var(--border);
     background:var(--surface-2);color:var(--text);font-size:1rem;font-family:inherit;text-align:center;letter-spacing:.6px}
@@ -98,8 +110,8 @@
   .lockwall button.unlock:hover{filter:brightness(1.06)}
   .lockwall .err{color:var(--warn);font-size:.85rem;font-weight:600;margin-top:11px;min-height:1.1em;visibility:hidden}
   .lockwall .err.show{visibility:visible}
-  .lockwall .hint{margin-top:16px;font-size:.72rem;color:var(--muted)}
-  .lockwall .panel.shake{animation:shake .32s}
+  .home .foot{margin-top:20px;font-size:.72rem;color:var(--muted)}
+  .lockwall .gate.shake{animation:shake .32s}
   @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
   body.locked{overflow:hidden}
 
@@ -2631,22 +2643,29 @@
   <p class="muted"><!-- EDIT: update this line whenever you like --> Personal revision notes built from lecture materials. Filled-in answers (<span class="fill" style="font-size:.8em">green</span>) and worked steps are done by hand — double-check against your own lectures before an exam.</p>
 </footer>
 
-<!-- ============ SECURITY WALL — client-side passcode gate ============ -->
-<div class="lockwall show" id="lockwall" role="dialog" aria-modal="true" aria-label="MindSpace passcode">
-  <div class="panel" id="lockpanel">
-    <div class="lock-logo">🔒</div>
-    <h2>MindSpace</h2>
-    <p>Enter the passcode to continue.</p>
-    <form id="lockform" autocomplete="off">
-      <div class="pwrap">
-        <input id="lockinput" type="password" placeholder="Passcode"
-               aria-label="Passcode" autocomplete="off" spellcheck="false">
-        <button type="button" class="peek" id="lockpeek" aria-label="Show passcode" title="Show passcode">👁</button>
-      </div>
-      <button type="submit" class="unlock">Unlock</button>
-      <div class="err" id="lockerr">Incorrect passcode</div>
-    </form>
-    <div class="hint">🔓 Locked for this session only</div>
+<!-- ============ HOME LANDING — the passcode front door ============ -->
+<div class="lockwall show" id="lockwall" role="dialog" aria-modal="true" aria-label="Jean's Palace — passcode entry">
+  <div class="home">
+    <div class="crest">J</div>
+    <div class="eyebrow">Private Study Palace</div>
+    <h1>Jean's Palace</h1>
+    <p class="sub">Macroeconomics, calculus, econ English, and the psychology of influence — one quiet place to think. Enter the passcode to step inside.</p>
+    <div class="teasers">
+      <span>📈 Macro</span><span>∫ Calculus</span><span>🅰 Econ English</span><span>🧠 Influence</span>
+    </div>
+    <div class="gate" id="lockpanel">
+      <div class="glbl">🔒 MindSpace · passcode required</div>
+      <form id="lockform" autocomplete="off">
+        <div class="pwrap">
+          <input id="lockinput" type="password" placeholder="Enter passcode"
+                 aria-label="Passcode" autocomplete="off" spellcheck="false">
+          <button type="button" class="peek" id="lockpeek" aria-label="Show passcode" title="Show passcode">👁</button>
+        </div>
+        <button type="submit" class="unlock">Enter Palace →</button>
+        <div class="err" id="lockerr">Incorrect passcode</div>
+      </form>
+    </div>
+    <div class="foot">🔓 Private · unlocks for this browser session only</div>
   </div>
 </div>
 
