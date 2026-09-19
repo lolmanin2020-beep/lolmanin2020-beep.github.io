@@ -310,6 +310,7 @@
       <span>Jean's Study Palace</span>
     </div>
     <div class="subjtabs" id="subjtabs">
+      <button data-subj="home">🏠 Home</button>
       <button data-subj="macro" class="active">📈 Macro</button>
       <button data-subj="calc">∫ Calculus</button>
       <button data-subj="eng">🅰 Econ English</button>
@@ -369,6 +370,72 @@
 </header>
 
 <main id="top">
+
+<!-- ################################################################
+                        SUBJECT: HOME (dashboard)
+################################################################# -->
+<div class="subject" id="s-home">
+  <section class="unit" style="margin-top:20px">
+    <div class="card" style="background:linear-gradient(135deg,var(--accent-soft),var(--surface))">
+      <span class="tag">Welcome back</span>
+      <h3 style="font-size:1.35rem">Jean's Palace — jump to any section</h3>
+      <p class="lead">Four subjects, every section one click away. Pick a card below, or use the tabs up top.</p>
+    </div>
+    <div class="pm-grid">
+      <div class="pm-card">
+        <div class="pm-head"><span class="pm-ico">📈</span> Macroeconomics</div>
+        <div class="pm-links">
+          <a data-subj="macro" data-anchor="top">Overview</a>
+          <a data-subj="macro" data-anchor="ch1">1 · Introduction</a>
+          <a data-subj="macro" data-anchor="ch2">2 · GDP</a>
+          <a data-subj="macro" data-anchor="ch3">3 · Equilibrium Income</a>
+          <a data-subj="macro" data-anchor="ch4">4 · Fiscal Policy</a>
+          <a data-subj="macro" data-anchor="examples">★ Worked Examples</a>
+          <a data-subj="macro" data-anchor="macro-quiz">❓ Quiz</a>
+          <a data-subj="macro" data-anchor="cheatsheet">Cheat-Sheet</a>
+        </div>
+      </div>
+      <div class="pm-card">
+        <div class="pm-head"><span class="pm-ico">∫</span> Calculus I</div>
+        <div class="pm-links">
+          <a data-subj="calc" data-anchor="top">Overview</a>
+          <a data-subj="calc" data-anchor="calc-limits">1 · Limits &amp; Continuity</a>
+          <a data-subj="calc" data-anchor="calc-diff">2 · Differentiation</a>
+          <a data-subj="calc" data-anchor="calc-lhopital">3 · L'Hôpital</a>
+          <a data-subj="calc" data-anchor="calc-linear">4 · Linear Approx.</a>
+          <a data-subj="calc" data-anchor="calc-practice">★ Practice + Solutions</a>
+          <a data-subj="calc" data-anchor="calc-quiz">❓ Quiz</a>
+          <a data-subj="calc" data-anchor="calc-cheat">Formulas &amp; Midterm</a>
+        </div>
+      </div>
+      <div class="pm-card">
+        <div class="pm-head"><span class="pm-ico">🅰</span> Econ English</div>
+        <div class="pm-links">
+          <a data-subj="eng" data-anchor="top">Exam Overview</a>
+          <a data-subj="eng" data-anchor="eng-vocab">Vocabulary ★</a>
+          <a data-subj="eng" data-anchor="eng-grammar">Grammar (Tenses)</a>
+          <a data-subj="eng" data-anchor="eng-purpose">Author's Purpose</a>
+          <a data-subj="eng" data-anchor="eng-writing">Formal Writing</a>
+          <a data-subj="eng" data-anchor="eng-reading">Reading Tips</a>
+          <a data-subj="eng" data-anchor="eng-quiz">❓ Quiz</a>
+        </div>
+      </div>
+      <div class="pm-card">
+        <div class="pm-head"><span class="pm-ico">🧠</span> Influence</div>
+        <div class="pm-links">
+          <a data-subj="infl" data-anchor="top">Overview &amp; Ethics</a>
+          <a data-subj="infl" data-anchor="infl-franklin">1 · Franklin Effect</a>
+          <a data-subj="infl" data-anchor="infl-funnel">2 · Funnel Technique</a>
+          <a data-subj="infl" data-anchor="infl-ikea">3 · IKEA Effect</a>
+          <a data-subj="infl" data-anchor="infl-erickson">4 · Ericksonian</a>
+          <a data-subj="infl" data-anchor="infl-map">★ The Stack</a>
+          <a data-subj="infl" data-anchor="infl-defense">🛡 Defense</a>
+          <a data-subj="infl" data-anchor="infl-quiz">❓ Quiz</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 <!-- ################################################################
                         SUBJECT: MACROECONOMICS
@@ -2662,6 +2729,9 @@
     <div class="eyebrow">Private Study Palace</div>
     <h1>Jean's Palace</h1>
     <p class="sub">Macroeconomics, calculus, econ English, and the psychology of influence — one quiet place to think. Enter the passcode to step inside.</p>
+    <div class="teasers">
+      <span>📈 Macro</span><span>∫ Calculus</span><span>🅰 Econ English</span><span>🧠 Influence</span>
+    </div>
     <div class="gate" id="lockpanel">
       <div class="glbl">🔒 MindSpace · passcode required</div>
       <form id="lockform" autocomplete="off">
@@ -2675,63 +2745,6 @@
       </form>
     </div>
     <div class="foot">🔓 Private · unlocks for this browser session only</div>
-
-    <div class="palacemap">
-      <div class="pm-title">What's inside · jump to any section</div>
-      <div class="pm-grid">
-        <div class="pm-card">
-          <div class="pm-head"><span class="pm-ico">📈</span> Macroeconomics</div>
-          <div class="pm-links">
-            <a data-subj="macro" data-anchor="top">Overview</a>
-            <a data-subj="macro" data-anchor="ch1">1 · Introduction</a>
-            <a data-subj="macro" data-anchor="ch2">2 · GDP</a>
-            <a data-subj="macro" data-anchor="ch3">3 · Equilibrium Income</a>
-            <a data-subj="macro" data-anchor="ch4">4 · Fiscal Policy</a>
-            <a data-subj="macro" data-anchor="examples">★ Worked Examples</a>
-            <a data-subj="macro" data-anchor="macro-quiz">❓ Quiz</a>
-            <a data-subj="macro" data-anchor="cheatsheet">Cheat-Sheet</a>
-          </div>
-        </div>
-        <div class="pm-card">
-          <div class="pm-head"><span class="pm-ico">∫</span> Calculus I</div>
-          <div class="pm-links">
-            <a data-subj="calc" data-anchor="top">Overview</a>
-            <a data-subj="calc" data-anchor="calc-limits">1 · Limits &amp; Continuity</a>
-            <a data-subj="calc" data-anchor="calc-diff">2 · Differentiation</a>
-            <a data-subj="calc" data-anchor="calc-lhopital">3 · L'Hôpital</a>
-            <a data-subj="calc" data-anchor="calc-linear">4 · Linear Approx.</a>
-            <a data-subj="calc" data-anchor="calc-practice">★ Practice + Solutions</a>
-            <a data-subj="calc" data-anchor="calc-quiz">❓ Quiz</a>
-            <a data-subj="calc" data-anchor="calc-cheat">Formulas &amp; Midterm</a>
-          </div>
-        </div>
-        <div class="pm-card">
-          <div class="pm-head"><span class="pm-ico">🅰</span> Econ English</div>
-          <div class="pm-links">
-            <a data-subj="eng" data-anchor="top">Exam Overview</a>
-            <a data-subj="eng" data-anchor="eng-vocab">Vocabulary ★</a>
-            <a data-subj="eng" data-anchor="eng-grammar">Grammar (Tenses)</a>
-            <a data-subj="eng" data-anchor="eng-purpose">Author's Purpose</a>
-            <a data-subj="eng" data-anchor="eng-writing">Formal Writing</a>
-            <a data-subj="eng" data-anchor="eng-reading">Reading Tips</a>
-            <a data-subj="eng" data-anchor="eng-quiz">❓ Quiz</a>
-          </div>
-        </div>
-        <div class="pm-card">
-          <div class="pm-head"><span class="pm-ico">🧠</span> Influence</div>
-          <div class="pm-links">
-            <a data-subj="infl" data-anchor="top">Overview &amp; Ethics</a>
-            <a data-subj="infl" data-anchor="infl-franklin">1 · Franklin Effect</a>
-            <a data-subj="infl" data-anchor="infl-funnel">2 · Funnel Technique</a>
-            <a data-subj="infl" data-anchor="infl-ikea">3 · IKEA Effect</a>
-            <a data-subj="infl" data-anchor="infl-erickson">4 · Ericksonian</a>
-            <a data-subj="infl" data-anchor="infl-map">★ The Stack</a>
-            <a data-subj="infl" data-anchor="infl-defense">🛡 Defense</a>
-            <a data-subj="infl" data-anchor="infl-quiz">❓ Quiz</a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -2768,6 +2781,7 @@
   var noresult=document.getElementById('noresult');
   var tabs=[].slice.call(document.querySelectorAll('#subjtabs button'));
   var subjects={
+    home:document.getElementById('s-home'),
     macro:document.getElementById('s-macro'),
     calc:document.getElementById('s-calc'),
     eng:document.getElementById('s-eng'),
@@ -2823,7 +2837,7 @@
   try{ saved=localStorage.getItem('subject')||'macro'; }catch(e){}
   switchTo(saved);
 
-  // Expose navigation for the home-page palace map: switch subject, then scroll to a section.
+  // Expose navigation for the home dashboard palace map: switch subject, then scroll to a section.
   window.palaceGoto=function(subj,anchor){
     switchTo(subj);
     requestAnimationFrame(function(){
@@ -2834,6 +2848,13 @@
       window.scrollTo({top:0});
     });
   };
+  // Home dashboard links (subject + section deep-links).
+  document.querySelectorAll('a[data-subj][data-anchor]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      window.palaceGoto(a.getAttribute('data-subj'),a.getAttribute('data-anchor'));
+    });
+  });
 })();
 
 /* ============================================================
@@ -2934,27 +2955,14 @@
     input.focus();
   });
 
-  // Palace-map links: remember where they wanted to go, then take them there after unlock.
-  var pending=null;
-  function goPending(){
-    if(pending && window.palaceGoto){ window.palaceGoto(pending.subj,pending.anchor); }
-    pending=null;
-  }
-  document.querySelectorAll('.home a[data-subj]').forEach(function(a){
-    a.addEventListener('click',function(e){
-      e.preventDefault();
-      pending={subj:a.getAttribute('data-subj'),anchor:a.getAttribute('data-anchor')};
-      if(authed()){ hideWall(); paintBtn(); goPending(); }
-      else { panel.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ input.focus(); },200); }
-    });
-  });
-
   form.addEventListener('submit',function(e){
     e.preventDefault();
     if(input.value.trim()===PASSCODE){
       try{ sessionStorage.setItem(KEY,'1'); }catch(e){}
       input.value=''; err.classList.remove('show');
-      hideWall(); paintBtn(); goPending();
+      hideWall(); paintBtn();
+      // Land on the Home dashboard right after entering the passcode.
+      if(window.palaceGoto) window.palaceGoto('home','top');
     } else {
       err.classList.add('show');
       panel.classList.remove('shake'); void panel.offsetWidth; panel.classList.add('shake');
