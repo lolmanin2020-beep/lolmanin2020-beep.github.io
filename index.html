@@ -266,6 +266,7 @@
       <button data-subj="macro" class="active">📈 Macro</button>
       <button data-subj="calc">∫ Calculus</button>
       <button data-subj="eng">🅰 Econ English</button>
+      <button data-subj="infl">🧠 Influence</button>
     </div>
     <div class="spacer"></div>
     <div class="search">
@@ -307,6 +308,16 @@
     <a href="#eng-writing">Formal Writing</a>
     <a href="#eng-reading">Reading Tips</a>
     <a href="#eng-quiz">❓ Quiz</a>
+  </nav>
+  <nav class="chips" data-for="infl">
+    <a href="#top">Overview &amp; Ethics</a>
+    <a href="#infl-franklin">1 · Franklin Effect</a>
+    <a href="#infl-funnel">2 · Funnel Technique</a>
+    <a href="#infl-ikea">3 · IKEA Effect</a>
+    <a href="#infl-erickson">4 · Ericksonian</a>
+    <a href="#infl-map">★ The Stack</a>
+    <a href="#infl-defense">🛡 Defense</a>
+    <a href="#infl-quiz">❓ Quiz</a>
   </nav>
 </header>
 
@@ -2112,6 +2123,369 @@
 
 </div><!-- /s-eng -->
 
+<!-- ################################################################
+                  SUBJECT: INFLUENCE & PERSUASION  (private)
+################################################################# -->
+<div class="subject" id="s-infl">
+
+  <!-- Intro / ethics frame -->
+  <section class="unit" style="margin-top:20px">
+    <div class="card" style="background:linear-gradient(135deg,var(--accent-soft),var(--surface))">
+      <span class="tag">Private · Influence &amp; Persuasion</span>
+      <h3 style="font-size:1.35rem">The psychology of influence — how four classic techniques actually work</h3>
+      <p class="lead">Four well-studied mechanisms — the <b>Franklin effect</b>, the <b>funnel technique</b>, the <b>IKEA effect</b>, and <b>Ericksonian (indirect) suggestion</b> — sit behind a huge amount of everyday sales, marketing, management and negotiation. Each entry below gives you the <b>mechanism</b>, the <b>research</b> it rests on, how it shows up in <b>social and corporate</b> settings, how the four <b>link together</b>, and — most important for actually understanding it — <b>how to recognise and resist it</b>.</p>
+      <div class="box key"><span class="lbl">Influence vs. manipulation — the line</span>
+        Persuasion becomes <b>manipulation</b> when it is <b>covert</b> (you'd object if you saw the technique), <b>exploitative</b> (benefits one side by using your biases against you), and <b>irreversible</b> (engineered so you can't easily back out). The single best test: <em>would this survive disclosure?</em> If the other person would feel <b>used</b> the moment they understood what you did, it was manipulation. Learn these to <b>defend yourself</b> first.</div>
+      <div class="box warn"><span class="lbl">Honesty note</span>These effects are real and replicated — but the internet oversells them. "Covert hypnosis can control anyone against their will" is <b>not</b> supported by evidence, and most strong <b>NLP</b> claims have failed empirical tests. Where a claim is shaky, this page says so.</div>
+    </div>
+  </section>
+
+  <!-- ===== 1 · FRANKLIN EFFECT ===== -->
+  <section class="unit" id="infl-franklin">
+    <div class="unit-head"><span class="num">1</span><h2>The Ben Franklin Effect</h2></div>
+    <p class="unit-sub">"He that has once done you a kindness will be more ready to do you another than he whom you yourself have obliged."</p>
+    <div class="card">
+      <p><b>The effect:</b> when someone does <em>you</em> a small favour, they tend to <b>like you more</b> afterwards — the opposite of the intuition that we help people we already like. Franklin, in his autobiography, won over a hostile rival legislator by asking to <b>borrow a rare book</b>. Having done the favour, the rival became friendly for life.</p>
+      <div class="box key"><span class="lbl">Mechanism — cognitive dissonance / self-perception</span>
+        The helper's mind holds two facts: <span class="math">"I went out of my way for this person"</span> and <span class="math">"I don't especially like them."</span> Those clash. The cheapest way to resolve the clash is to <b>adjust the attitude</b>: <em>"I helped them → I must actually like/respect them."</em> We infer our feelings from our own behaviour.</div>
+
+      <figure class="graph">
+        <svg viewBox="0 0 620 250" role="img" aria-label="Person A does a favour for person B and, resolving dissonance, comes to like B more">
+          <!-- Person A -->
+          <g transform="translate(70,90)">
+            <circle cx="0" cy="0" r="20" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2"/>
+            <path d="M-26 60 C -26 28, 26 28, 26 60 Z" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2"/>
+            <text x="0" y="88" text-anchor="middle" class="box-t">Helper (A)</text>
+          </g>
+          <!-- Person B -->
+          <g transform="translate(470,90)">
+            <circle cx="0" cy="0" r="20" style="fill:var(--surface);stroke:var(--muted);stroke-width:2"/>
+            <path d="M-26 60 C -26 28, 26 28, 26 60 Z" style="fill:var(--surface);stroke:var(--muted);stroke-width:2"/>
+            <text x="0" y="88" text-anchor="middle" class="box-t">Requester (B)</text>
+          </g>
+          <!-- favour arrow A -> B (B asks, A gives) -->
+          <line x1="150" y1="80" x2="420" y2="80" style="stroke:var(--muted);stroke-width:2;marker-end:url(#ah)"/>
+          <text x="285" y="70" text-anchor="middle" class="lbl-ax">A does B a small favour</text>
+          <!-- dissonance note -->
+          <text x="285" y="120" text-anchor="middle" class="box-t" style="font-style:italic">"Why did I help? …I must like them."</text>
+          <!-- liking arrow back, curved -->
+          <path d="M420 150 C 300 205, 200 205, 150 150" style="fill:none;stroke:var(--good);stroke-width:2.4;marker-end:url(#ahg)"/>
+          <text x="285" y="200" text-anchor="middle" class="lbl-ax" style="fill:var(--good)">A's liking of B ↑</text>
+          <defs>
+            <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="var(--muted)"/></marker>
+            <marker id="ahg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="var(--good)"/></marker>
+          </defs>
+        </svg>
+        <figcaption>The favour flows <b>toward</b> the asker, yet it's the <b>helper</b> whose liking rises — the mind rewrites the attitude to match the action.</figcaption>
+      </figure>
+
+      <div class="box tip"><span class="lbl">Evidence</span>Jecker &amp; Landy (1969): participants who were personally asked by the researcher to <b>return</b> a cash prize (a favour to him) later rated him <b>more likeable</b> than those who weren't asked.</div>
+      <h4>In the wild — social &amp; corporate</h4>
+      <ul>
+        <li><b>"Ask for advice, not approval."</b> Asking a senior colleague for a <b>small</b> piece of help or mentorship builds their investment in you.</li>
+        <li><b>Sales/onboarding:</b> get the prospect to do a tiny thing for you (send a doc, pick a slot) — small giving breeds warmth.</li>
+        <li><b>Team-building:</b> reciprocal small favours knit groups together faster than gifts do.</li>
+      </ul>
+      <div class="box exam"><span class="lbl">How it links →</span>It's the mirror of <b>reciprocity</b> (there, <em>they</em> give to <em>you</em>). A favour is also the first <b>micro-commitment</b>, which feeds straight into the <b>Funnel</b> (§2) and the effort-investment of the <b>IKEA effect</b> (§3).</div>
+      <div class="box warn"><span class="lbl">🛡 Defense</span>When a small favour is followed by a bigger ask, separate the two thoughts: <em>"I helped them"</em> does not mean <em>"I trust their proposal."</em> Judge the ask on its merits.</div>
+    </div>
+  </section>
+
+  <!-- ===== 2 · FUNNEL TECHNIQUE ===== -->
+  <section class="unit" id="infl-funnel">
+    <div class="unit-head"><span class="num">2</span><h2>The Funnel Technique</h2></div>
+    <p class="unit-sub">Start broad and easy; narrow to the commitment. Every small "yes" makes the next one cheaper.</p>
+    <div class="card">
+      <p>Two related meanings share the shape of a funnel:</p>
+      <ol>
+        <li><b>Funnel questioning</b> (interviews, sales discovery, UX research): begin with <b>open, broad</b> questions to build rapport and gather context, then move to <b>closed, specific</b> ones that pin down a decision.</li>
+        <li><b>Commitment funnel</b> (foot-in-the-door): secure a <b>trivial agreement</b> first, then escalate. Each agreement lowers resistance to the next.</li>
+      </ol>
+      <div class="box key"><span class="lbl">Mechanism — consistency &amp; momentum</span>
+        Once you've said yes, saying no next feels like <b>contradicting yourself</b>. Cialdini's <b>commitment &amp; consistency</b> principle: people strive to act consistently with what they've already said and done. A "yes-set" builds behavioural momentum.</div>
+
+      <figure class="graph">
+        <svg viewBox="0 0 620 300" role="img" aria-label="A funnel narrowing from broad easy agreement at the top to the real ask at the bottom">
+          <!-- funnel outline -->
+          <path d="M70 40 L550 40 L400 210 L400 260 L220 260 L220 210 Z" style="fill:none;stroke:var(--muted);stroke-width:2"/>
+          <!-- bands -->
+          <path d="M70 40 L550 40 L497 100 L123 100 Z" style="fill:var(--accent-soft);opacity:.85"/>
+          <path d="M123 100 L497 100 L444 160 L176 160 Z" style="fill:var(--accent-soft);opacity:.6"/>
+          <path d="M176 160 L444 160 L400 210 L220 210 Z" style="fill:var(--accent-soft);opacity:.4"/>
+          <rect x="220" y="210" width="180" height="50" style="fill:var(--gold-soft);stroke:var(--gold);stroke-width:2"/>
+          <text x="310" y="75" text-anchor="middle" class="box-t">Broad, easy "yes" — "Care about saving time?"</text>
+          <text x="310" y="134" text-anchor="middle" class="box-t">Narrower — "So a faster tool would help?"</text>
+          <text x="310" y="188" text-anchor="middle" class="box-t">Specific — "Worth a 15-min demo?"</text>
+          <text x="310" y="240" text-anchor="middle" class="box-t" style="fill:var(--gold);font-weight:700">THE REAL ASK — "Sign here."</text>
+          <!-- descending yes ticks -->
+          <text x="585" y="72" class="lbl-ax" style="fill:var(--good)">✓ yes</text>
+          <text x="585" y="132" class="lbl-ax" style="fill:var(--good)">✓ yes</text>
+          <text x="585" y="186" class="lbl-ax" style="fill:var(--good)">✓ yes</text>
+        </svg>
+        <figcaption>Resistance drops band by band. By the time the real ask arrives, refusing would mean breaking a chain of your own agreements.</figcaption>
+      </figure>
+
+      <div class="box tip"><span class="lbl">Evidence &amp; relatives</span>Freedman &amp; Fraser (1966), <b>foot-in-the-door</b>: agreeing to a tiny request (a small sign) tripled compliance with a large one later. Cousins: <b>low-ball</b>, and the marketing <b>AIDA</b> funnel (Attention → Interest → Desire → Action).</div>
+      <h4>In the wild — social &amp; corporate</h4>
+      <ul>
+        <li><b>Sales scripts</b> (e.g. SPIN): situation → problem → implication → need-payoff, each step a smaller gap to the close.</li>
+        <li><b>Growth/marketing funnels:</b> free content → email → trial → paid, each a low-friction step.</li>
+        <li><b>Negotiation:</b> agree on principles first ("we both want a fair deal?") before numbers.</li>
+      </ul>
+      <div class="box exam"><span class="lbl">How it links →</span>Each early "yes" is a <b>Franklin-style micro-commitment</b> (§1). The "yes-set" is exactly the <b>pacing</b> move in Ericksonian language (§4). And asking the person to <b>do</b> a step invokes the <b>IKEA effect</b> (§3).</div>
+      <div class="box warn"><span class="lbl">🛡 Defense</span>Notice a run of trivial agreements. Only the <b>last</b> decision has real stakes — evaluate it on its own, as if the earlier yeses never happened. "I agreed to those, but this one I'll decide fresh."</div>
+    </div>
+  </section>
+
+  <!-- ===== 3 · IKEA EFFECT ===== -->
+  <section class="unit" id="infl-ikea">
+    <div class="unit-head"><span class="num">3</span><h2>The IKEA Effect</h2></div>
+    <p class="unit-sub">Labour leads to love: we over-value what we partly built ourselves.</p>
+    <div class="card">
+      <p><b>The effect:</b> people assign <b>disproportionately high value</b> to objects they <b>partially created</b> — assembling the IKEA cabinet, folding the origami, building the Lego — compared with identical objects they didn't build.</p>
+      <div class="box key"><span class="lbl">Mechanism — effort justification + ownership</span>
+        Two forces stack: <b>effort justification</b> ("I worked on it, so it must be worth it") and a heightened sense of <b>ownership/competence</b>. It's the <b>endowment effect</b> supercharged by self-investment. <b>Boundary condition:</b> the boost only appears when the build <b>succeeds</b> — abandon it half-finished and the effect vanishes.</div>
+
+      <figure class="graph">
+        <svg viewBox="0 0 620 270" role="img" aria-label="Effort turns into ownership, which inflates perceived value above market value">
+          <!-- stage 1 effort -->
+          <g transform="translate(40,60)">
+            <rect x="0" y="30" width="30" height="30" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8"/>
+            <rect x="34" y="30" width="30" height="30" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8"/>
+            <rect x="17" y="0" width="30" height="30" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8"/>
+            <text x="32" y="86" text-anchor="middle" class="box-t">You build it</text>
+            <text x="32" y="104" text-anchor="middle" class="lbl-ax">(effort)</text>
+          </g>
+          <text x="150" y="95" class="lbl-ax" style="font-size:20px">→</text>
+          <!-- stage 2 ownership -->
+          <g transform="translate(190,60)">
+            <path d="M0 20 L44 20 L64 44 L28 44 Z" style="fill:var(--gold-soft);stroke:var(--gold);stroke-width:1.8"/>
+            <circle cx="10" cy="26" r="3" style="fill:var(--gold)"/>
+            <text x="30" y="86" text-anchor="middle" class="box-t">"It's mine"</text>
+            <text x="30" y="104" text-anchor="middle" class="lbl-ax">(ownership)</text>
+          </g>
+          <text x="300" y="95" class="lbl-ax" style="font-size:20px">→</text>
+          <!-- stage 3 value bars -->
+          <g transform="translate(360,20)">
+            <line x1="0" y1="150" x2="230" y2="150" class="axis"/>
+            <rect x="30" y="95" width="55" height="55" style="fill:var(--muted);opacity:.5"/>
+            <rect x="140" y="30" width="55" height="120" style="fill:var(--good);opacity:.8"/>
+            <text x="57" y="168" text-anchor="middle" class="lbl-ax">Market</text>
+            <text x="167" y="168" text-anchor="middle" class="lbl-ax">Your value</text>
+            <text x="167" y="22" text-anchor="middle" class="box-t" style="fill:var(--good)">inflated ↑</text>
+          </g>
+        </svg>
+        <figcaption>Self-made effort converts into felt ownership, and ownership inflates the value <em>you</em> place on the result above its market price.</figcaption>
+      </figure>
+
+      <div class="box tip"><span class="lbl">Evidence</span>Norton, Mochon &amp; Ariely (2012): people paid <b>63% more</b> for self-assembled IKEA boxes than for pre-assembled identical ones, and valued their own origami nearly as highly as an expert's.</div>
+      <h4>In the wild — social &amp; corporate</h4>
+      <ul>
+        <li><b>Co-creation &amp; configurators:</b> "build your own" cars, PCs, meal kits — customer effort raises attachment and willingness to pay.</li>
+        <li><b>Management buy-in:</b> "people support what they help build" — invite staff to shape a plan and they defend it as theirs.</li>
+        <li><b>Onboarding:</b> make users set up a profile / customise the app early → higher retention.</li>
+      </ul>
+      <div class="box exam"><span class="lbl">How it links →</span>The <b>Funnel</b> (§2) is what gets you to invest that first bit of effort; the <b>IKEA effect</b> then makes you over-value the result; <b>consistency</b> locks you into defending it. A completed build is also a big <b>Franklin-style</b> self-investment (§1).</div>
+      <div class="box warn"><span class="lbl">🛡 Defense</span>Separate the value of <em>your labour</em> from the <em>market value of the thing</em>. Ask: "If a stranger built this, what would I pay?" Close cousin of the <b>sunk-cost</b> trap.</div>
+    </div>
+  </section>
+
+  <!-- ===== 4 · ERICKSONIAN HYPNOSIS ===== -->
+  <section class="unit" id="infl-erickson">
+    <div class="unit-head"><span class="num">4</span><h2>Ericksonian (Indirect) Suggestion</h2></div>
+    <p class="unit-sub">Milton Erickson's permissive, conversational style — match the person's reality first, then lead.</p>
+    <div class="card">
+      <p><b>Milton H. Erickson</b> (1901–1980) was a psychiatrist who rejected the authoritarian "you are getting sleepy" style for an <b>indirect, permissive</b> one that uses the person's <b>own language and experience</b>. Its therapeutic aim was to bypass a client's conscious resistance to <b>help them change</b>. The same devices appear — often crudely — in sales, copywriting and negotiation.</p>
+      <div class="box key"><span class="lbl">Core devices (the "Milton model")</span>
+        <ul style="margin:6px 0 0">
+          <li><b>Pacing &amp; leading:</b> describe what's undeniably true right now (pacing) to build a "yes" rhythm, then append the suggestion (leading).</li>
+          <li><b>Presupposition:</b> smuggle a claim in as a given — <em>"When you start noticing improvements…"</em> (assumes you will).</li>
+          <li><b>Double bind:</b> offer two options that both lead where the speaker wants — <em>"Would you like to begin now, or after a coffee?"</em></li>
+          <li><b>Embedded command &amp; artful vagueness:</b> a directive nested in a sentence; deliberately unspecific language the listener fills with their own meaning.</li>
+        </ul></div>
+
+      <figure class="graph">
+        <svg viewBox="0 0 620 280" role="img" aria-label="Two lines matched during pacing, then the guide's line leads upward and the subject's line follows">
+          <line x1="55" y1="235" x2="600" y2="235" class="axis"/>
+          <line x1="55" y1="25" x2="55" y2="235" class="axis"/>
+          <text x="330" y="268" text-anchor="middle" class="lbl-ax">Time →</text>
+          <text x="20" y="130" class="lbl-ax" transform="rotate(-90 20 130)">State</text>
+          <!-- pacing zone -->
+          <rect x="55" y="25" width="230" height="210" style="fill:var(--accent-soft);opacity:.35"/>
+          <text x="170" y="45" text-anchor="middle" class="lbl-ax">PACE (match)</text>
+          <text x="445" y="45" text-anchor="middle" class="lbl-ax">LEAD (suggest)</text>
+          <!-- guide line -->
+          <path d="M55 180 L285 180 C 360 180, 420 110, 600 70" style="fill:none;stroke:var(--accent);stroke-width:2.6"/>
+          <!-- subject line, follows with lag -->
+          <path d="M55 195 L285 193 C 380 192, 450 140, 600 100" style="fill:none;stroke:var(--good);stroke-width:2.6;stroke-dasharray:6 4"/>
+          <text x="150" y="170" class="lbl-ax" style="fill:var(--accent)">guide</text>
+          <text x="150" y="212" class="lbl-ax" style="fill:var(--good)">subject</text>
+          <circle cx="285" cy="180" r="4" style="fill:var(--warn)"/>
+          <text x="285" y="205" text-anchor="middle" class="lbl-ax" style="fill:var(--warn)">switch point</text>
+        </svg>
+        <figcaption>While the two lines run together (pacing), trust builds; at the switch point the guide leads and the paced subject tends to follow.</figcaption>
+      </figure>
+
+      <div class="box warn"><span class="lbl">Honesty note — what's real vs. hype</span>Clinical hypnosis is a genuine, studied phenomenon (e.g. for pain and anxiety). But <b>"covert conversational hypnosis that controls people without consent"</b> is <b>not</b> established science, and <b>NLP's</b> specific claims have largely <b>failed</b> controlled testing. Treat pacing/leading as <b>rapport and framing</b>, not mind control.</div>
+      <h4>In the wild — social &amp; corporate</h4>
+      <ul>
+        <li><b>Rapport-building:</b> matching tone, pace and language before making a proposal.</li>
+        <li><b>Copywriting:</b> presuppositions ("when you upgrade…") and embedded commands.</li>
+        <li><b>Negotiation:</b> the double bind as a <b>false choice</b> that hides the "no" option.</li>
+      </ul>
+      <div class="box exam"><span class="lbl">How it links →</span><b>Pacing</b> is the <b>Funnel's</b> yes-set (§2) in language form. The <b>double bind</b> is a two-band funnel with the exit removed. Rapport is <b>Franklin/reciprocity</b> warmth (§1). Together they're the delivery layer of the stack below.</div>
+      <div class="box warn"><span class="lbl">🛡 Defense</span><b>Make the implicit explicit.</b> Hearing "now or after coffee?", say: <em>"Those aren't my only two options — I might not start at all."</em> Name presuppositions out loud, and slow the pace: manipulation needs momentum.</div>
+    </div>
+  </section>
+
+  <!-- ===== THE STACK (combined map) ===== -->
+  <section class="unit" id="infl-map">
+    <div class="unit-head"><span class="num">★</span><h2>The Persuasion Stack — how they chain</h2></div>
+    <p class="unit-sub">In practice these rarely appear alone. A polished corporate sequence layers them.</p>
+    <div class="card">
+      <figure class="graph">
+        <svg viewBox="0 0 620 210" role="img" aria-label="Five-stage chain: rapport, yes-set, co-create, framed choice, commitment">
+          <defs><marker id="ac" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="var(--accent)"/></marker></defs>
+          <!-- nodes -->
+          <g class="box-t">
+            <rect x="10"  y="70" width="100" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8"/>
+            <text x="60"  y="95" text-anchor="middle">Rapport</text><text x="60" y="114" text-anchor="middle" class="lbl-ax">Franklin §1</text>
+            <rect x="130" y="70" width="100" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8"/>
+            <text x="180" y="95" text-anchor="middle">Yes-set</text><text x="180" y="114" text-anchor="middle" class="lbl-ax">Funnel §2</text>
+            <rect x="250" y="70" width="100" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8"/>
+            <text x="300" y="95" text-anchor="middle">Co-create</text><text x="300" y="114" text-anchor="middle" class="lbl-ax">IKEA §3</text>
+            <rect x="370" y="70" width="100" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.8"/>
+            <text x="420" y="92" text-anchor="middle">Framed</text><text x="420" y="108" text-anchor="middle">choice</text><text x="420" y="124" text-anchor="middle" class="lbl-ax">Erickson §4</text>
+            <rect x="490" y="70" width="110" height="60" rx="10" style="fill:var(--gold-soft);stroke:var(--gold);stroke-width:2"/>
+            <text x="545" y="95" text-anchor="middle" style="fill:var(--gold);font-weight:700">Commitment</text><text x="545" y="114" text-anchor="middle" class="lbl-ax">consistency</text>
+          </g>
+          <!-- arrows -->
+          <line x1="110" y1="100" x2="128" y2="100" style="stroke:var(--accent);stroke-width:2;marker-end:url(#ac)"/>
+          <line x1="230" y1="100" x2="248" y2="100" style="stroke:var(--accent);stroke-width:2;marker-end:url(#ac)"/>
+          <line x1="350" y1="100" x2="368" y2="100" style="stroke:var(--accent);stroke-width:2;marker-end:url(#ac)"/>
+          <line x1="470" y1="100" x2="488" y2="100" style="stroke:var(--accent);stroke-width:2;marker-end:url(#ac)"/>
+          <text x="305" y="35" text-anchor="middle" class="box-t">A typical corporate influence sequence</text>
+          <text x="305" y="175" text-anchor="middle" class="lbl-ax">Each stage lowers resistance to the next; the last stage feels like <tspan style="font-style:italic">your own</tspan> decision.</text>
+        </svg>
+        <figcaption>The through-line is <b>commitment &amp; consistency</b>: small self-consistent steps that end in a choice you experience as yours.</figcaption>
+      </figure>
+
+      <h4>The ethics spectrum</h4>
+      <figure class="graph">
+        <svg viewBox="0 0 620 130" role="img" aria-label="A spectrum from transparent influence to covert manipulation">
+          <defs><linearGradient id="eth" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="var(--good)"/><stop offset="1" stop-color="var(--warn)"/>
+          </linearGradient></defs>
+          <rect x="40" y="45" width="540" height="22" rx="11" fill="url(#eth)"/>
+          <text x="40"  y="95" class="box-t" style="fill:var(--good)">Influence</text>
+          <text x="40"  y="113" class="lbl-ax">transparent · mutual · reversible · informed</text>
+          <text x="580" y="95" text-anchor="end" class="box-t" style="fill:var(--warn)">Manipulation</text>
+          <text x="580" y="113" text-anchor="end" class="lbl-ax">covert · one-sided · engineered · hidden</text>
+          <text x="310" y="30" text-anchor="middle" class="box-t">The test: would it survive disclosure?</text>
+          <circle cx="310" cy="56" r="6" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>
+        </svg>
+        <figcaption>Same techniques, either side of the line. What moves you rightward is <b>concealment</b> and <b>whose interest</b> it serves.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== DEFENSE ===== -->
+  <section class="unit" id="infl-defense">
+    <div class="unit-head"><span class="num">🛡</span><h2>Recognise &amp; Resist — field guide</h2></div>
+    <div class="card">
+      <div class="box tip"><span class="lbl">Fast checklist</span>
+        <ol style="margin:6px 0 0">
+          <li><b>Spot the small favour / small yes.</b> Ask why it came just before a bigger request.</li>
+          <li><b>Decouple.</b> "I helped / I agreed earlier" ≠ "I endorse this ask." Judge each on its merits.</li>
+          <li><b>Un-hide the third option.</b> Any "A or B?" that omits "neither" is a possible double bind.</li>
+          <li><b>Name presuppositions.</b> "When you upgrade…" assumes you will — say it out loud.</li>
+          <li><b>Discount your own effort.</b> Sunk labour ≠ market value (IKEA/sunk cost).</li>
+          <li><b>Slow the tempo.</b> "I'll decide by tomorrow." Manipulation runs on momentum and urgency.</li>
+          <li><b>Apply the disclosure test.</b> Would I feel used if I saw the technique? If yes, walk.</li>
+        </ol></div>
+      <div class="box key"><span class="lbl">Use it ethically</span>To <b>persuade</b> without manipulating: be willing to <b>show your reasoning</b>, make the "no" genuinely available, and make sure the other side <b>also</b> benefits. Influence you'd be comfortable explaining afterwards is influence you can be proud of.</div>
+    </div>
+  </section>
+
+  <!-- ===== QUIZ ===== -->
+  <section class="unit" id="infl-quiz">
+    <div class="unit-head"><span class="num">❓</span><h2>Quiz Yourself — Influence</h2></div>
+    <p class="unit-sub">Mechanisms, evidence and defenses. Tap an option to check.</p>
+    <div class="quiz">
+      <div class="quiz-bar"><span class="quiz-score">Score: <b>0</b> / <span class="quiz-total">0</span></span><button class="quiz-reset">↺ Reset</button></div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">1.</span> The Ben Franklin effect predicts that after doing you a small favour, a person will…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>like you <b>more</b> (they resolve dissonance)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>resent you and withdraw</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>expect an identical favour back immediately</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>feel nothing different</span></button></li>
+        </ul>
+        <div class="explain">We infer attitudes from our behaviour: "I helped them, so I must like them." That's self-perception / dissonance reduction.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">2.</span> Which principle most directly powers the funnel technique's chain of small "yeses"?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>Scarcity</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>Commitment &amp; consistency</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>Social proof</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>Authority</span></button></li>
+        </ul>
+        <div class="explain">Once we've agreed, refusing next feels like contradicting ourselves — Cialdini's consistency principle (foot-in-the-door).</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">3.</span> The IKEA effect boost <b>disappears</b> when…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>the object is expensive</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>the build is abandoned before completion</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>someone else watches you build it</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>the instructions are in another language</span></button></li>
+        </ul>
+        <div class="explain">Successful completion is the boundary condition — an unfinished build produces no valuation bump (Norton, Mochon &amp; Ariely, 2012).</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">4.</span> "Would you like to begin now, or after a coffee?" is an example of a…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>double bind (both options lead where the speaker wants)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>reciprocity trigger</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>social proof cue</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>scarcity appeal</span></button></li>
+        </ul>
+        <div class="explain">Both branches presuppose you'll begin; the hidden third option ("not at all") is removed. Defense: name the missing option.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">5.</span> The single best test for whether influence has crossed into manipulation is…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>whether it worked</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>whether money changed hands</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>whether it would survive disclosure (would they feel used?)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>whether it was written down</span></button></li>
+        </ul>
+        <div class="explain">If the person would feel used the moment they saw the technique, it was covert and exploitative — i.e. manipulation.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">6.</span> Which claim is <b>overstated / unsupported</b> by evidence?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>Clinical hypnosis can help with pain and anxiety</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>Covert conversational hypnosis can control anyone against their will</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>Rapport-building improves persuasion</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>People often follow after a period of pacing</span></button></li>
+        </ul>
+        <div class="explain">Clinical hypnosis is real; "mind control without consent" and strong NLP claims are not supported by controlled research.</div>
+      </div>
+
+      <div class="quiz-bar"><span class="quiz-score">Score: <b>0</b> / <span class="quiz-total">0</span></span><button class="quiz-reset">↺ Reset</button></div>
+    </div>
+  </section>
+
+</div><!-- /s-infl -->
+
   <p class="noresult" id="noresult">No topics match your search in this subject. Try a shorter word.</p>
 
 </main>
@@ -2119,7 +2493,7 @@
 <button class="backtop" id="backtop" aria-label="Back to top">↑</button>
 
 <footer>
-  <p><b>Jean's Study Palace</b> · Macroeconomics · Calculus I · Econ English — pick a subject up top.</p>
+  <p><b>Jean's Study Palace</b> · Macroeconomics · Calculus I · Econ English · Influence — pick a subject up top.</p>
   <p class="muted"><!-- EDIT: update this line whenever you like --> Personal revision notes built from lecture materials. Filled-in answers (<span class="fill" style="font-size:.8em">green</span>) and worked steps are done by hand — double-check against your own lectures before an exam.</p>
 </footer>
 
@@ -2177,7 +2551,8 @@
   var subjects={
     macro:document.getElementById('s-macro'),
     calc:document.getElementById('s-calc'),
-    eng:document.getElementById('s-eng')
+    eng:document.getElementById('s-eng'),
+    infl:document.getElementById('s-infl')
   };
   var navs={};
   [].forEach.call(document.querySelectorAll('nav.chips[data-for]'),function(n){ navs[n.getAttribute('data-for')]=n; });
