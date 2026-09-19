@@ -101,6 +101,30 @@
   details.sol[open]>summary{border-bottom:1px solid var(--border)}
   details.sol .solbody{padding:11px 15px}
   details.sol .solbody p{margin:.4em 0}
+  /* interactive quiz */
+  .quiz{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+  .quiz-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:var(--surface-2);border-bottom:1px solid var(--border);flex-wrap:wrap}
+  .quiz-score{font-weight:800;font-size:.98rem}
+  .quiz-score b{color:var(--accent)}
+  .quiz-reset{border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;font-weight:700;font-size:.85rem;padding:7px 12px;border-radius:9px;cursor:pointer}
+  .quiz-reset:hover{border-color:var(--accent)}
+  .quiz-q{padding:15px 16px;border-top:1px solid var(--border)}
+  .quiz-q:first-of-type{border-top:none}
+  .quiz-q .q{font-weight:600;margin:.1em 0 .75em}
+  .quiz-q .q .n{color:var(--accent);font-weight:800;margin-right:6px}
+  .opts{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .opt{width:100%;text-align:left;font:inherit;font-size:.97rem;color:var(--text);background:var(--surface-2);
+    border:1px solid var(--border);border-radius:10px;padding:10px 13px;cursor:pointer;transition:border-color .12s,background .12s;display:flex;gap:9px;align-items:flex-start}
+  .opt:hover:not(:disabled){border-color:var(--accent)}
+  .opt:disabled{cursor:default;opacity:.92}
+  .opt .mk{flex:0 0 auto;width:16px;font-weight:800;text-align:center}
+  .opt.correct{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+  .opt.wrong{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+  .opt.correct .mk::before{content:"✓"}
+  .opt.wrong .mk::before{content:"✗"}
+  .explain{display:none;margin-top:10px;padding:9px 13px;border-radius:9px;background:var(--accent-soft);
+    border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);font-size:.92rem}
+  .quiz-q.done .explain{display:block}
 
   /* ---------- Layout ---------- */
   main{max-width:var(--maxw);margin:0 auto;padding:16px 16px 80px}
@@ -224,6 +248,7 @@
     <a href="#ch3">3 · Equilibrium Income</a>
     <a href="#ch4">4 · Fiscal Policy</a>
     <a href="#examples">★ Worked Examples</a>
+    <a href="#macro-quiz">❓ Quiz</a>
     <a href="#cheatsheet">Cheat-Sheet</a>
   </nav>
   <nav class="chips" data-for="calc">
@@ -233,6 +258,7 @@
     <a href="#calc-lhopital">3 · L'Hôpital</a>
     <a href="#calc-linear">4 · Linear Approx.</a>
     <a href="#calc-practice">★ Practice + Solutions</a>
+    <a href="#calc-quiz">❓ Quiz</a>
     <a href="#calc-cheat">Formulas &amp; Midterm</a>
   </nav>
   <nav class="chips" data-for="eng">
@@ -242,6 +268,7 @@
     <a href="#eng-purpose">Author's Purpose</a>
     <a href="#eng-writing">Formal Writing</a>
     <a href="#eng-reading">Reading Tips</a>
+    <a href="#eng-quiz">❓ Quiz</a>
   </nav>
 </header>
 
@@ -650,8 +677,9 @@
           <line class="axis" x1="60" y1="270" x2="600" y2="270"/><line class="axis" x1="60" y1="20" x2="60" y2="270"/>
           <line class="c45" x1="60" y1="270" x2="470" y2="20"/><text x="430" y="35" class="lbl-ax">45° : Y = DAE</text>
           <line class="c1" x1="60" y1="175" x2="600" y2="55"/><text x="500" y="70" style="fill:var(--accent);font-weight:700">DAE = A + (slope)Y</text>
-          <circle class="dot" cx="322" cy="147" r="5"/>
-          <line class="dash" x1="322" y1="147" x2="322" y2="270"/><text x="300" y="288" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+          <!-- 45° and DAE lines intersect exactly at (305,120) -->
+          <circle class="dot" cx="305" cy="120" r="5"/>
+          <line class="dash" x1="305" y1="120" x2="305" y2="270"/><text x="289" y="288" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
           <text x="70" y="185" class="lbl-ax">A</text>
           <text x="140" y="255" class="box-t" style="fill:var(--good)">Y &lt; Y<tspan dy="3">E</tspan>: DAE&gt;Y → stock ↓ → produce more →Y↑</text>
           <text x="360" y="110" class="box-t" style="fill:var(--warn)">Y &gt; Y<tspan dy="3">E</tspan>: DAE&lt;Y → stock ↑ → cut output →Y↓</text>
@@ -677,12 +705,16 @@
         Open, with gov: &nbsp; <b>I + G + X = S + T + M</b>
       </div>
       <figure class="graph">
-        <svg viewBox="0 0 620 300" role="img" aria-label="Injection line crossing leakage line at equilibrium income">
+        <svg viewBox="0 0 620 300" role="img" aria-label="Upward-sloping injection and steeper leakage lines crossing at equilibrium income">
           <line class="axis" x1="60" y1="250" x2="600" y2="250"/><line class="axis" x1="60" y1="20" x2="60" y2="250"/>
-          <line class="c2" x1="60" y1="100" x2="600" y2="220"/><text x="500" y="205" style="fill:var(--good);font-weight:700">S+T+M (leakage)</text>
-          <line class="c1" x1="60" y1="160" x2="600" y2="90"/><text x="480" y="80" style="fill:var(--accent);font-weight:700">I+G+X (injection)</text>
-          <circle class="dot" cx="352" cy="129" r="5"/>
-          <line class="dash" x1="352" y1="129" x2="352" y2="250"/><text x="330" y="268" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+          <!-- both slope UP with income; leakage is steeper, so they cross once at (360,117) -->
+          <line class="c1" x1="60" y1="150" x2="600" y2="90"/>
+          <line class="c2" x1="60" y1="192" x2="600" y2="57"/>
+          <circle class="dot" cx="360" cy="117" r="5"/>
+          <line class="dash" x1="360" y1="117" x2="360" y2="250"/>
+          <text x="440" y="62" style="fill:var(--good);font-weight:700">S+T+M (leakage)</text>
+          <text x="440" y="122" style="fill:var(--accent);font-weight:700">I+G+X (injection)</text>
+          <text x="345" y="268" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
           <text x="300" y="16" class="lbl-ax">Injection, Leakage</text><text x="585" y="270" class="lbl-ax">Y</text>
         </svg>
         <figcaption>When injection &gt; leakage the economy expands; when leakage &gt; injection it contracts. Equal at Y<sub>E</sub>.</figcaption>
@@ -710,12 +742,18 @@
       <figure class="graph">
         <svg viewBox="0 0 620 300" role="img" aria-label="Saving line shifting up reduces equilibrium income while investment stays fixed">
           <line class="axis" x1="60" y1="250" x2="600" y2="250"/><line class="axis" x1="60" y1="20" x2="60" y2="250"/>
-          <line class="c1" x1="60" y1="150" x2="600" y2="150"/><text x="520" y="140" style="fill:var(--accent);font-weight:700">I = I<tspan dy="3">a</tspan></text>
-          <line class="c2" x1="60" y1="230" x2="520" y2="60"/><text x="470" y="60" style="fill:var(--good)">S</text>
-          <line class="c2" x1="60" y1="195" x2="430" y2="60" style="opacity:.6"/><text x="380" y="60" style="fill:var(--good);opacity:.8">S′ (save more)</text>
-          <circle class="dot" cx="379" cy="150" r="5"/><circle class="dot" cx="290" cy="150" r="5" style="fill:var(--warn)"/>
-          <line class="dash" x1="379" y1="150" x2="379" y2="250"/><line class="dash" x1="290" y1="150" x2="290" y2="250"/>
-          <text x="360" y="268" class="lbl-ax">Y<tspan dy="3">1</tspan></text><text x="255" y="268" class="lbl-ax" style="fill:var(--warn)">Y<tspan dy="3">2</tspan> ↓</text>
+          <!-- I is a horizontal line at y=150. S crosses it at Y1=x360; the shifted S' crosses at Y2=x250 (lower) -->
+          <line class="c1" x1="60" y1="150" x2="600" y2="150"/>
+          <line class="c2" x1="60" y1="270" x2="520" y2="86"/>
+          <line class="c2" x1="60" y1="226" x2="430" y2="78" style="opacity:.6"/>
+          <line class="dash" x1="360" y1="150" x2="360" y2="250"/>
+          <line class="dash" x1="250" y1="150" x2="250" y2="250"/>
+          <circle class="dot" cx="360" cy="150" r="5"/>
+          <circle class="dot" cx="250" cy="150" r="5" style="fill:var(--warn)"/>
+          <text x="522" y="140" style="fill:var(--accent);font-weight:700">I = I<tspan dy="3">a</tspan></text>
+          <text x="527" y="92" style="fill:var(--good);font-weight:700">S</text>
+          <text x="284" y="64" style="fill:var(--good);font-weight:700;opacity:.75">S′ (save more)</text>
+          <text x="344" y="268" class="lbl-ax">Y<tspan dy="3">1</tspan></text><text x="226" y="268" class="lbl-ax" style="fill:var(--warn)">Y<tspan dy="3">2</tspan> ↓</text>
           <text x="300" y="16" class="lbl-ax">S, I</text><text x="585" y="270" class="lbl-ax">Y</text>
         </svg>
         <figcaption>The S curve shifts up (more thrift). With I fixed, the new intersection sits at a <b>lower</b> Y — and saving is unchanged. If investment is <em>induced</em> (I=I<sub>a</sub>+dY), income falls even further.</figcaption>
@@ -727,34 +765,51 @@
       <span class="tag">3.5 GDP gaps</span>
       <h3>Inflationary vs. Deflationary gap</h3>
       <p>Compare equilibrium output Y<sub>E</sub> with full-employment (potential) output Y<sub>F</sub>.</p>
+      <p class="muted" style="margin-top:-6px">The <b>gap</b> is the <em>vertical distance</em> between the DAE line and the 45° line, measured right at Y<sub>F</sub>.</p>
       <div class="grid2">
         <figure class="graph">
-          <svg viewBox="0 0 300 260" role="img" aria-label="Inflationary gap: desired spending above full-employment output">
-            <line class="axis" x1="45" y1="215" x2="285" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+          <svg viewBox="0 0 320 275" role="img" aria-label="Inflationary gap: at full-employment output the DAE line lies above the 45-degree line, and equilibrium is beyond full employment">
+            <line class="axis" x1="45" y1="215" x2="305" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+            <!-- 45° line (slope 1) and DAE line cross at Y_E=(195,65); Y_F=130 is to the LEFT -->
             <line class="c45" x1="45" y1="215" x2="235" y2="25"/>
-            <line class="c1" x1="45" y1="120" x2="285" y2="35"/>
-            <line class="dash" x1="175" y1="70" x2="175" y2="215"/>
-            <line class="dash" x1="45" y1="82" x2="175" y2="82"/><line class="dash" x1="45" y1="52" x2="175" y2="52"/>
-            <path class="fillW" d="M175 82 L175 52 L45 52 L45 82 Z"/>
-            <text x="150" y="235" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
-            <text x="55" y="46" class="box-t" style="fill:var(--warn);font-size:11px">gap</text>
-            <text x="150" y="14" class="lbl-ax" style="fill:var(--warn)">Inflationary</text>
+            <line class="c1" x1="45" y1="140" x2="305" y2="10"/>
+            <line class="dash" x1="130" y1="215" x2="130" y2="93"/>
+            <line class="dash" x1="195" y1="215" x2="195" y2="65"/>
+            <circle class="dot" cx="195" cy="65" r="4"/>
+            <!-- gap at Y_F: between 45°(130,130) and DAE(130,97.5) -->
+            <line x1="130" y1="97.5" x2="130" y2="130" style="stroke:var(--warn);stroke-width:3"/>
+            <line x1="125" y1="97.5" x2="135" y2="97.5" style="stroke:var(--warn);stroke-width:2"/>
+            <line x1="125" y1="130" x2="135" y2="130" style="stroke:var(--warn);stroke-width:2"/>
+            <text x="83" y="118" style="fill:var(--warn);font-weight:700;font-size:12px">gap</text>
+            <text x="70" y="172" class="lbl-ax">45°</text>
+            <text x="256" y="26" style="fill:var(--accent);font-weight:700;font-size:12px">DAE</text>
+            <text x="118" y="232" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
+            <text x="184" y="232" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+            <text x="150" y="13" style="fill:var(--warn);font-weight:700;font-size:13px">Inflationary (Y<tspan dy="3">E</tspan> &gt; Y<tspan dy="3">F</tspan>)</text>
           </svg>
-          <figcaption>DAE &gt; output at Y<sub>F</sub>: too much demand → inflation. <b>Fix: reduce DAE</b> (↑T or ↓G).</figcaption>
+          <figcaption>At Y<sub>F</sub>, desired spending <b>exceeds</b> output (DAE above the 45° line). Equilibrium Y<sub>E</sub> sits <em>beyond</em> full employment → demand-pull inflation. <b>Fix: reduce DAE</b> (↑T or ↓G).</figcaption>
         </figure>
         <figure class="graph">
-          <svg viewBox="0 0 300 260" role="img" aria-label="Deflationary gap: desired spending below full-employment output">
-            <line class="axis" x1="45" y1="215" x2="285" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+          <svg viewBox="0 0 320 275" role="img" aria-label="Deflationary gap: at full-employment output the DAE line lies below the 45-degree line, and equilibrium is below full employment">
+            <line class="axis" x1="45" y1="215" x2="305" y2="215"/><line class="axis" x1="45" y1="15" x2="45" y2="215"/>
+            <!-- crosses at Y_E=(130,130); Y_F=195 is to the RIGHT -->
             <line class="c45" x1="45" y1="215" x2="235" y2="25"/>
-            <line class="c1" x1="45" y1="150" x2="285" y2="80"/>
-            <line class="dash" x1="215" y1="35" x2="215" y2="215"/>
-            <line class="dash" x1="45" y1="52" x2="215" y2="52"/><line class="dash" x1="45" y1="86" x2="215" y2="86"/>
-            <path class="fillA" d="M215 86 L215 52 L45 52 L45 86 Z" style="fill:var(--good);opacity:.18"/>
-            <text x="190" y="235" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
-            <text x="55" y="46" class="box-t" style="fill:var(--good);font-size:11px">gap</text>
-            <text x="150" y="14" class="lbl-ax" style="fill:var(--good)">Deflationary</text>
+            <line class="c1" x1="45" y1="172.5" x2="305" y2="42.5"/>
+            <line class="dash" x1="195" y1="215" x2="195" y2="62"/>
+            <line class="dash" x1="130" y1="215" x2="130" y2="130"/>
+            <circle class="dot" cx="130" cy="130" r="4"/>
+            <!-- gap at Y_F: between 45°(195,65) and DAE(195,97.5) -->
+            <line x1="195" y1="65" x2="195" y2="97.5" style="stroke:var(--good);stroke-width:3"/>
+            <line x1="190" y1="65" x2="200" y2="65" style="stroke:var(--good);stroke-width:2"/>
+            <line x1="190" y1="97.5" x2="200" y2="97.5" style="stroke:var(--good);stroke-width:2"/>
+            <text x="205" y="86" style="fill:var(--good);font-weight:700;font-size:12px">gap</text>
+            <text x="70" y="178" class="lbl-ax">45°</text>
+            <text x="256" y="58" style="fill:var(--accent);font-weight:700;font-size:12px">DAE</text>
+            <text x="118" y="232" class="lbl-ax">Y<tspan dy="3">E</tspan></text>
+            <text x="184" y="232" class="lbl-ax">Y<tspan dy="3">F</tspan></text>
+            <text x="150" y="13" style="fill:var(--good);font-weight:700;font-size:13px">Deflationary (Y<tspan dy="3">E</tspan> &lt; Y<tspan dy="3">F</tspan>)</text>
           </svg>
-          <figcaption>DAE &lt; output at Y<sub>F</sub>: too little demand → unemployment. <b>Fix: raise DAE</b> (↓T or ↑G).</figcaption>
+          <figcaption>At Y<sub>F</sub>, desired spending <b>falls short</b> of output (DAE below the 45° line). Equilibrium Y<sub>E</sub> sits <em>below</em> full employment → unemployment. <b>Fix: raise DAE</b> (↓T or ↑G).</figcaption>
         </figure>
       </div>
       <div class="box key"><span class="lbl">3.6 Keynes vs Classical vs in-between (the multiplier's size depends on prices)</span>
@@ -1003,6 +1058,105 @@
   <!-- ==================================================================
                         CHEAT SHEET
   =================================================================== -->
+  <!-- ===== MACRO QUIZ ===== -->
+  <section class="unit" id="macro-quiz">
+    <div class="unit-head"><span class="num">❓</span><h2>Quiz Yourself — Macro</h2></div>
+    <p class="unit-sub">Tap an answer to check it instantly and see <em>why</em>. Your score updates as you go. <!-- EDIT: add questions by copying a .quiz-q block --></p>
+    <div class="quiz">
+      <div class="quiz-bar"><span class="quiz-score">Score: <b>0</b> / <span class="quiz-total">0</span></span><button class="quiz-reset">↺ Reset</button></div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">1.</span> In the goods market, equilibrium national income occurs where…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>output equals desired aggregate expenditure (Y = DAE)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>government spending equals taxes</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>exports equal imports</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>consumption equals investment</span></button></li>
+        </ul>
+        <div class="explain">Equilibrium = no tendency to change: what's produced (Y) exactly matches what people <em>want</em> to spend (DAE). Equivalently, injections = leakages.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">2.</span> If MPC = 0.8 (closed economy, no tax), the simple spending multiplier is…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>0.8</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>1.25</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>5</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>8</span></button></li>
+        </ul>
+        <div class="explain">k = 1/(1 − MPC) = 1/(1 − 0.8) = 1/0.2 = <b>5</b>. Higher MPC ⟹ bigger multiplier.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">3.</span> An increase in <em>autonomous taxes</em> will make equilibrium income…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>rise</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>fall</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>stay the same</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>double</span></button></li>
+        </ul>
+        <div class="explain">Taxes are a leakage → they reduce disposable income and spending. The tax multiplier is negative (−b/(1−b)), so ↑T lowers Y.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">4.</span> Which is counted in this year's GDP?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>the resale of a used car</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>buying shares on the stock market</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>a haircut you paid for this year</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>flour a bakery buys to make bread</span></button></li>
+        </ul>
+        <div class="explain">GDP counts <b>new, final</b> production this year. Used goods and pure financial transactions aren't new output; flour is an <em>intermediate</em> good (counted inside the bread's value).</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">5.</span> When current output is <em>below</em> equilibrium (DAE &gt; Y), what pushes the economy back up?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>inventories fall unexpectedly, so firms raise production</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>inventories pile up, so firms cut production</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>prices immediately jump to close the gap</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>nothing — it stays below forever</span></button></li>
+        </ul>
+        <div class="explain">Desired spending exceeds output → firms sell more than they made → unplanned inventory <em>fall</em> → they produce more → Y rises to Y<sub>E</sub>.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">6.</span> The <em>paradox of thrift</em> says that if everyone tries to save more at once…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>national income rises</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>national income falls (and saving may not even rise)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>inflation always follows</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>the multiplier becomes zero</span></button></li>
+        </ul>
+        <div class="explain">More saving = less spending = lower DAE → output and income fall. A fallacy of composition: good for one person, harmful if everyone does it at once.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">7.</span> Real GDP differs from nominal GDP because real GDP…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>values output at constant base-year prices</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>uses current-year prices</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>excludes services</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>only counts government output</span></button></li>
+        </ul>
+        <div class="explain">Real GDP holds prices fixed at a base year, so changes reflect genuine output growth — not inflation. Nominal uses current prices.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">8.</span> To close an <em>inflationary gap</em>, contractionary fiscal policy would…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>increase G and cut T</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>decrease G and/or raise T</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>leave the budget unchanged</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>print money</span></button></li>
+        </ul>
+        <div class="explain">An inflationary gap = too much demand. Reduce DAE by ↓G or ↑T to bring Y back to full-employment output.</div>
+      </div>
+
+      <div class="quiz-bar"><span class="quiz-score">Score: <b>0</b> / <span class="quiz-total">0</span></span><button class="quiz-reset">↺ Reset</button></div>
+    </div>
+  </section>
+
   <section class="unit" id="cheatsheet">
     <div class="unit-head"><span class="num">Σ</span><h2>Formula Cheat-Sheet</h2></div>
     <div class="card">
@@ -1531,6 +1685,116 @@
     </div>
   </section>
 
+  <!-- ===== CALC QUIZ ===== -->
+  <section class="unit" id="calc-quiz">
+    <div class="unit-head"><span class="num">❓</span><h2>Quiz Yourself — Calculus</h2></div>
+    <p class="unit-sub">Quick concept checks. Tap to reveal correct/incorrect + the reason. <!-- EDIT: copy a .quiz-q block to add more --></p>
+    <div class="quiz">
+      <div class="quiz-bar"><span class="quiz-score">Score: <b>0</b> / <span class="quiz-total">0</span></span><button class="quiz-reset">↺ Reset</button></div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">1.</span> <span class="math">lim<sub>x→0</sub> sin(x)/x</span> = ?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>0</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>1</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>∞</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>does not exist</span></button></li>
+        </ul>
+        <div class="explain">One of the two must-know trig limits: <span class="math">sin(x)/x → 1</span> as x→0. (The other: <span class="math">(1−cos x)/x → 0</span>.)</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">2.</span> A two-sided limit <span class="math">lim<sub>x→a</sub>f(x)</span> exists only if…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>f(a) is defined</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>both one-sided limits exist and are equal</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>f is a polynomial</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>the left limit exists</span></button></li>
+        </ul>
+        <div class="explain">Left limit = right limit (both finite). f(a) itself is irrelevant to whether the limit exists.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">3.</span> When <span class="math">lim f/g</span> gives the form <span class="math">0/0</span>, L'Hôpital's rule says it equals…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>lim f′/g′</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>lim (f/g)′</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>f′(a)·g′(a)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>always 1</span></button></li>
+        </ul>
+        <div class="explain">Differentiate top and bottom <em>separately</em>: <span class="math">lim f/g = lim f′/g′</span>. Only valid for <span class="math">0/0</span> or <span class="math">∞/∞</span>.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">4.</span> For <span class="math">f</span> to be continuous at <span class="math">x=a</span>, we need f(a) defined, the limit to exist, and…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>f′(a) to exist</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>lim<sub>x→a</sub>f(x) = f(a)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>f(a) = 0</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>a to be in the domain of f′</span></button></li>
+        </ul>
+        <div class="explain">All three: defined, limit exists, and they're <em>equal</em>. (Differentiable ⟹ continuous, but continuous does NOT ⟹ differentiable — think |x| at 0.)</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">5.</span> The horizontal asymptote of <span class="math">f(x)=(3x²+1)/(x²−4)</span> is…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>y = 0</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>y = 3</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>none</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>y = ±2</span></button></li>
+        </ul>
+        <div class="explain">Equal degrees (2 and 2) → H.A. = ratio of leading coefficients = 3/1 = <b>3</b>. (x = ±2 are the <em>vertical</em> asymptotes.)</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">6.</span> <span class="math">d/dx (xˣ)</span> = ?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>x·xˣ⁻¹</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>xˣ·ln x</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>xˣ(1 + ln x)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>xˣ</span></button></li>
+        </ul>
+        <div class="explain">Variable base <em>and</em> exponent → logarithmic differentiation: <span class="math">ln y = x ln x → y′/y = ln x + 1</span> → <span class="math">y′ = xˣ(1+ln x)</span>.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">7.</span> Using implicit differentiation on <span class="math">x² + y² = 2</span>, <span class="math">dy/dx</span> = ?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>x/y</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>−x/y</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>−y/x</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>2x + 2y</span></button></li>
+        </ul>
+        <div class="explain"><span class="math">2x + 2y·y′ = 0 → y′ = −x/y</span>. Every y picks up a <span class="math">·y′</span> from the chain rule.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">8.</span> The linearization of <span class="math">f</span> at <span class="math">a</span> is <span class="math">L(x)</span> = ?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>f(a) + f′(a)(x − a)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>f′(a) + f(a)(x − a)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>f(a)·(x − a)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>f(a) − f′(a)x</span></button></li>
+        </ul>
+        <div class="explain">It's just the tangent line at <span class="math">a</span>: <span class="math">L(x) = f(a) + f′(a)(x−a)</span>, used to approximate <span class="math">f(x) ≈ L(x)</span> near a.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">9.</span> <span class="math">lim<sub>x→∞</sub> (1 + 3/x)ˣ</span> = ?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>1</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>e</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>e³</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>∞</span></button></li>
+        </ul>
+        <div class="explain">Form 1<sup>∞</sup>. Take ln: <span class="math">x·ln(1+3/x) → 3</span>, so the limit is <span class="math">e³</span>. (General: <span class="math">(1+a/x)ˣ → eᵃ</span>.)</div>
+      </div>
+
+      <div class="quiz-bar"><span class="quiz-score">Score: <b>0</b> / <span class="quiz-total">0</span></span><button class="quiz-reset">↺ Reset</button></div>
+    </div>
+  </section>
+
   <!-- ===== CALC CHEAT SHEET ===== -->
   <section class="unit" id="calc-cheat">
     <div class="unit-head"><span class="num">Σ</span><h2>Formulas &amp; Midterm Checklist</h2></div>
@@ -1709,6 +1973,105 @@
     </div>
   </section>
 
+  <!-- ===== ENG QUIZ ===== -->
+  <section class="unit" id="eng-quiz">
+    <div class="unit-head"><span class="num">❓</span><h2>Quiz Yourself — Econ English</h2></div>
+    <p class="unit-sub">Vocabulary, tenses, purpose &amp; formal style — the four things the midterm tests. Tap to check.</p>
+    <div class="quiz">
+      <div class="quiz-bar"><span class="quiz-score">Score: <b>0</b> / <span class="quiz-total">0</span></span><button class="quiz-reset">↺ Reset</button></div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">1.</span> <b>Deflation</b> means…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>a general rise in prices</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>a general fall in prices</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>a period of fast growth</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>rising unemployment</span></button></li>
+        </ul>
+        <div class="explain">Deflation = prices <em>fall</em> (opposite of inflation). Don't confuse with <b>contraction</b> (economy shrinks).</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">2.</span> Choose the best formal replacement for the informal phrasal verb “<b>find out</b>”.</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>discover</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>check up on</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>get</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>figure out</span></button></li>
+        </ul>
+        <div class="explain">Formal academic writing prefers single verbs over phrasal verbs: find out → <b>discover</b>, go up → increase, put off → postpone.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">3.</span> “Prices <u>______</u> rapidly at the moment.” Which tense fits?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>are rising (present continuous)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>have risen (present perfect)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>rose (past simple)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>rise (present simple)</span></button></li>
+        </ul>
+        <div class="explain">“at the moment” signals a current trend → <b>present continuous</b> (am/is/are + -ing).</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">4.</span> “The war <u>______</u> prices to rise <b>since March</b>.” Which tense?</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>is causing</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>has caused (present perfect)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>caused</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>causes</span></button></li>
+        </ul>
+        <div class="explain">“since March” = started in the past, still relevant now → <b>present perfect</b> (have/has + past participle). <em>since</em> + a point in time.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">5.</span> A paragraph that gives neutral facts to teach the reader has the purpose to…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>inform</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>persuade</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>entertain</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>criticise</span></button></li>
+        </ul>
+        <div class="explain">Facts, neutral tone, no opinion → <b>inform</b>. Opinion + “should/must” → persuade. Humour/story → entertain.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">6.</span> <b>Collateral</b> is…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>a prediction of the future</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>money owed to a bank</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>property pledged to secure a loan</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>a rise in prices</span></button></li>
+        </ul>
+        <div class="explain">Collateral is an asset the lender can seize if you don't repay — e.g. a house or car backing a loan.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">7.</span> <b>Prudent</b> most nearly means…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>careful and sensible (esp. with money)</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>extremely expensive</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>outstanding / excellent</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>agreed by everyone</span></button></li>
+        </ul>
+        <div class="explain">Prudent = wise and cautious (noun: <em>prudence</em>). “Exorbitant” = too expensive; “stellar” = excellent; “unanimous” = agreed by all.</div>
+      </div>
+
+      <div class="quiz-q">
+        <p class="q"><span class="n">8.</span> The central bank “<b>intervened</b>” in the currency market. To intervene is to…</p>
+        <ul class="opts">
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>predict an outcome</span></button></li>
+          <li><button class="opt" data-correct="1"><span class="mk"></span><span>step in to change an outcome</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>borrow money</span></button></li>
+          <li><button class="opt" data-correct="0"><span class="mk"></span><span>measure something</span></button></li>
+        </ul>
+        <div class="explain">Intervene = get involved to affect the result (noun: <em>intervention</em>).</div>
+      </div>
+
+      <div class="quiz-bar"><span class="quiz-score">Score: <b>0</b> / <span class="quiz-total">0</span></span><button class="quiz-reset">↺ Reset</button></div>
+    </div>
+  </section>
+
 </div><!-- /s-eng -->
 
   <p class="noresult" id="noresult">No topics match your search in this subject. Try a shorter word.</p>
@@ -1808,6 +2171,50 @@
   var saved='macro';
   try{ saved=localStorage.getItem('subject')||'macro'; }catch(e){}
   switchTo(saved);
+})();
+
+/* ============================================================
+   INTERACTIVE QUIZ ENGINE — click to check, instant feedback + score
+   ============================================================ */
+(function(){
+  document.querySelectorAll('.quiz').forEach(function(quiz){
+    var qs=[].slice.call(quiz.querySelectorAll('.quiz-q'));
+    var total=qs.length, answered=0, correct=0;
+    function update(){
+      quiz.querySelectorAll('.quiz-score b').forEach(function(e){ e.textContent=correct; });
+      quiz.querySelectorAll('.quiz-total').forEach(function(e){ e.textContent=total; });
+      quiz.querySelectorAll('.quiz-ans').forEach(function(e){ e.textContent=answered; });
+    }
+    qs.forEach(function(q){
+      var opts=[].slice.call(q.querySelectorAll('.opt'));
+      opts.forEach(function(opt){
+        opt.addEventListener('click',function(){
+          if(q.classList.contains('done')) return;
+          q.classList.add('done');
+          answered++;
+          var isC = opt.getAttribute('data-correct')==='1';
+          if(isC) correct++;
+          opt.classList.add(isC?'correct':'wrong');
+          opts.forEach(function(o){
+            if(o.getAttribute('data-correct')==='1') o.classList.add('correct');
+            o.disabled=true;
+          });
+          update();
+        });
+      });
+    });
+    quiz.querySelectorAll('.quiz-reset').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        answered=0; correct=0;
+        qs.forEach(function(q){
+          q.classList.remove('done');
+          q.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('correct','wrong'); o.disabled=false; });
+        });
+        update();
+      });
+    });
+    update();
+  });
 })();
 
 /* ============================================================
