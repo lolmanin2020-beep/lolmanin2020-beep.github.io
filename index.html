@@ -241,6 +241,38 @@
   details.script .sc{padding:2px 15px 12px}
   .script-line{border-left:3px solid var(--accent-2);padding:5px 0 5px 12px;margin:9px 0;font-style:italic;color:var(--text)}
 
+  /* ---------- Course roadmap + progressive levels ---------- */
+  .rm-grid{display:grid;grid-template-columns:auto repeat(4,1fr);gap:8px;align-items:center}
+  .rm-h{font-size:.66rem;font-weight:800;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.2}
+  .rm-tech{font-weight:700;font-size:.86rem;padding-right:6px;white-space:nowrap}
+  .rm-cell{border:1px solid var(--border);border-radius:10px;padding:10px 4px;text-align:center;font-size:.76rem;font-weight:800;
+    color:var(--muted);background:var(--surface-2);cursor:pointer;transition:border-color .12s,color .12s,background .12s}
+  .rm-cell:hover{border-color:var(--accent);color:var(--accent)}
+  .rm-cell.done{background:var(--good-soft);border-color:color-mix(in srgb,var(--good) 45%,transparent);color:var(--good)}
+  .rm-cell.soon{opacity:.45;cursor:not-allowed}
+  .rm-cell.soon:hover{border-color:var(--border);color:var(--muted)}
+  .rm-bar{height:8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);overflow:hidden;margin:14px auto 0;max-width:340px}
+  .rm-bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .35s}
+  .rm-progress{margin-top:8px;font-size:.82rem;color:var(--muted);text-align:center}
+  .level{border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:12px;background:var(--surface);padding:16px 18px;margin:14px 0;scroll-margin-top:130px}
+  .level.l1{border-left-color:var(--good)}
+  .level.l2{border-left-color:var(--accent)}
+  .level.l3{border-left-color:var(--gold)}
+  .level.l4{border-left-color:var(--warn)}
+  .level-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .level-badge{font-weight:800;font-size:.72rem;letter-spacing:.4px;text-transform:uppercase;padding:3px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted)}
+  .level.l1 .level-badge{color:var(--good);background:var(--good-soft)}
+  .level.l2 .level-badge{color:var(--accent);background:var(--accent-soft)}
+  .level.l3 .level-badge{color:var(--gold);background:var(--gold-soft)}
+  .level.l4 .level-badge{color:var(--warn);background:var(--warn-soft)}
+  .level-head h4{margin:0;font-size:1.05rem}
+  .lvl-done{margin-top:12px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);padding:8px 14px;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:700;font-size:.85rem}
+  .lvl-done:hover{border-color:var(--good)}
+  .lvl-done.done{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+  .cite{font-size:.82rem;color:var(--muted);border-top:1px dashed var(--border);margin-top:12px;padding-top:9px}
+  .cite b{color:var(--text)}
+  .spotcheck{font-size:.66rem;font-weight:800;letter-spacing:.2px;color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);background:var(--gold-soft);border-radius:5px;padding:0 5px;white-space:nowrap}
+
   .fill{background:var(--good-soft);border:1px solid color-mix(in srgb,var(--good) 45%,transparent);
     border-radius:7px;padding:1px 7px;font-weight:700;color:var(--good);white-space:nowrap}
   .fill::before{content:"✎ ";font-size:.85em;opacity:.8}
@@ -2260,35 +2292,59 @@
     </div>
   </section>
 
-  <!-- ===== 1 · FRANKLIN EFFECT ===== -->
-  <section class="unit" id="infl-franklin">
-    <div class="unit-head"><span class="num">1</span><h2>The Ben Franklin Effect</h2></div>
-    <p class="unit-sub">"He that has once done you a kindness will be more ready to do you another than he whom you yourself have obliged."</p>
+  <!-- ===== COURSE PATH / ROADMAP ===== -->
+  <section class="unit" id="infl-path">
+    <div class="unit-head"><span class="num">🗺</span><h2>Course path — recognise → understand → apply → critique</h2></div>
+    <p class="unit-sub">Each technique climbs four levels, hardest last. Mark a level done to track progress (saved in your browser). Click an active cell to jump to it.</p>
     <div class="card">
-      <p><b>The effect:</b> when someone does <em>you</em> a small favour, they tend to <b>like you more</b> afterwards — the opposite of the intuition that we help people we already like. Franklin, in his autobiography, won over a hostile rival legislator by asking to <b>borrow a rare book</b>. Having done the favour, the rival became friendly for life.</p>
-      <div class="box key"><span class="lbl">Mechanism — cognitive dissonance / self-perception</span>
-        The helper's mind holds two facts: <span class="math">"I went out of my way for this person"</span> and <span class="math">"I don't especially like them."</span> Those clash. The cheapest way to resolve the clash is to <b>adjust the attitude</b>: <em>"I helped them → I must actually like/respect them."</em> We infer our feelings from our own behaviour.</div>
+      <div class="rm-grid">
+        <div></div>
+        <div class="rm-h">L1<br>Recognise</div><div class="rm-h">L2<br>Understand</div><div class="rm-h">L3<br>Apply</div><div class="rm-h">L4<br>Critique</div>
+        <div class="rm-tech">📈 Franklin</div>
+        <div class="rm-cell" data-tech="franklin" data-level="1" data-go="infl-franklin-l1">L1</div>
+        <div class="rm-cell" data-tech="franklin" data-level="2" data-go="infl-franklin-l2">L2</div>
+        <div class="rm-cell" data-tech="franklin" data-level="3" data-go="infl-franklin-l3">L3</div>
+        <div class="rm-cell" data-tech="franklin" data-level="4" data-go="infl-franklin-l4">L4</div>
+        <div class="rm-tech">🔻 Funnel</div>
+        <div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div>
+        <div class="rm-tech">🪑 IKEA</div>
+        <div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div>
+        <div class="rm-tech">🌀 Ericksonian</div>
+        <div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div><div class="rm-cell soon">soon</div>
+      </div>
+      <div class="rm-bar"><i id="rm-fill"></i></div>
+      <div class="rm-progress" id="rm-progress">0 of 4 Franklin levels complete</div>
+      <div class="box" style="margin-top:16px"><span class="lbl">Pilot build</span>Franklin is fully leveled below. Funnel, IKEA and Ericksonian follow the same L1→L4 pattern next — their rows activate as each is built. Their current single-entry write-ups still live further down this page.</div>
+    </div>
+  </section>
+
+  <!-- ===== 1 · FRANKLIN EFFECT (leveled course module) ===== -->
+  <section class="unit" id="infl-franklin">
+    <div class="unit-head"><span class="num">1</span><h2>The Ben Franklin Effect</h2><span class="gradebadge gB">Grade B</span></div>
+    <p class="unit-sub">"He that has once done you a kindness will be more ready to do you another than he whom you yourself have obliged."</p>
+
+    <!-- L1 -->
+    <div class="level l1" id="infl-franklin-l1">
+      <div class="level-head"><span class="level-badge">L1 · Recognise</span><h4>What it is, and how to spot it</h4></div>
+      <p><b>The effect:</b> do someone a small favour and — counter-intuitively — <em>they</em> tend to like <em>you</em> more afterwards. We assume we help people we already like; here the liking runs the other way, following the help.</p>
+      <p><b>The origin:</b> in his autobiography, Franklin defused a hostile rival legislator by asking to <b>borrow a rare book</b> from his library. Having done Franklin the favour, the man became a lifelong ally.</p>
+      <div class="box key"><span class="lbl">Spot it in the wild</span>Watch for a <b>small favour or "can you help me with…"</b> that arrives just before warmth or a bigger request. The favour flows toward the asker, but it's the <b>helper</b> whose attitude shifts.</div>
 
       <figure class="graph">
         <svg viewBox="0 0 620 250" role="img" aria-label="Person A does a favour for person B and, resolving dissonance, comes to like B more">
-          <!-- Person A -->
           <g transform="translate(70,90)">
             <circle cx="0" cy="0" r="20" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2"/>
             <path d="M-26 60 C -26 28, 26 28, 26 60 Z" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2"/>
             <text x="0" y="88" text-anchor="middle" class="box-t">Helper (A)</text>
           </g>
-          <!-- Person B -->
           <g transform="translate(470,90)">
             <circle cx="0" cy="0" r="20" style="fill:var(--surface);stroke:var(--muted);stroke-width:2"/>
             <path d="M-26 60 C -26 28, 26 28, 26 60 Z" style="fill:var(--surface);stroke:var(--muted);stroke-width:2"/>
             <text x="0" y="88" text-anchor="middle" class="box-t">Requester (B)</text>
           </g>
-          <!-- favour arrow A -> B (B asks, A gives) -->
           <line x1="150" y1="80" x2="420" y2="80" style="stroke:var(--muted);stroke-width:2;marker-end:url(#ah)"/>
           <text x="285" y="70" text-anchor="middle" class="lbl-ax">A does B a small favour</text>
-          <!-- dissonance note -->
           <text x="285" y="120" text-anchor="middle" class="box-t" style="font-style:italic">"Why did I help? …I must like them."</text>
-          <!-- liking arrow back, curved -->
           <path d="M420 150 C 300 205, 200 205, 150 150" style="fill:none;stroke:var(--good);stroke-width:2.4;marker-end:url(#ahg)"/>
           <text x="285" y="200" text-anchor="middle" class="lbl-ax" style="fill:var(--good)">A's liking of B ↑</text>
           <defs>
@@ -2296,44 +2352,51 @@
             <marker id="ahg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="var(--good)"/></marker>
           </defs>
         </svg>
-        <figcaption>The favour flows <b>toward</b> the asker, yet it's the <b>helper</b> whose liking rises — the mind rewrites the attitude to match the action.</figcaption>
+        <figcaption>The favour flows <b>toward</b> the asker, yet it's the <b>helper</b> whose liking rises.</figcaption>
       </figure>
+      <div class="cite"><b>Source:</b> Franklin, B. (1793). <i>The Autobiography of Benjamin Franklin</i>. — historical anecdote, the origin of the name, not itself evidence.</div>
+      <button class="lvl-done" data-tech="franklin" data-level="1">Mark L1 complete</button>
+    </div>
 
-      <div class="box tip"><span class="lbl">Evidence</span>Jecker &amp; Landy (1969): participants who were personally asked by the researcher to <b>return</b> a cash prize (a favour to him) later rated him <b>more likeable</b> than those who weren't asked.</div>
-      <h4>In the wild — social &amp; corporate</h4>
-      <ul>
-        <li><b>"Ask for advice, not approval."</b> Asking a senior colleague for a <b>small</b> piece of help or mentorship builds their investment in you.</li>
-        <li><b>Sales/onboarding:</b> get the prospect to do a tiny thing for you (send a doc, pick a slot) — small giving breeds warmth.</li>
-        <li><b>Team-building:</b> reciprocal small favours knit groups together faster than gifts do.</li>
-      </ul>
-      <div class="box exam"><span class="lbl">How it links →</span>It's the mirror of <b>reciprocity</b> (there, <em>they</em> give to <em>you</em>). A favour is also the first <b>micro-commitment</b>, which feeds straight into the <b>Funnel</b> (§2) and the effort-investment of the <b>IKEA effect</b> (§3).</div>
-      <div class="box warn"><span class="lbl">🛡 Defense</span>When a small favour is followed by a bigger ask, separate the two thoughts: <em>"I helped them"</em> does not mean <em>"I trust their proposal."</em> Judge the ask on its merits.</div>
+    <!-- L2 -->
+    <div class="level l2" id="infl-franklin-l2">
+      <div class="level-head"><span class="level-badge">L2 · Understand</span><h4>Why it works — and when it doesn't</h4></div>
+      <p>The helper's mind holds two clashing thoughts: <span class="math">"I went out of my way for them"</span> and <span class="math">"I don't especially like them."</span> That clash is <b>cognitive dissonance</b>, and the cheapest way to resolve it is to <b>revise the attitude</b>: <em>"I helped them → I must like them."</em> By <b>self-perception</b>, we read our own behaviour to infer our feelings.</p>
+      <p><b>Parent principle:</b> <b>consistency</b> — attitudes bend to line up with freely-chosen actions. <span class="ct">Likely</span></p>
+      <div class="box warn"><span class="lbl">Boundary conditions — it only fires when…</span>
+        <ol style="margin:6px 0 0">
+          <li><b>The favour feels freely chosen.</b> Coerce it ("you had to") and there's no dissonance to resolve, so no attitude shift.</li>
+          <li><b>It's modest.</b> Too large and the mind resolves the other way — resentment, not liking.</li>
+          <li><b>It isn't transparently instrumental.</b> If the favour obviously sets up a sale, the helper concludes "I was used."</li>
+        </ol></div>
+      <div class="cite"><b>Sources:</b> Festinger, L. (1957). <i>A Theory of Cognitive Dissonance.</i> Stanford Univ. Press. <span class="ct">Certain</span> · Bem, D. J. (1967). "Self-perception: An alternative interpretation of cognitive dissonance phenomena." <i>Psychological Review</i>, 74(3), 183–200. <span class="ct">Certain</span></div>
+      <button class="lvl-done" data-tech="franklin" data-level="2">Mark L2 complete</button>
+    </div>
 
-      <div class="entry">
-        <div class="ehead"><span class="et">Catalogue entry</span><span class="gradebadge gB">Grade B</span></div>
-        <div class="efield"><div class="fl"><span class="fn">1</span>Definition</div>
-          <p>Doing someone a freely-chosen small favour raises the <b>helper's</b> liking for the recipient — the mind revises the attitude to fit the effort it just chose to spend.</p></div>
-        <div class="efield"><div class="fl"><span class="fn">2</span>Evidence — Grade B</div>
-          <p>One classic experiment (Jecker &amp; Landy, 1969) <span class="ct">Certain</span>, with <b>thin direct replication</b>; it sits inside the far better-supported dissonance / effort-justification family (that family is Grade A). <b>Strongest objection:</b> the standalone "favour → liking" result is old, small, and rarely replicated on its own — it may just be effort justification in costume. <b>Rebranding of:</b> cognitive dissonance (Festinger) / self-perception (Bem); it isn't a separate law.</p></div>
-        <div class="efield"><div class="fl"><span class="fn">3</span>Mechanism</div>
-          <p>Self-perception + dissonance reduction: "I chose to help → I must value them." Parent principle: <b>consistency</b> (attitude follows behaviour). <span class="ct">Likely</span></p></div>
-        <div class="efield"><div class="fl"><span class="fn">4</span>Script</div>
-          <details class="script"><summary></summary><div class="sc">
-            <div class="script-line">"Can I borrow your read on something for two minutes? You know this space better than I do."</div>
-            <div class="script-line">"Honestly, that helped more than the last three articles I read on it."</div>
-            <div class="script-line">"Mind if I come back to you once I've tried it?"</div>
-            <p class="lbl-note" style="color:var(--muted);font-size:.85rem">Micro-favour → sincere, specific credit → permission for a next contact. No flattery, no ask attached.</p>
-          </div></details></div>
-        <div class="efield"><div class="fl"><span class="fn">5</span>Failure modes</div>
-          <p><b>a) Favour too large</b> — it reads as an imposition and breeds resentment, not liking. <em>Tell:</em> they stall or hedge ("let me check and get back to you").<br>
-          <b>b) Transparently instrumental</b> — if the favour obviously sets up a sale, dissonance resolves the other way ("I was used"). <em>Tell:</em> clipped compliance with cooling body language.</p></div>
-        <div class="efield"><div class="fl"><span class="fn">6</span>Drill — 10 min, pass/fail</div>
-          <p>"Advice, not approval." Ask one real person today for a small, genuine piece of advice in their domain, take it visibly, and thank them <b>specifically</b>. <b>Pass</b> = they volunteer a follow-up unprompted ("let me know how it goes" / offer more help) in the same conversation. <b>Fail</b> = they answer and disengage.</p></div>
-        <div class="efield"><div class="fl"><span class="fn">7</span>Adjacent</div>
-          <p><b>Stacks with:</b> the funnel (a favour is the first "yes"), reciprocity (its mirror). <b>Contradicts:</b> gift-giving as a rapport tool — a gift makes <em>them</em> indebted to you (reciprocity), a different and often weaker lever than getting them invested in <em>you</em>.</p></div>
-        <div class="efield"><div class="fl"><span class="fn">8</span>Content hook</div>
-          <p><b>Angle:</b> "I asked my three iciest contacts for a tiny favour each and logged what happened." <b>Counter-claim:</b> "Giving people gifts to win them over is backwards — get them to do <em>you</em> a small favour instead." <span class="ct">Likely</span></p></div>
-      </div>
+    <!-- L3 -->
+    <div class="level l3" id="infl-franklin-l3">
+      <div class="level-head"><span class="level-badge">L3 · Apply</span><h4>Use it — script, drill, guardrails</h4></div>
+      <p><b>The move:</b> ask for a small, genuine favour or piece of advice — then credit it sincerely. "Ask for advice, not approval."</p>
+      <details class="script"><summary></summary><div class="sc">
+        <div class="script-line">"Can I borrow your read on something for two minutes? You know this space better than I do."</div>
+        <div class="script-line">"Honestly, that helped more than the last three articles I read on it."</div>
+        <div class="script-line">"Mind if I come back to you once I've tried it?"</div>
+        <p class="lbl-note" style="color:var(--muted);font-size:.85rem">Micro-favour → sincere, specific credit → permission for a next contact. No flattery, no ask attached.</p>
+      </div></details>
+      <div class="box tip"><span class="lbl">Drill — 10 min, pass/fail</span>Ask one real person today for a small, genuine piece of advice in their domain, take it visibly, and thank them <b>specifically</b>. <b>Pass</b> = they volunteer a follow-up unprompted ("let me know how it goes" / offer more help) in the same conversation. <b>Fail</b> = they answer and disengage.</div>
+      <div class="box key"><span class="lbl">Ethical guardrails</span>The favour must be <b>real</b> — you actually want and use the advice. A fake ask is a pretext, and it fails the disclosure test: would they feel used if they saw the technique? If yes, don't.</div>
+      <button class="lvl-done" data-tech="franklin" data-level="3">Mark L3 complete</button>
+    </div>
+
+    <!-- L4 -->
+    <div class="level l4" id="infl-franklin-l4">
+      <div class="level-head"><span class="level-badge">L4 · Critique &amp; Master</span><h4>Evidence limits, defense, and how it stacks</h4></div>
+      <p><b>How solid is it? Grade B.</b> The named "Ben Franklin effect" rests largely on one old, small study, with <b>thin direct replication</b>. It is best understood not as a standalone law but as a <b>special case of the well-replicated dissonance / effort-justification family</b> — which is Grade A. The catchy name is pop-psych packaging over Festinger and Bem.</p>
+      <div class="box warn"><span class="lbl">Strongest objection</span>Strip the anecdote and you may just be seeing <b>effort justification</b>: people value what they worked for. "Favour → liking" might add nothing the parent theory doesn't already predict. <span class="ct">Likely</span></div>
+      <div class="box exam"><span class="lbl">How it stacks</span>A favour is the first <b>micro-commitment</b> → it primes the <b>Funnel</b> (§2). Completed effort on your behalf is a cousin of the <b>IKEA effect</b> (§3). The unifying meta-principle across all four techniques is <b>self-perception / consistency</b>.</div>
+      <div class="box key"><span class="lbl">🛡 Adversarial defense</span>When a small favour precedes a bigger ask, <b>decouple</b> the two: <em>"I helped them"</em> does not mean <em>"I trust this proposal."</em> Judge the ask on its own merits, as if the favour never happened.</div>
+      <div class="cite"><b>Source to verify:</b> Jecker, J. &amp; Landy, D. (1969). "Liking a person as a function of doing him a favour." <i>Human Relations</i>, 22(4), 371–378. <span class="spotcheck">SPOT-CHECK</span> — confirm the citation and sample details against the paper; direct replications are sparse. <span class="ct">Likely</span></div>
+      <button class="lvl-done" data-tech="franklin" data-level="4">Mark L4 complete</button>
     </div>
   </section>
 
@@ -2899,6 +2962,46 @@
     });
     update();
   });
+})();
+
+/* ============================================================
+   INFLUENCE COURSE — level progress tracking (localStorage)
+   ============================================================ */
+(function(){
+  var KEY='infl_progress';
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } }
+  function save(p){ try{ localStorage.setItem(KEY,JSON.stringify(p)); }catch(e){} }
+  var prog=load();
+  function done(t,l){ return !!(prog[t]&&prog[t][l]); }
+  function setDone(t,l,v){ prog[t]=prog[t]||{}; prog[t][l]=v; save(prog); }
+
+  function paint(){
+    document.querySelectorAll('.lvl-done').forEach(function(b){
+      var t=b.getAttribute('data-tech'), l=b.getAttribute('data-level'), d=done(t,l);
+      b.classList.toggle('done',d);
+      b.textContent = d ? '✓ L'+l+' complete' : 'Mark L'+l+' complete';
+    });
+    document.querySelectorAll('.rm-cell[data-tech]').forEach(function(c){
+      c.classList.toggle('done', done(c.getAttribute('data-tech'),c.getAttribute('data-level')));
+    });
+    var n=0; ['1','2','3','4'].forEach(function(l){ if(done('franklin',l)) n++; });
+    var fill=document.getElementById('rm-fill'); if(fill) fill.style.width=(n/4*100)+'%';
+    var pr=document.getElementById('rm-progress'); if(pr) pr.textContent=n+' of 4 Franklin levels complete';
+  }
+
+  document.querySelectorAll('.lvl-done').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.getAttribute('data-tech'), l=b.getAttribute('data-level');
+      setDone(t,l,!done(t,l)); paint();
+    });
+  });
+  document.querySelectorAll('.rm-cell[data-go]').forEach(function(c){
+    c.addEventListener('click',function(){
+      var el=document.getElementById(c.getAttribute('data-go'));
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+  paint();
 })();
 
 /* ============================================================
