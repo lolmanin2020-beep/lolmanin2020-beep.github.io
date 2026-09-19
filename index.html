@@ -273,6 +273,20 @@
   .cite b{color:var(--text)}
   .spotcheck{font-size:.66rem;font-weight:800;letter-spacing:.2px;color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);background:var(--gold-soft);border-radius:5px;padding:0 5px;white-space:nowrap}
 
+  /* ---------- Concepts library ---------- */
+  .conc-cat{margin-top:18px}
+  .conc-cat h4{margin:0 0 9px;font-size:1.02rem;color:var(--accent-2)}
+  .conc-list{display:grid;grid-template-columns:1fr;gap:8px}
+  @media(min-width:780px){.conc-list.two{grid-template-columns:1fr 1fr}}
+  .conc{border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:9px;padding:9px 12px;background:var(--surface-2);font-size:.9rem}
+  .conc.myth{border-left-color:var(--warn)}
+  .conc .cn{font-weight:800}
+  .cmini{font-size:.62rem;font-weight:800;letter-spacing:.3px;text-transform:uppercase;padding:1px 6px;border-radius:5px;border:1px solid var(--border);margin-left:5px;white-space:nowrap;vertical-align:1px}
+  .cmini.a{color:var(--good);background:var(--good-soft);border-color:color-mix(in srgb,var(--good) 45%,transparent)}
+  .cmini.b{color:var(--gold);background:var(--gold-soft);border-color:color-mix(in srgb,var(--gold) 45%,transparent)}
+  .cmini.c{color:var(--warn);background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+  .cmini.myth{color:#fff;background:var(--warn);border-color:var(--warn)}
+
   .fill{background:var(--good-soft);border:1px solid color-mix(in srgb,var(--good) 45%,transparent);
     border-radius:7px;padding:1px 7px;font-weight:700;color:var(--good);white-space:nowrap}
   .fill::before{content:"✎ ";font-size:.85em;opacity:.8}
@@ -395,6 +409,7 @@
     <a href="#infl-funnel">2 · Funnel Technique</a>
     <a href="#infl-ikea">3 · IKEA Effect</a>
     <a href="#infl-erickson">4 · Ericksonian</a>
+    <a href="#infl-concepts">📚 Concepts</a>
     <a href="#infl-map">★ The Stack</a>
     <a href="#infl-defense">🛡 Defense</a>
     <a href="#infl-quiz">❓ Quiz</a>
@@ -460,6 +475,7 @@
           <a data-subj="infl" data-anchor="infl-funnel">2 · Funnel Technique</a>
           <a data-subj="infl" data-anchor="infl-ikea">3 · IKEA Effect</a>
           <a data-subj="infl" data-anchor="infl-erickson">4 · Ericksonian</a>
+          <a data-subj="infl" data-anchor="infl-concepts">📚 Concepts</a>
           <a data-subj="infl" data-anchor="infl-map">★ The Stack</a>
           <a data-subj="infl" data-anchor="infl-defense">🛡 Defense</a>
           <a data-subj="infl" data-anchor="infl-quiz">❓ Quiz</a>
@@ -2657,6 +2673,88 @@
         So a full sequence — favour → yes-set → co-build → framed close — is <em>spoken</em> in this register. That is also exactly why the ethics ceiling in L3 matters most here.</div>
       <div class="box key"><span class="lbl">🛡 Defense</span><b>Make the implicit explicit.</b> Hearing "now or after coffee?", say: <em>"Those aren't my only two options — I might not start at all."</em> Name presuppositions out loud, surface the hidden third choice, and <b>slow the pace</b> — indirect suggestion runs on momentum.</div>
       <button class="lvl-done" data-tech="erickson" data-level="4">Mark L4 complete</button>
+    </div>
+  </section>
+
+  <!-- ===== CONCEPTS LIBRARY ===== -->
+  <section class="unit" id="infl-concepts">
+    <div class="unit-head"><span class="num">📚</span><h2>Principles &amp; Concepts — the wider map</h2></div>
+    <p class="unit-sub">The named ideas behind the four techniques. Each carries an evidence grade — <span class="cmini a">A</span> replicated, <span class="cmini b">B</span> single/contested, <span class="cmini c">C</span> lore — and the last group is the myths worth knowing are <b>false</b>.</p>
+    <div class="card">
+
+      <div class="conc-cat">
+        <h4>Cialdini's principles of influence <span class="ct">from <i>Influence</i>, 1984 / rev. 2021</span></h4>
+        <div class="conc-list two">
+          <div class="conc"><span class="cn">Reciprocity</span><span class="cmini a">A</span> — we feel obliged to repay what we're given; concessions count too (→ door-in-the-face).</div>
+          <div class="conc"><span class="cn">Commitment &amp; Consistency</span><span class="cmini a">A</span> — we act consistently with prior commitments. <i>Parent of the Funnel (§2).</i></div>
+          <div class="conc"><span class="cn">Social Proof</span><span class="cmini a">A</span> — under uncertainty we copy similar others ("5,000 sold").</div>
+          <div class="conc"><span class="cn">Authority</span><span class="cmini a">A</span> — we defer to credible experts (titles, coats, credentials).</div>
+          <div class="conc"><span class="cn">Liking</span><span class="cmini a">A</span> — we say yes to people we like: similarity, praise, cooperation. <i>Cousin of Franklin (§1).</i></div>
+          <div class="conc"><span class="cn">Scarcity</span><span class="cmini a">A</span> — rare or dwindling things feel more valuable; loss-framed ("last 2").</div>
+          <div class="conc"><span class="cn">Unity</span><span class="cmini b">B</span> — shared identity ("one of us"); the newest, least-tested principle.</div>
+        </div>
+      </div>
+
+      <div class="conc-cat">
+        <h4>Core cognitive mechanisms</h4>
+        <div class="conc-list two">
+          <div class="conc"><span class="cn">Cognitive dissonance</span><span class="cmini a">A</span> — discomfort from clashing beliefs/acts drives attitude change (Festinger, 1957). <i>Parent of Franklin.</i></div>
+          <div class="conc"><span class="cn">Self-perception</span><span class="cmini a">A</span> — we infer our attitudes from our own behaviour (Bem, 1967).</div>
+          <div class="conc"><span class="cn">Effort justification</span><span class="cmini a">A</span> — we value what we suffered or laboured for (Aronson &amp; Mills, 1959). <i>Parent of IKEA (§3).</i></div>
+          <div class="conc"><span class="cn">Endowment effect</span><span class="cmini a">A</span> — we over-value what we own (Kahneman, Knetsch &amp; Thaler, 1990).</div>
+          <div class="conc"><span class="cn">Loss aversion</span><span class="cmini a">A</span> — losses hurt roughly twice as much as equal gains (Kahneman &amp; Tversky, 1979); powers scarcity &amp; framing.</div>
+          <div class="conc"><span class="cn">Anchoring</span><span class="cmini a">A</span> — the first number sets the reference point for everything after (pricing, negotiation).</div>
+          <div class="conc"><span class="cn">Framing</span><span class="cmini a">A</span> — identical facts worded as a gain vs a loss flip the decision.</div>
+          <div class="conc"><span class="cn">Peak–end rule</span><span class="cmini a">A</span> — we judge an experience by its most intense moment and its ending, not its average (Kahneman).</div>
+        </div>
+      </div>
+
+      <div class="conc-cat">
+        <h4>Sequential-request techniques (the compliance family)</h4>
+        <div class="conc-list two">
+          <div class="conc"><span class="cn">Foot-in-the-door</span><span class="cmini a">A</span> — small yes → big yes (Freedman &amp; Fraser, 1966). <i>This is the Funnel (§2).</i></div>
+          <div class="conc"><span class="cn">Door-in-the-face</span><span class="cmini a">A</span> — an unreasonable ask first, then the real one looks reasonable (Cialdini, 1975). Runs <em>opposite</em> to the funnel.</div>
+          <div class="conc"><span class="cn">Low-ball</span><span class="cmini b">B</span> — secure the commitment, then reveal the true (higher) cost; consistency keeps them in.</div>
+          <div class="conc"><span class="cn">That's-not-all</span><span class="cmini b">B</span> — pile on a bonus <em>before</em> they answer, triggering reciprocity.</div>
+          <div class="conc"><span class="cn">Disrupt-then-reframe</span><span class="cmini b">B</span> — a brief confusion, then a reframe, slips past scrutiny ("300 pennies… that's $3, a bargain").</div>
+        </div>
+      </div>
+
+      <div class="conc-cat">
+        <h4>Social &amp; relational effects</h4>
+        <div class="conc-list two">
+          <div class="conc"><span class="cn">Mere exposure</span><span class="cmini a">A</span> — repeated exposure to something breeds liking (Zajonc, 1968).</div>
+          <div class="conc"><span class="cn">Halo effect</span><span class="cmini a">A</span> — one positive trait (e.g. attractiveness) bleeds into judgments of unrelated traits.</div>
+          <div class="conc"><span class="cn">Pratfall effect</span><span class="cmini b">B</span> — a small, humanising blunder makes an otherwise competent person <em>more</em> likeable (Aronson).</div>
+          <div class="conc"><span class="cn">Reciprocal self-disclosure</span><span class="cmini b">B</span> — sharing something personal invites the other to share back; builds rapport fast.</div>
+        </div>
+      </div>
+
+      <div class="conc-cat">
+        <h4>Biases persuasion exploits</h4>
+        <div class="conc-list two">
+          <div class="conc"><span class="cn">Bandwagon</span><span class="cmini a">A</span> — we adopt what the crowd adopts (social proof in motion).</div>
+          <div class="conc"><span class="cn">Decoy effect</span><span class="cmini a">A</span> — adding a deliberately inferior third option steers choice between the other two.</div>
+          <div class="conc"><span class="cn">Availability heuristic</span><span class="cmini a">A</span> — vivid or recent examples feel more probable than they are.</div>
+          <div class="conc"><span class="cn">Confirmation bias</span><span class="cmini a">A</span> — we seek and weight evidence that fits what we already believe.</div>
+          <div class="conc"><span class="cn">Primacy &amp; recency</span><span class="cmini a">A</span> — the first and last items in a sequence carry the most weight.</div>
+          <div class="conc"><span class="cn">Authority bias</span><span class="cmini a">A</span> — a credible source's claim is under-scrutinised (Milgram's wider lesson).</div>
+        </div>
+      </div>
+
+      <div class="conc-cat">
+        <h4>⚠️ Commonly cited — but weak or false</h4>
+        <p class="unit-sub" style="margin-top:0">Know these so you can call them out. Selling them is a tell that a "coach" hasn't checked their sources.</p>
+        <div class="conc-list">
+          <div class="conc myth"><span class="cn">Subliminal advertising</span><span class="cmini myth">FALSE</span> — the 1957 "eat popcorn / drink Coke" study was <b>fabricated</b> by James Vicary; genuine subliminal-priming effects are tiny and unreliable.</div>
+          <div class="conc myth"><span class="cn">"7-38-55" / 93% is body language</span><span class="cmini myth">MYTH</span> — a misquote of Mehrabian's narrow study on <em>incongruent</em> emotional messages; it is <b>not</b> a general law of communication.</div>
+          <div class="conc myth"><span class="cn">Most of NLP</span><span class="cmini c">C</span> — "anchoring states", "eye-accessing cues", rep-systems: repeatedly <b>failed</b> controlled testing (Sharpley 1987; Witkowski 2010).</div>
+          <div class="conc myth"><span class="cn">Lie detection by micro-expressions</span><span class="cmini c">C</span> — untrained and most trained observers score barely above chance; confident "human lie detectors" are overselling.</div>
+          <div class="conc myth"><span class="cn">Left-digit / "charm pricing" as mind-control</span><span class="cmini b">B</span> — $9.99 vs $10 has a <em>real but small</em> effect; the dramatic claims around it are inflated.</div>
+        </div>
+      </div>
+
+      <div class="box key" style="margin-top:16px"><span class="lbl">How to use this shelf</span>These are the vocabulary behind the four leveled techniques. When you spot a move in the wild, name the <b>principle</b> (reciprocity? consistency? scarcity?) — naming it is the first step to both using it cleanly and resisting it. Want any of these promoted to a full L1→L4 module? Say which.</div>
     </div>
   </section>
 
