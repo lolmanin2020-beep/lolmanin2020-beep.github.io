@@ -81,7 +81,7 @@
       radial-gradient(820px 460px at 112% 118%, color-mix(in srgb,var(--accent-2) 20%,transparent), transparent 55%),
       var(--bg)}
   .lockwall.show{display:grid}
-  .home{width:min(560px,100%);margin:auto;text-align:center;animation:homeIn .5s ease}
+  .home{width:min(920px,100%);margin:auto;text-align:center;animation:homeIn .5s ease}
   @keyframes homeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .home .crest{width:84px;height:84px;border-radius:22px;margin:0 auto 18px;
     background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;
@@ -111,6 +111,18 @@
   .lockwall .err{color:var(--warn);font-size:.85rem;font-weight:600;margin-top:11px;min-height:1.1em;visibility:hidden}
   .lockwall .err.show{visibility:visible}
   .home .foot{margin-top:20px;font-size:.72rem;color:var(--muted)}
+  /* Palace map — all sub-categories on the home page */
+  .palacemap{margin-top:36px;text-align:left}
+  .pm-title{text-align:center;font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .pm-grid{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:720px){.pm-grid{grid-template-columns:1fr 1fr}}
+  .pm-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .pm-head{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.06rem;margin-bottom:11px}
+  .pm-ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-size:1.1rem;flex:none}
+  .pm-links{display:flex;flex-wrap:wrap;gap:7px}
+  .pm-links a{font-size:.83rem;font-weight:600;color:var(--muted);text-decoration:none;background:var(--surface-2);
+    border:1px solid var(--border);border-radius:999px;padding:5px 11px;cursor:pointer;transition:border-color .12s,color .12s}
+  .pm-links a:hover{color:var(--accent);border-color:var(--accent)}
   .lockwall .gate.shake{animation:shake .32s}
   @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
   body.locked{overflow:hidden}
@@ -2650,9 +2662,6 @@
     <div class="eyebrow">Private Study Palace</div>
     <h1>Jean's Palace</h1>
     <p class="sub">Macroeconomics, calculus, econ English, and the psychology of influence — one quiet place to think. Enter the passcode to step inside.</p>
-    <div class="teasers">
-      <span>📈 Macro</span><span>∫ Calculus</span><span>🅰 Econ English</span><span>🧠 Influence</span>
-    </div>
     <div class="gate" id="lockpanel">
       <div class="glbl">🔒 MindSpace · passcode required</div>
       <form id="lockform" autocomplete="off">
@@ -2666,6 +2675,63 @@
       </form>
     </div>
     <div class="foot">🔓 Private · unlocks for this browser session only</div>
+
+    <div class="palacemap">
+      <div class="pm-title">What's inside · jump to any section</div>
+      <div class="pm-grid">
+        <div class="pm-card">
+          <div class="pm-head"><span class="pm-ico">📈</span> Macroeconomics</div>
+          <div class="pm-links">
+            <a data-subj="macro" data-anchor="top">Overview</a>
+            <a data-subj="macro" data-anchor="ch1">1 · Introduction</a>
+            <a data-subj="macro" data-anchor="ch2">2 · GDP</a>
+            <a data-subj="macro" data-anchor="ch3">3 · Equilibrium Income</a>
+            <a data-subj="macro" data-anchor="ch4">4 · Fiscal Policy</a>
+            <a data-subj="macro" data-anchor="examples">★ Worked Examples</a>
+            <a data-subj="macro" data-anchor="macro-quiz">❓ Quiz</a>
+            <a data-subj="macro" data-anchor="cheatsheet">Cheat-Sheet</a>
+          </div>
+        </div>
+        <div class="pm-card">
+          <div class="pm-head"><span class="pm-ico">∫</span> Calculus I</div>
+          <div class="pm-links">
+            <a data-subj="calc" data-anchor="top">Overview</a>
+            <a data-subj="calc" data-anchor="calc-limits">1 · Limits &amp; Continuity</a>
+            <a data-subj="calc" data-anchor="calc-diff">2 · Differentiation</a>
+            <a data-subj="calc" data-anchor="calc-lhopital">3 · L'Hôpital</a>
+            <a data-subj="calc" data-anchor="calc-linear">4 · Linear Approx.</a>
+            <a data-subj="calc" data-anchor="calc-practice">★ Practice + Solutions</a>
+            <a data-subj="calc" data-anchor="calc-quiz">❓ Quiz</a>
+            <a data-subj="calc" data-anchor="calc-cheat">Formulas &amp; Midterm</a>
+          </div>
+        </div>
+        <div class="pm-card">
+          <div class="pm-head"><span class="pm-ico">🅰</span> Econ English</div>
+          <div class="pm-links">
+            <a data-subj="eng" data-anchor="top">Exam Overview</a>
+            <a data-subj="eng" data-anchor="eng-vocab">Vocabulary ★</a>
+            <a data-subj="eng" data-anchor="eng-grammar">Grammar (Tenses)</a>
+            <a data-subj="eng" data-anchor="eng-purpose">Author's Purpose</a>
+            <a data-subj="eng" data-anchor="eng-writing">Formal Writing</a>
+            <a data-subj="eng" data-anchor="eng-reading">Reading Tips</a>
+            <a data-subj="eng" data-anchor="eng-quiz">❓ Quiz</a>
+          </div>
+        </div>
+        <div class="pm-card">
+          <div class="pm-head"><span class="pm-ico">🧠</span> Influence</div>
+          <div class="pm-links">
+            <a data-subj="infl" data-anchor="top">Overview &amp; Ethics</a>
+            <a data-subj="infl" data-anchor="infl-franklin">1 · Franklin Effect</a>
+            <a data-subj="infl" data-anchor="infl-funnel">2 · Funnel Technique</a>
+            <a data-subj="infl" data-anchor="infl-ikea">3 · IKEA Effect</a>
+            <a data-subj="infl" data-anchor="infl-erickson">4 · Ericksonian</a>
+            <a data-subj="infl" data-anchor="infl-map">★ The Stack</a>
+            <a data-subj="infl" data-anchor="infl-defense">🛡 Defense</a>
+            <a data-subj="infl" data-anchor="infl-quiz">❓ Quiz</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2756,6 +2822,18 @@
   var saved='macro';
   try{ saved=localStorage.getItem('subject')||'macro'; }catch(e){}
   switchTo(saved);
+
+  // Expose navigation for the home-page palace map: switch subject, then scroll to a section.
+  window.palaceGoto=function(subj,anchor){
+    switchTo(subj);
+    requestAnimationFrame(function(){
+      if(anchor && anchor!=='top'){
+        var el=document.getElementById(anchor);
+        if(el){ el.scrollIntoView({behavior:'smooth',block:'start'}); return; }
+      }
+      window.scrollTo({top:0});
+    });
+  };
 })();
 
 /* ============================================================
@@ -2856,12 +2934,27 @@
     input.focus();
   });
 
+  // Palace-map links: remember where they wanted to go, then take them there after unlock.
+  var pending=null;
+  function goPending(){
+    if(pending && window.palaceGoto){ window.palaceGoto(pending.subj,pending.anchor); }
+    pending=null;
+  }
+  document.querySelectorAll('.home a[data-subj]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      pending={subj:a.getAttribute('data-subj'),anchor:a.getAttribute('data-anchor')};
+      if(authed()){ hideWall(); paintBtn(); goPending(); }
+      else { panel.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ input.focus(); },200); }
+    });
+  });
+
   form.addEventListener('submit',function(e){
     e.preventDefault();
     if(input.value.trim()===PASSCODE){
       try{ sessionStorage.setItem(KEY,'1'); }catch(e){}
       input.value=''; err.classList.remove('show');
-      hideWall(); paintBtn();
+      hideWall(); paintBtn(); goPending();
     } else {
       err.classList.add('show');
       panel.classList.remove('shake'); void panel.offsetWidth; panel.classList.add('shake');
